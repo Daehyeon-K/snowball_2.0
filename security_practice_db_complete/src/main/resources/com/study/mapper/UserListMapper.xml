@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.mapper.UserListMapper">
+
+	<!-- 페이지 나누기 개념 없을 때 -->
+	<select id="select" resultType="com.study.dto.MemDTO">
+		<![CDATA[   
+		select mem_id, grade_id, company_id, dept_id, mem_name, mem_phone, mem_mail, mem_gender, mem_birth, mem_addr, mem_sal, mem_pwd, mem_con_start,mem_con_end, mem_dcon_start, mem_dcon_end,enabled
+		from (
+				select /*+INDEX_DESC(mem pk_mem)*/ rownum rn, mem_id, grade_id, company_id, dept_id, mem_name, mem_phone, mem_mail, mem_gender, mem_birth, mem_addr, mem_sal, mem_pwd, mem_con_start,mem_con_end, mem_dcon_start, mem_dcon_end,enabled
+				from mem
+				where mem_id >= '1' and rownum <= (#{pageNum} * #{amount})
+			)
+		where rn > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select>
+	
+	<!-- 전체 게시물 숫자니까 int형 -->
+	<select id="totalCnt" resultType="int">
+		select count(*) from mem where mem_id >= '1'
+	</select>
+
+
+</mapper>

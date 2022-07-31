@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-5.6.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+	
+	<!-- 
+		<security:form-login/> => 이렇게만 하면 시큐리티에서 제공하는 기본 css 로그인 페이지를 띄어줌
+	 -->
+	 
+	 <!-- 비밀번호 암호화해주는 인코더 추가해주기 -->
+	 <bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+	 
+	
+	<security:http>
+		<!-- 로그인에서 비밀번호나 아이디 틀리면 /loginError 여기로 컨트롤러 이동 -->
+		<security:form-login login-page="/login" authentication-failure-url="/loginError" 
+			authentication-success-handler-ref="customLoginSuccessHandler"/>
+		<security:logout invalidate-session="true" />
+		
+		<!-- 
+			security:intercept-url 
+			=> pattern에 들어있는 경로로 요청이 들어올 때 오쳥을 가로채기 
+			=> 이제 로그인 안 하고 /user 또는 /admin 으로 접근 시 로그인하라고 로그인 창 띄어줌 => 권한이 없기 때문에
+			그래서 로그인한 후 user면 /user만 가능하고, admin 로그인하면 /admin만 가능함 => 여기서 접근제한함
+		-->
+		<security:intercept-url pattern="/user/**" access="hasRole('ROLE_USER')"/>
+		<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+		
+		<!-- <security:access-denied-handler error-page="/access-denied"/> -->
+		<security:access-denied-handler ref="customAccessDeniedHandler"/>
+	</security:http>
+
+	
+	<security:authentication-manager>
+		<security:authentication-provider user-service-ref="customUserDetailService">
+			<security:password-encoder ref="encoder"/>
+		</security:authentication-provider>
+	</security:authentication-manager>
+	
+	
+</beans>
+	
+	<!-- 이 방법은 여기에 박아놓은거라 쓸 수가 없음 우리가 -->
+	<!-- <security:authentication-manager>
+		<security:authentication-provider>
+			<security:user-service>
+				<security:user name="user1" password="{noop}user1" authorities="ROLE_USER"/>
+				<security:user name="admin" password="{noop}admin" authorities="ROLE_ADMIN, ROLE_USER"/>
+			</security:user-service>
+		</security:authentication-provider>
+	</security:authentication-manager> -->
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+

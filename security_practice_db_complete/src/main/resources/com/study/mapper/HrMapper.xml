@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.mapper.HrMapper">
+
+
+<!--<select id="hrList" resultType="com.study.dto.AttDTO">
+		select * from att
+	</select> -->
+	
+	
+	<select id="hrList" resultType="com.study.dto.AttDTO">
+	<![CDATA[
+		select *
+		from(select /*+INDEX_DESC(att pk_att)*/ rownum rn, att.*
+		from att
+		where
+		]]>	
+			<include refid="criteria"></include>
+	<![CDATA[	
+		att_vac > 0 and rownum <= (#{pageNum} * #{amount}))
+		where rn > (#{pageNum} - 1) * #{amount} and att_in_out like 'in'
+	]]>
+	</select>
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND" prefixOverrides="OR">
+			<foreach collection="typeArr" item="type">
+				<trim prefix="OR">
+					<choose>
+						<when test="type=='T'.toString()">
+							att_id like '%'||#{keyword}||'%'
+						</when>
+						<when test="type=='C'.toString()">
+							mem_id like '%'||#{keyword}||'%'
+						</when>	
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+	
+	<!-- 전체 게시물 숫자니까 int형 -->
+   	<select id="totalCnt" resultType="int">
+     select count(*) from att where 
+     <include refid="criteria"></include>
+     att_vac > 0
+   	</select>
+	
+</mapper>
