@@ -29,7 +29,7 @@
    <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 	
 	
-	<!-- 시큐리티 어노테이션 활성화 @PreAuthorize, @PostAuthorize, @Secured -->
+	<!-- 시큐리티 어노테이션 활성화 @PreAuthorize, @PostAuthorize, @Secured  이거 사용해야해서 일단 활성화하기 -->
 	<security:global-method-security pre-post-annotations="enabled" secured-annotations="enabled"/>
 	
 	
