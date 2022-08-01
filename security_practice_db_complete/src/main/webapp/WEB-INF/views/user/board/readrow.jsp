@@ -46,7 +46,7 @@
 		   <button type="button" class="btn btn-success" id="ModBtn">수정</button>        
 		   <button type="button" class="btn btn-danger" id="RemoveBtn">삭제</button>  
   		 </c:if>
-   </sec:authorize>  
+   </sec:authorize> 
    
    
  </div>
@@ -54,7 +54,7 @@
 </div>
 
 <%-- 댓글 리스트 영역 --%>    
-<%-- <div class="row">
+  <div class="row">
 	<div class="col-lg-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -83,7 +83,11 @@
 			댓글 페이지 영역
 			<div class="panel-footer"></div>
 		</div>
+<<<<<<< HEAD
 	</div>  --%>
+=======
+	</div>  
+>>>>>>> refs/heads/master
 <%@include file="../../includes/footer.jsp" %>   				
 </div>
 			
