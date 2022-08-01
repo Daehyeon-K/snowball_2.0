@@ -54,7 +54,7 @@
 </div>
 
 <%-- 댓글 리스트 영역 --%>    
-<%-- <div class="row">
+ <div class="row">
 	<div class="col-lg-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -83,7 +83,7 @@
 			댓글 페이지 영역
 			<div class="panel-footer"></div>
 		</div>
-	</div> --%>
+	</div> 
 <%@include file="../../includes/footer.jsp" %>   				
 </div>
 			
