@@ -13,5 +13,5 @@ public class AttDTO {
 	private int att_vac;
 	private int att_nos;
 	private int att_late;
-	private String test;
+//	private String test;
 }
