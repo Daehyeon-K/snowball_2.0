@@ -11,4 +11,5 @@ public class ApprovalCommitDTO {
 	private String approval_commit_id;
 	private String approval_commit_inter_check;
 	private String approval_commit_final_check;
+	private String test;
 }
