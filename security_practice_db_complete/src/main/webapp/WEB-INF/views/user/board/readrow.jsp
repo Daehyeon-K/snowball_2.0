@@ -6,7 +6,7 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<div id="layoutSidenav_content">
+<!-- <div id="layoutSidenav_content"> -->
                 <main>
                     <div class="container-fluid px-4">
                     	<h1 class="mt-4 breadcrumb mb-4 layout-center">게시글 보기</h1>
