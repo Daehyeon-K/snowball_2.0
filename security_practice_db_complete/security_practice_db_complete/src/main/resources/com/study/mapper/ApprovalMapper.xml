@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.mapper.ApprovalMapper">
+	
+	<select id="select" resultType="com.study.dto.ApprovalDTO">
+      <![CDATA[ 
+        select approval_id,mem_id,approval_type_id,approval_commit_id,approval_inter_id,approval_final_id,approval_reject,approval_content
+      from (select /*+INDEX_DESC(approval pk_approval)*/ rownum rn, approval_id,mem_id,approval_type_id,approval_commit_id,approval_inter_id,approval_final_id,approval_reject,approval_content 
+            from (select approval_id,mem_id,approval_type_id,approval_commit_id,approval_inter_id,approval_final_id,approval_reject,approval_content 
+                from approval 
+                order by TO_NUMBER(REGEXP_SUBSTR(approval_id, '[0-9]+',1,1)) desc
+                  )
+             where
+      ]]> 
+            <include refid="criteria"></include>
+            
+      <![CDATA[
+      rownum <= (#{cri.pageNum} * #{cri.amount}) and  mem_id = #{mem_id})
+      where rn > ((#{cri.pageNum} - 1) * #{cri.amount})
+      
+     ]]>
+   </select>
+   <!-- 동적 sql -->
+   <sql id="criteria">
+      <trim prefix="(" suffix=") AND" prefixOverrides="OR">
+         <!--  priefixOverides로 맨앞에 or 제거 후 시작 -->
+            <trim prefix="OR">
+               <choose>
+                  <!-- approval_content 속에서 검색 -->
+                  <when test="cri.getType()=='W'.toString()">
+                     approval_content like '%'||#{cri.keyword}||'%'
+                  </when>
+                  <!-- approval_id 속에서 검색 -->
+                  <when test="cri.getType()=='T'.toString()">
+                     approval_id like '%'||#{cri.keyword}||'%'
+                  </when>
+               </choose>
+            </trim>
+      </trim>
+   </sql>
+   
+   <!-- 전체 게시물 숫자니까 int형 -->
+      <select id="totalCnt" resultType="int">
+     select count(*) from approval where
+     <include refid="criteria"></include>
+     approval_id >= 'APPR1' and mem_id = #{mem_id}
+   </select>
+   
+   
+  
+
+	<!-- 이거 전 거 
+	<insert id="insert">
+		insert into approval(approval_id,mem_id,approval_type_id, approval_inter_id, approval_final_id, approval_reject, approval_content)  
+		values(concat('APPR', approval_seq.nextval),#{mem_id} ,#{approval_type_id}, #{approval_inter_id},#{approval_final_id},#{approval_reject},#{approval_content})
+	</insert> -->
+	
+	<!-- 1개 read 폼 호출 -->
+	<!-- <select id="read" resultType="com.study.dto.ApprovalDTO">
+		select * from approval where approval_id = #{approval_id}
+	</select> -->
+	
+	
+
+	<!-- 결재 생성 시 결재 승인 먼저 만들어 주기 -->
+   <insert id="commit_insert">
+      insert into approval_commit(approval_commit_id, approval_commit_inter_check, approval_commit_final_check)  
+      values(concat('APPR_COMM',approval_commit_seq.nextval), '중간미승인', '최종미승인')
+   </insert>   
+
+   <insert id="insert">
+      insert into approval(approval_id,mem_id,approval_commit_id,approval_type_id, approval_inter_id, approval_final_id, approval_reject, approval_content)  
+      values(concat('APPR', approval_seq.nextval),#{mem_id},concat('APPR_COMM',approval_commit_seq.currval),#{approval_type_id}, #{approval_inter_id},#{approval_final_id},#{approval_reject},#{approval_content})
+   </insert>
+	
+	
+	<!-- 1개 read 폼 호출 -->
+   <select id="read" resultType="com.study.dto.ApprovalDTO">
+      select * from approval where approval_id = #{approval_id}
+   </select>
+   
+   <!-- 결재 수신 list -->
+   <select id="commitSelect" resultType="com.study.dto.ApprovalDTO">
+      <![CDATA[ 
+        select approval_id,mem_id,approval_type_id,approval_commit_id,approval_inter_id,approval_final_id,approval_reject,approval_content
+      from (select /*+INDEX_DESC(approval pk_approval)*/ rownum rn, approval_id,mem_id,approval_type_id,approval_commit_id,approval_inter_id,approval_final_id,approval_reject,approval_content 
+            from (select approval_id,mem_id,approval_type_id,approval_commit_id,approval_inter_id,approval_final_id,approval_reject,approval_content 
+                from approval 
+                order by TO_NUMBER(REGEXP_SUBSTR(approval_id, '[0-9]+',1,1)) desc
+                  )
+             where
+      ]]> 
+            <include refid="criteria2"></include>
+            
+      <![CDATA[
+      rownum <= (#{cri.pageNum} * #{cri.amount}) and (approval_inter_id = #{mem_id} or approval_final_id = #{mem_id}))
+      where rn > ((#{cri.pageNum} - 1) * #{cri.amount})
+      
+     ]]>
+   </select>
+   <!-- 결재수신 동적 sql -->
+   <sql id="criteria2">
+      <trim prefix="(" suffix=") AND" prefixOverrides="OR">
+         <!--  priefixOverides로 맨앞에 or 제거 후 시작 -->
+            <trim prefix="OR">
+               <choose>
+                  <!-- approval_content 속에서 검색 -->
+                  <when test="cri.getType()=='W'.toString()">
+                     approval_content like '%'||#{cri.keyword}||'%'
+                  </when>
+                  <!-- approval_id 속에서 검색 -->
+                  <when test="cri.getType()=='T'.toString()">
+                     approval_id like '%'||#{cri.keyword}||'%'
+                  </when>
+                  <!-- mem_id 속에서 검색 -->
+                  <when test="cri.getType()=='C'.toString()">
+                     mem_id like '%'||#{cri.keyword}||'%'
+                  </when>
+               </choose>
+            </trim>
+      </trim>
+   </sql>
+   
+   <!-- 결재 승인 1개 호출 -->
+   <select id="commitRead" resultType="com.study.dto.ApprovalCommitDTO">
+      select * from approval_commit where approval_commit_id = #{approval_commit_id}
+   </select>
+
+   <!-- 결재 중간 승인 -->
+   <update id="approvalInterCommit">
+      update approval_commit
+      set approval_commit_inter_check = '중간승인'
+      where approval_commit_id = #{approval_commit_id}
+   </update>
+   
+   <!-- 결재 최종 승인 -->
+   <update id="approvalFinalCommit">
+      update approval_commit
+      set approval_commit_final_check = '최종승인'
+      where approval_commit_id = #{approval_commit_id}
+   </update>
+   
+   <!-- 결재 중간 반려 -->
+   <update id="approvalInterReject">
+      update approval_commit
+      set approval_commit_inter_check = '중간반려'
+      where approval_commit_id = #{approval_commit_id}
+   </update>
+   
+   <!-- 결재 중간 반려 사유 -->
+   <update id="approvalInterRejectContent">
+      update approval
+      set approval_reject=#{approval_reject}
+      where approval_commit_id = #{approval_commit_id}
+   </update>
+   
+   <!-- 결재 최종 반려 -->
+   <update id="approvalFinalReject">
+      update approval_commit
+      set approval_commit_final_check = '최종반려'
+      where approval_commit_id = #{approval_commit_id}
+   </update>
+   
+   <!-- 결재 최종 반려 사유 -->
+   <update id="approvalFinalRejectContent">
+      update approval_commit
+      set approval_reject=#{approval_reject}
+      where approval_commit_id = #{approval_commit_id}
+   </update>
+   
+   <!--  중간승인권자 불러오기 -->
+   <select id = "getInterMan" resultType = "com.study.dto.MemGradeDTO">
+      select *
+      from (select * from mem where grade_id = '3GZ' or grade_id ='4BZ') m
+      inner join grade g
+      on (m.grade_id=g.grade_id)
+   </select>
+   
+   <!--  최종승인권자 불러오기 -->
+   <select id = "getFinalMan" resultType = "com.study.dto.MemGradeDTO">
+      select *
+      from (select * from mem where grade_id = '5SZ') m
+      inner join grade g
+      on (m.grade_id=g.grade_id)
+   </select>
+	
+	
+	
+	
+	
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.mapper.AttachMapper">
+	
+	<insert id="insertFile">
+	<!-- AttachDTO 맞춰야함  -->
+		insert into approval_file(approval_file_id, approval_id, approval_file_dir, approval_file_name, approval_file_type)
+		values(#{approval_file_id},concat('APPR', approval_seq.currval),#{approval_file_dir},#{approval_file_name},#{approval_file_type}) 
+		
+	</insert>
+
+
+	<!-- approval_id 첨부파일 목록 추출 -->
+	<select id="list" resultType="com.study.dto.ApprovalFileDTO">
+		select * from approval_file where approval_id = #{approval_id}
+	</select>
+	
+	<!-- bno가 일치하는 첨부파일 모두 삭제 -->
+	<delete id="deleteAll">
+		delete from approval_file where approval_id = #{approval_id}
+	</delete>
+	
+	<!-- 어제 날짜로 등록된 첨부 파일 목록 가져오기 -->
+	<select id="getOldFiles" resultType="com.study.dto.ApprovalFileDTO">
+		select * from approval_file
+		where approval_file_dir = to_char(sysdate-1,'yyyy\mm\dd') <!-- 문자형식으로 바꿔줌 : to_char -->
+	</select>
+</mapper>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.mapper.AdminUserControlMapper">
+	
+	
+	 <select id="userList" resultType="com.study.dto.MemDTO">
+      <![CDATA[ 
+     	select mem_id, grade_id, company_id, dept_id, mem_name, mem_phone, mem_mail, mem_gender, mem_birth, mem_addr, mem_sal, mem_pwd, mem_con_start,mem_con_end, mem_dcon_start, mem_dcon_end
+		from (
+				select /*+INDEX_DESC(approval pk_mem)*/ rownum rn, mem_id, grade_id, company_id, dept_id, mem_name, mem_phone, mem_mail, mem_gender, mem_birth, mem_addr, mem_sal, mem_pwd, mem_con_start,mem_con_end, mem_dcon_start, mem_dcon_end 
+    			from (
+    					select mem_id, grade_id, company_id, dept_id, mem_name, mem_phone, mem_mail, mem_gender, mem_birth, mem_addr, mem_sal, mem_pwd, mem_con_start,mem_con_end, mem_dcon_start, mem_dcon_end 
+    					from mem 
+    					order by TO_NUMBER(REGEXP_SUBSTR(mem_id, '[0-9]+',1,1)) desc
+    		 		 )
+    			where
+      ]]> 
+      <include refid="criteria"></include>
+      <![CDATA[
+		mem_id >= '20220001' and rownum <= (#{pageNum} * #{amount}))
+		where rn > (#{pageNum} - 1) * #{amount}
+		
+	  ]]>
+   </select>
+   <!-- 동적 sql -->
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND" prefixOverrides="OR">
+			<foreach collection="typeArr" item="type">
+			<!--  priefixOverides로 맨앞에 or 제거 후 시작 -->
+				<trim prefix="OR">
+					<choose>
+						<when test="type=='W'.toString()">
+							mem_name like '%'||#{keyword}||'%'
+						</when>
+						<when test="type=='C'.toString()">
+							mem_id like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+   
+   <!-- 전체 게시물 숫자니까 int형 -->
+   	<select id="totalCnt" resultType="int">
+     select count(*) from mem where
+     <include refid="criteria"></include>
+     mem_id >= '20220001'
+   </select>
+	
+	
+	
+	
+	
+	
+	
+	<!-- 관리자가 사용자 리스트 확인하기 -->
+<!-- 	<select id="userList" resultType="com.study.dto.MemDTO">
+		select * from mem order by mem_id asc
+	</select> -->
+	
+	
+	<!-- 관리자가 사용자 회원가입시켜주기 -->
+	<insert id="userInsert">
+		insert into mem(mem_id, grade_id, company_id, dept_id, mem_name, mem_phone, mem_mail, mem_gender, mem_birth, mem_addr, mem_sal, mem_pwd, mem_con_start,mem_con_end, mem_dcon_start, mem_dcon_end,enabled)   
+		values(#{mem_id}, #{grade_id} ,#{company_id}, #{dept_id} , #{mem_name}, #{mem_phone}, #{mem_mail}, #{mem_gender}, #{mem_birth, jdbcType=DATE}, #{mem_addr}, #{mem_sal}, #{mem_pwd}, #{mem_con_start, jdbcType=DATE}, #{mem_con_end, jdbcType=DATE}, #{mem_dcon_start, jdbcType=DATE}, #{mem_dcon_end, jdbcType=DATE}, 1)
+	</insert>
+	
+	
+	<!-- 사용자 추가될 때마다 각각 메모 알아서 insert 해주기 -->
+ 	<insert id="memoInsert">
+      insert into memo(memo_id,mem_id,memo_content) values(concat('MEMO',memo_seq.nextval),#{mem_id},' ')
+    </insert>
+	
+	
+	<!-- 권한 부여 -->
+	<insert id="authInsert">
+		insert into authority(mem_id, authority) values(#{mem_id},#{authority})
+	</insert>
+	
+	
+	<!-- 로그인 => 조인 sql문 -->
+	<resultMap type="com.study.dto.MemDTO" id="user">
+		<id property="mem_id" column="mem_id"/>
+		<result property="mem_name" column="mem_name"/>
+		<result property="mem_pwd" column="mem_pwd"/>
+		<result property="enabled" column="enabled"/>
+		<collection property="authorities" resultMap="authList"/>
+	</resultMap>
+	<resultMap type="com.study.dto.AuthorityDTO" id="authList">
+		<result property="mem_id" column="mem_id"/>
+		<result property="authority" column="authority"/>
+	</resultMap>
+	
+	
+	<!-- 관리자가 회원가입 시켜준 사용자가 로그인하기 -->
+	<select id="login" resultMap="user">
+		select m.mem_id, mem_name, mem_pwd, enabled, authority
+		from mem m join authority a on m.mem_id = a.mem_id
+		where m.mem_id = #{mem_id}
+	</select>
+	
+	<!-- <update id="pwdChange">
+		update mem set mem_pwd = #{mem_pwd} where mem_id = #{mem_id}
+	</update> -->
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 태현 - 사용자 읽기, 수정, 삭제 부분 -->
+	<select id="read" resultType="com.study.dto.MemDTO">
+		select *
+		from mem where mem_id=#{mem_id} 
+	</select>
+	
+	<update id="update">
+		update mem
+		set grade_id=#{grade_id}, company_id=#{company_id}, dept_id=#{dept_id}, mem_name=#{mem_name} ,mem_phone=#{mem_phone}, mem_mail=#{mem_mail}, mem_gender=#{mem_gender} , mem_birth=#{mem_birth, jdbcType=DATE} ,mem_addr=#{mem_addr}, mem_sal=#{mem_sal}, mem_pwd=#{mem_pwd} , mem_con_end=#{mem_con_end, jdbcType=DATE}, mem_dcon_end=#{mem_dcon_end,jdbcType=DATE} 
+		where mem_id=#{mem_id}
+	</update>
+	
+	
+	<delete id="delete">
+		delete from mem
+		where mem_id=#{mem_id}
+	</delete>
+	
+	
+	
+	
+	
+	
+
+</mapper>

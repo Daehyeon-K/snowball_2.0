@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.mapper.MsgMapper">
+
+
+
+
+	<!-- 컨트롤러에서 mem_id 시큐리터 정보 가져와서 넣어주니까 성공 => 페이지 나누기 전 거 -->
+	<!-- <select id="mSelect" resultType="com.study.dto.MsgDTO">
+		select msg_id, sender_id, receiver_id, msg_content
+		from msg
+		where receiver_id = #{mem_id}
+	</select>  -->
+	
+	
+	<!-- 페이지 나누기 개념 없을 때 -->
+   <select id="mSelect" resultType="com.study.dto.MsgDTO">
+      <![CDATA[ 
+     	select  msg_id, sender_id, receiver_id, msg_content
+		from (
+				select /*+INDEX_DESC(msg pk_msg)*/ rownum rn,  msg_id, sender_id, receiver_id, msg_content 
+    			from (
+    					select msg_id, sender_id, receiver_id, msg_content  
+    					from msg 
+    					
+    					order by TO_NUMBER(REGEXP_SUBSTR(msg_id, '[0-9]+',1,1)) desc
+    		 		 )
+    			where
+      ]]> 
+      <![CDATA[
+		msg_id >= 'MSG1' and rownum <= (#{pageNum} * #{amount}) and receiver_id = #{mem_id} )
+		where rn > (#{pageNum} - 1) * #{amount}
+		
+	  ]]>
+   </select>
+	
+	
+	<!-- 전체 게시물 숫자니까 int형 -->
+   	<select id="totalCnt" resultType="int">
+	     select count(*) from msg 
+	     where msg_id >= 'MSG1' and receiver_id = #{mem_id}
+   	</select>
+	
+	
+	
+	
+	
+	<!-- 읽어오는건 msg_id 잘 넘겨줘서 잘 읽어옴 -->
+	<select id="msgReadRow" resultType="com.study.dto.MsgDTO">
+		select msg_id, sender_id, receiver_id, msg_content
+		from msg
+		where msg_id = '${msg_id}'
+	</select>
+	
+	
+	
+	
+	<!-- 인서트 성공  -->
+	<insert id="msgInsert">
+		insert into msg(msg_id, sender_id, receiver_id, msg_content, msg_send_date) 
+		values(concat('MSG',msg_seq.nextval), #{mem_id}, #{receiver_id}, #{msg_content}, sysdate)
+	</insert>
+	
+	
+	
+	<!-- 삭제도 잘됨 -->
+   <delete id="msgDelete">
+      delete from MSG where msg_id = #{msg_id}
+   </delete>
+
+
+
+</mapper>
+
+

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.mapper.ReplyMapper">
+
+	<!-- 댓글 등록 -->  
+	<insert id="replyInsert">
+		insert into reply(reply_id,mem_id,board_id,reply_content,reply_regdate)
+		values(reply_seq.nextval,#{mem_id},#{board_id},#{reply_content},sysdate)
+	</insert>
+	
+	<!-- 댓글 하나 가져오기 : read -->
+	<select id="replyRow" resultType="com.study.dto.ReplyDTO">
+		select * from reply where reply_id=#{reply_id}
+	</select>
+	
+	
+	<!-- 댓글 전체 가져오기 : list -->
+	<select id="getList"  resultType="com.study.dto.ReplyDTO">
+		<![CDATA[  	
+	
+		select reply_id,mem_id,board_id,reply_content,reply_regdate,reply_updatedate
+		from (select /*+INDEX(reply pk_reply)*/ rownum rn,reply_id,mem_id,board_id,reply_content,reply_regdate,reply_updatedate
+			  from reply
+			  where board_id=#{board_id} and 
+			  reply_id > 0 and rownum <= (#{cri.pageNum} * #{cri.amount}))
+		where rn > (#{cri.pageNum} - 1) * #{cri.amount}
+		
+		 ]]>
+	
+	</select>
+	
+	<select id="getCountBoard_id" resultType="int">
+		select count(*) from reply where board_id=#{board_id}
+	</select>
+	
+	
+	
+	
+	<!-- 댓글 수정 : update(댓글내용, 댓글수정날짜) -->
+	<update id="replyupdate">
+		update reply
+		set reply_content=#{reply_content}, reply_updatedate=sysdate
+		where reply_id=#{reply_id}
+	</update>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="replydelete">
+		delete from reply where reply_id=#{reply_id}
+	</delete>
+	
+	<!-- 댓글 전체 삭제 -->
+	<delete id="deleteAll">
+		delete from reply where board_id=#{board_id}
+	</delete>
+	
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

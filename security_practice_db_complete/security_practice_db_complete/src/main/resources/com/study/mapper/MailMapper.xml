@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.mapper.MailMapper">
+
+	<select id="select" resultType="com.study.dto.MailDTO">
+		select * from mail
+	</select>
+
+	<insert id="emailToDB">
+		insert into mail ( mail_id, mail_name, mail_title, mail_content) 
+		values (concat('MAIL', mail_seq.nextval), #{mail_name}, #{mail_title}, #{mail_content})
+	</insert>
+
+
+ 	<select id="read" resultType="com.study.dto.MailDTO" >
+		select mail_id, mail_name, mail_title, mail_content, mail_send_date from mail where mail_id = #{mail_id}
+	</select> 
+
+
+</mapper>
