@@ -6,7 +6,7 @@
                             <div class="text-muted">Copyright &copy; Co-Mapping 2022</div>
                             <!-- 푸터 우측 개인정보보호정책, 이용약관 등 : 수정 필요! -->
                             <div>
-                                <a href="#">Privacy Policy</a>
+                                <!-- <a href="#">Privacy Policy</a> -->
                                 &middot;
                                 <a href="#">Terms &amp; Conditions</a>
                             </div>
