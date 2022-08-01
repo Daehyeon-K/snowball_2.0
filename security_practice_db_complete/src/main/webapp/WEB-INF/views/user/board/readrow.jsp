@@ -40,13 +40,13 @@
   <button type="button" class="btn btn-info" >리스트</button>   
   
   <!-- 수정 및 삭제버튼은 자기 자신을 제외한 다른 사람 게시물을 수정/삭제 불가해야하므로 권한 조건 걸어주기 -->
-<%--    <sec:authentication property="principal" var="info"/>
+   <sec:authentication property="principal" var="info"/>
    <sec:authorize access="isAuthenticated()">
    		<c:if test="${info.username == dto.mem_id}">
 		   <button type="button" class="btn btn-success" id="ModBtn">수정</button>        
 		   <button type="button" class="btn btn-danger" id="RemoveBtn">삭제</button>  
   		 </c:if>
-   </sec:authorize>   --%>
+   </sec:authorize> 
    
    
  </div>
@@ -54,7 +54,7 @@
 </div>
 
 <%-- 댓글 리스트 영역 --%>    
-<%--  <div class="row">
+  <div class="row">
 	<div class="col-lg-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -83,7 +83,7 @@
 			댓글 페이지 영역
 			<div class="panel-footer"></div>
 		</div>
-	</div>  --%>
+	</div>  
 <%@include file="../../includes/footer.jsp" %>   				
 </div>
 			
