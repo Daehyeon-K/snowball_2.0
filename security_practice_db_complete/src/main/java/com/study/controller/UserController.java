@@ -148,12 +148,12 @@ public class UserController {
 		List<ApprovalFileDTO> attachList = new ArrayList<ApprovalFileDTO>();
 
 		// 업로드 기본 폴더 지정
-		String uploadBasicPath = "d:\\upload";
+		String uploadBasicPath = "c:\\upload";
 
 		// 업로드 세부 폴더 지정 / 날짜 기준으로 나눠주는 
 		String uploadFolderPath = getFolder();
 
-		// 전체 업로드 패스 생성 / 파일 객체 생성 / "d:\\upload\\2022\06\08"
+		// 전체 업로드 패스 생성 / 파일 객체 생성 / "c:\\upload\\2022\06\08"
 		File uploadPath = new File(uploadBasicPath,uploadFolderPath);
 
 		if(!uploadPath.exists()) { // 폴더가 없다면 폴더들 생성
@@ -224,7 +224,7 @@ public class UserController {
 	public ResponseEntity<byte[]> getFile(String fileName) {
 		log.info("이미지 요청" + fileName);
 
-		File file = new File("d:\\upload\\"+fileName);
+		File file = new File("c:\\upload\\"+fileName);
 
 		ResponseEntity<byte[]> image = null;
 
@@ -246,7 +246,7 @@ public class UserController {
 	public ResponseEntity<Resource> downloadFile(String fileName){
 		log.info("다운로드 요청 " + fileName);
 
-		Resource resource = new FileSystemResource("d:\\upload\\" + fileName);
+		Resource resource = new FileSystemResource("c:\\upload\\" + fileName);
 		String resourceUidName = resource.getFilename();
 		//uuid 값 제거
 		String resourceName = resourceUidName.substring(resourceUidName.indexOf("_")+1);
@@ -473,125 +473,9 @@ public class UserController {
 
 		log.info("근태리스트 요청");
 
-<<<<<<< HEAD
+
 		rttr.addAttribute("att_id",att_id);
 		model.addAttribute("att_id",att_id);
-=======
-    @GetMapping({"/board/readrow","/board/modify"})
-       public void readGet(String board_id,@ModelAttribute("cri") CriteriaDTO cri,Model model) {
-          log.info("게시물 요청 "+board_id);
-          log.info("게시물 요청 "+cri);
-          
-          BoardDTO dto = boardService.getRow(board_id);
-          model.addAttribute("dto", dto);
-       }
-    
-    @PostMapping("/board/modify")
-    public String modify(BoardDTO updateDto, @ModelAttribute("cri") CriteriaDTO cri, RedirectAttributes rttr) {
-       log.info("수정 완료" + updateDto);
-       
-       boardService.modify(updateDto);
-       
-       //수정 성공
-       rttr.addAttribute("board_id", updateDto.getBoard_id());
-       rttr.addAttribute("pageNum", cri.getPageNum());
-       rttr.addAttribute("amount", cri.getAmount());   
-       rttr.addAttribute("type", cri.getType());
-       rttr.addAttribute("keyword", cri.getKeyword());
-       
-       return "redirect:/user/board/readrow";
-    }
-    
-    @GetMapping("/board/delete")
-    public String delete(String board_id) {
-       log.info("게시물 삭제");
-       
-       boardService.delete(board_id);
-    
-    
-       return "redirect:/user/board/list";
-       
-    }
-////////////////////////////////////////////////////게시글 끝/////////////////////////////////////////////////////////////////////////////////////////////////////////    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    ////////////////////////////////////////////////////댓글 시작/////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
-    @PostMapping(path = "/replies/new")
-    public ResponseEntity<String> create(@RequestBody ReplyDTO reply){
-       log.info("댓글 삽입 요청 "+reply.getMem_id()+reply.getBoard_id()+reply.getReply_content());
-       
-       return replyService.replyInsert(reply)?new ResponseEntity<String>("success", HttpStatus.OK):
-          new ResponseEntity<String>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-    
-    // 댓글 하나 가져오기 - /replies/rno + GET 
-    // 성공시 ReplyDTO + 200   
-    @GetMapping("/replies/{reply_id}")
-    public ResponseEntity<ReplyDTO> get(@PathVariable("reply_id") String reply_id){
-       log.info("댓글 가져오기 "+reply_id);
-       return new ResponseEntity<ReplyDTO>(replyService.replyRow(reply_id), HttpStatus.OK);
-    }
-    
-    // 댓글 수정 - /replies/1 + PUT + body(수정내용-json)
-    // 성공시 success + 200, 실패시 fail + 500
-    //@RequestMapping(path = "/{rno}", method = {RequestMethod.PUT,RequestMethod.PATCH})
-    @PutMapping("/replies/{reply_id}")
-    public ResponseEntity<String> create(@PathVariable("reply_id") String reply_id,@RequestBody ReplyDTO updateDto){
-       
-       log.info("댓글 수정 요청 "+updateDto);   
-       
-       updateDto.setReply_id(reply_id);      
-       
-       return replyService.replyUpdate(updateDto)?new ResponseEntity<String>("success", HttpStatus.OK):
-          new ResponseEntity<String>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-    
-    // 댓글삭제 : /replies/rno + Delete
-    // 성공시 success + 200, 실패시 fail + 500
-    @DeleteMapping("/replies/{reply_id}")
-    public ResponseEntity<String> remove(@PathVariable("reply_id") String reply_id){
-       
-       log.info("댓글 삭제 요청 "+ reply_id);         
-       
-       return replyService.replyDelete(reply_id)?new ResponseEntity<String>("success", HttpStatus.OK):
-          new ResponseEntity<String>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-    
-    //댓글 리스트 : /replies/pages/bno/page + GET
-    //성공시 댓글 리스트
-    // http://localhost:9090/replies/pages/500/1
-    @GetMapping("/replies/pages/{board_id}/{page}")
-    public ResponseEntity<ReplyPageDTO> getList(@PathVariable("board_id") String board_id,@PathVariable("page") int page){
-       log.info("댓글 리스트 요청 board_id="+board_id+", page = "+page);
-       
-       CriteriaDTO cri = new CriteriaDTO(page, 10);
-       
-       return new ResponseEntity<ReplyPageDTO>(replyService.getList(cri, board_id), HttpStatus.OK);
-    }
-////////////////////////////////////////////////////댓글 끝/////////////////////////////////////////////////////////////////////////////////////////////////////////    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-///////////////////////////////////////////////////////////////////////////사용자에게는 메일 리스트-읽기만 가능해야하기 때문에 메일 전송은 adminController 에서////////////////////////////////////
-    
->>>>>>> refs/remotes/origin/kim-branch
 
 		return "redirect:/user/support/dispatch/attlist";
 	}
@@ -702,12 +586,12 @@ public class UserController {
 		List<BoardFileDTO> attachList = new ArrayList<BoardFileDTO>();
 
 		// 업로드 기본 폴더 지정
-		String uploadBasicPath = "d:\\boardupload";
+		String uploadBasicPath = "c:\\boardupload";
 
 		// 업로드 세부 폴더 지정 / 날짜 기준으로 나눠주는 
 		String uploadFolderPath = getFolder();
 
-		// 전체 업로드 패스 생성 / 파일 객체 생성 / "d:\\upload\\2022\06\08"
+		// 전체 업로드 패스 생성 / 파일 객체 생성 / "c:\\upload\\2022\06\08"
 		File uploadPath = new File(uploadBasicPath,uploadFolderPath);
 
 		if(!uploadPath.exists()) { // 폴더가 없다면 폴더들 생성
@@ -774,7 +658,7 @@ public class UserController {
 	public ResponseEntity<byte[]> boardFile(String fileName) {
 		log.info("이미지 요청" + fileName);
 
-		File file = new File("d:\\boardupload\\"+fileName);
+		File file = new File("c:\\boardupload\\"+fileName);
 
 		ResponseEntity<byte[]> image = null;
 
@@ -795,7 +679,7 @@ public class UserController {
 	public ResponseEntity<Resource> board_downloadFile(String fileName){
 		log.info("다운로드 요청 " + fileName);
 
-		Resource resource = new FileSystemResource("d:\\boardupload\\" + fileName);
+		Resource resource = new FileSystemResource("c:\\boardupload\\" + fileName);
 		String resourceUidName = resource.getFilename();
 		//uuid 값 제거
 		String resourceName = resourceUidName.substring(resourceUidName.indexOf("_")+1);
@@ -837,132 +721,120 @@ public class UserController {
 		return str.replace("-", File.separator); // 2022\06\08 = getFolder
 	} // 폴더 생성 끝
 
-
 	@GetMapping({"/board/readrow","/board/modify"})
-	public void readGet(String board_id,@ModelAttribute("cri") CriteriaDTO cri,Model model) {
-		log.info("게시물 요청 "+board_id);
-		log.info("게시물 요청 "+cri);
-
-		BoardDTO dto = boardService.getRow(board_id);
-		model.addAttribute("dto", dto);
-	}
-
-	// 첨부 파일 부분
-	@GetMapping("/board/getAttachList")
-	public ResponseEntity<List<BoardFileDTO>> boardgetAttachList(String board_id) {
-		log.info("첨부파일 "+board_id);
-		
-		boardService.attachList(board_id);
-		
-		return new ResponseEntity<List<BoardFileDTO>>(boardService.attachList(board_id) ,HttpStatus.OK);
-		
-	} // 첨부파일 끝
-
-	@PostMapping("/board/modify")
-	public String modify(BoardDTO updateDto, @ModelAttribute("cri") CriteriaDTO cri, RedirectAttributes rttr) {
-		log.info("수정 완료" + updateDto);
-
-		boardService.modify(updateDto);
-
-		//수정 성공
-		rttr.addAttribute("board_id", updateDto.getBoard_id());
-		rttr.addAttribute("pageNum", cri.getPageNum());
-		rttr.addAttribute("amount", cri.getAmount());   
-		rttr.addAttribute("type", cri.getType());
-		rttr.addAttribute("keyword", cri.getKeyword());
-
-		return "redirect:/user/board/readrow";
-	}
-
-	@GetMapping("/board/delete")
-	public String delete(String board_id) {
-		log.info("게시물 삭제");
-
-		boardService.delete(board_id);
-
-
-		return "redirect:/user/board/list";
-
-	}
-	////////////////////////////////////////////////////게시글 끝/////////////////////////////////////////////////////////////////////////////////////////////////////////    
-
-
-
-
-
-
-
-
-
-
-
-
-	////////////////////////////////////////////////////댓글 시작/////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	@PostMapping(path = "/replies/new")
-	public ResponseEntity<String> create(@RequestBody Principal principal,String board_id, String reply_content){
-		log.info("댓글 삽입 요청 "+board_id+principal.getName()+reply_content);
-
-		return replyService.replyInsert(principal.getName(),board_id,reply_content)?new ResponseEntity<String>("success", HttpStatus.OK):
-			new ResponseEntity<String>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
-	}
-
-	// 댓글 하나 가져오기 - /replies/rno + GET 
-	// 성공시 ReplyDTO + 200   
-	@GetMapping("/replies/{reply_id}")
-	public ResponseEntity<ReplyDTO> get(@PathVariable("reply_id") String reply_id){
-		log.info("댓글 가져오기 "+reply_id);
-		return new ResponseEntity<ReplyDTO>(replyService.replyRow(reply_id), HttpStatus.OK);
-	}
-
-	// 댓글 수정 - /replies/1 + PUT + body(수정내용-json)
-	// 성공시 success + 200, 실패시 fail + 500
-	//@RequestMapping(path = "/{rno}", method = {RequestMethod.PUT,RequestMethod.PATCH})
-	@PutMapping("/replies/{reply_id}")
-	public ResponseEntity<String> create(@PathVariable("reply_id") String reply_id,@RequestBody ReplyDTO updateDto){
-
-		log.info("댓글 수정 요청 "+updateDto);   
-
-		updateDto.setReply_id(reply_id);      
-
-		return replyService.replyUpdate(updateDto)?new ResponseEntity<String>("success", HttpStatus.OK):
-			new ResponseEntity<String>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
-	}
-
-	// 댓글삭제 : /replies/rno + Delete
-	// 성공시 success + 200, 실패시 fail + 500
-	@DeleteMapping("/replies/{reply_id}")
-	public ResponseEntity<String> remove(@PathVariable("reply_id") String reply_id){
-
-		log.info("댓글 삭제 요청 "+ reply_id);         
-
-		return replyService.replyDelete(reply_id)?new ResponseEntity<String>("success", HttpStatus.OK):
-			new ResponseEntity<String>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
-	}
-
-	//댓글 리스트 : /replies/pages/bno/page + GET
-	//성공시 댓글 리스트
-	// http://localhost:9090/replies/pages/500/1
-	@GetMapping("/replies/pages/{board_id}/{page}")
-	public ResponseEntity<ReplyPageDTO> getList(@PathVariable("board_id") String board_id,@PathVariable("page") int page){
-		log.info("댓글 리스트 요청 board_id="+board_id+", page = "+page);
-
-		CriteriaDTO cri = new CriteriaDTO(page, 10);
-
-		return new ResponseEntity<ReplyPageDTO>(replyService.getList(cri, board_id), HttpStatus.OK);
-	}
-	////////////////////////////////////////////////////댓글 끝/////////////////////////////////////////////////////////////////////////////////////////////////////////    
-
-
-
-
-
-
-
-
-
-	///////////////////////////////////////////////////////////////////////////사용자에게는 메일 리스트-읽기만 가능해야하기 때문에 메일 전송은 adminController 에서////////////////////////////////////
-
+    public void readGet(String board_id,@ModelAttribute("cri") CriteriaDTO cri,Model model) {
+       log.info("게시물 요청 "+board_id);
+       log.info("게시물 요청 "+cri);
+       
+       BoardDTO dto = boardService.getRow(board_id);
+       model.addAttribute("dto", dto);
+    }
+ 
+ @PostMapping("/board/modify")
+ public String modify(BoardDTO updateDto, @ModelAttribute("cri") CriteriaDTO cri, RedirectAttributes rttr) {
+    log.info("수정 완료" + updateDto);
+    
+    boardService.modify(updateDto);
+    
+    //수정 성공
+    rttr.addAttribute("board_id", updateDto.getBoard_id());
+    rttr.addAttribute("pageNum", cri.getPageNum());
+    rttr.addAttribute("amount", cri.getAmount());   
+    rttr.addAttribute("type", cri.getType());
+    rttr.addAttribute("keyword", cri.getKeyword());
+    
+    return "redirect:/user/board/readrow";
+ }
+ 
+ @GetMapping("/board/delete")
+ public String delete(String board_id) {
+    log.info("게시물 삭제");
+    
+    boardService.delete(board_id);
+ 
+ 
+    return "redirect:/user/board/list";
+    
+ }
+////////////////////////////////////////////////////게시글 끝/////////////////////////////////////////////////////////////////////////////////////////////////////////    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ ////////////////////////////////////////////////////댓글 시작/////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
+ @PostMapping(path = "/replies/new")
+ public ResponseEntity<String> create(@RequestBody ReplyDTO reply){
+    log.info("댓글 삽입 요청 "+reply.getMem_id()+reply.getBoard_id()+reply.getReply_content());
+    
+    return replyService.replyInsert(reply)?new ResponseEntity<String>("success", HttpStatus.OK):
+       new ResponseEntity<String>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
+ }
+ 
+ // 댓글 하나 가져오기 - /replies/rno + GET 
+ // 성공시 ReplyDTO + 200   
+ @GetMapping("/replies/{reply_id}")
+ public ResponseEntity<ReplyDTO> get(@PathVariable("reply_id") String reply_id){
+    log.info("댓글 가져오기 "+reply_id);
+    return new ResponseEntity<ReplyDTO>(replyService.replyRow(reply_id), HttpStatus.OK);
+ }
+ 
+ // 댓글 수정 - /replies/1 + PUT + body(수정내용-json)
+ // 성공시 success + 200, 실패시 fail + 500
+ //@RequestMapping(path = "/{rno}", method = {RequestMethod.PUT,RequestMethod.PATCH})
+ @PutMapping("/replies/{reply_id}")
+ public ResponseEntity<String> create(@PathVariable("reply_id") String reply_id,@RequestBody ReplyDTO updateDto){
+    
+    log.info("댓글 수정 요청 "+updateDto);   
+    
+    updateDto.setReply_id(reply_id);      
+    
+    return replyService.replyUpdate(updateDto)?new ResponseEntity<String>("success", HttpStatus.OK):
+       new ResponseEntity<String>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
+ }
+ 
+ // 댓글삭제 : /replies/rno + Delete
+ // 성공시 success + 200, 실패시 fail + 500
+ @DeleteMapping("/replies/{reply_id}")
+ public ResponseEntity<String> remove(@PathVariable("reply_id") String reply_id){
+    
+    log.info("댓글 삭제 요청 "+ reply_id);         
+    
+    return replyService.replyDelete(reply_id)?new ResponseEntity<String>("success", HttpStatus.OK):
+       new ResponseEntity<String>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
+ }
+ 
+ //댓글 리스트 : /replies/pages/bno/page + GET
+ //성공시 댓글 리스트
+ // http://localhost:9090/replies/pages/500/1
+ @GetMapping("/replies/pages/{board_id}/{page}")
+ public ResponseEntity<ReplyPageDTO> getList(@PathVariable("board_id") String board_id,@PathVariable("page") int page){
+    log.info("댓글 리스트 요청 board_id="+board_id+", page = "+page);
+    
+    CriteriaDTO cri = new CriteriaDTO(page, 10);
+    
+    return new ResponseEntity<ReplyPageDTO>(replyService.getList(cri, board_id), HttpStatus.OK);
+ }
+////////////////////////////////////////////////////댓글 끝/////////////////////////////////////////////////////////////////////////////////////////////////////////    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+///////////////////////////////////////////////////////////////////////////사용자에게는 메일 리스트-읽기만 가능해야하기 때문에 메일 전송은 adminController 에서////////////////////////////////////
+ 
 
 	@GetMapping("/email/noticeList")
 	public String list(MailDTO mailDto,Model model) {
