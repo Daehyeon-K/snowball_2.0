@@ -5,7 +5,8 @@
 let replyService=(function(){
    
    function add(reply_content, callback) {
-      console.log('add 메소드 실행');
+      console.log('add 메소드 실행==============');
+		console.log(JSON.stringify(reply_content));
       
       $.ajax({
          url : '/user/replies/new',
@@ -149,7 +150,7 @@ $(function(){
    let modal = $(".modal");
    // 모달 창 안에 있는 input 요소 찾기
    let modalInputReply = modal.find("input[name='reply_content']");
-   let modalInputReplyer = modal.find("input[name='mem_id']");
+   let modalInputReplyer = modal.find("input[name='mem_name']");
    let modalInputReplyDate = modal.find("input[name='reply_regdate']");
    
    let modalModBtn = $("#modalModBtn");
@@ -162,6 +163,11 @@ $(function(){
    
       //input 태그가 가지고 있는 val 지우기
       modal.find("input").val("");
+    
+      //로그인 사용자 보여주기
+	  modalInputReplyer.val(mem_name);
+	 
+	  console.log(mem_name);
       
       //날짜 input 숨기기
       modalInputReplyDate.closest("div").hide();

@@ -636,10 +636,10 @@ public class UserController {
     ////////////////////////////////////////////////////댓글 시작/////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     @PostMapping(path = "/replies/new")
-    public ResponseEntity<String> create(@RequestBody Principal principal,String board_id, String reply_content){
-       log.info("댓글 삽입 요청 "+board_id+principal.getName()+reply_content);
+    public ResponseEntity<String> create(@RequestBody ReplyDTO reply){
+       log.info("댓글 삽입 요청 "+reply.getMem_id()+reply.getBoard_id()+reply.getReply_content());
        
-       return replyService.replyInsert(principal.getName(),board_id,reply_content)?new ResponseEntity<String>("success", HttpStatus.OK):
+       return replyService.replyInsert(reply)?new ResponseEntity<String>("success", HttpStatus.OK):
           new ResponseEntity<String>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
     }
     

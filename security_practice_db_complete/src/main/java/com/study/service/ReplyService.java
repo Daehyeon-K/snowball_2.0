@@ -9,7 +9,6 @@ import com.study.dto.ReplyDTO;
 import com.study.dto.ReplyPageDTO;
 
 public interface ReplyService {
-	public boolean replyInsert(@Param("mem_id") String mem_id,@Param("board_id") String board_id,@Param("reply_content") String reply_content);
 	
 	public ReplyDTO replyRow(String reply_id);
 	
@@ -23,5 +22,7 @@ public interface ReplyService {
 	public boolean getCountBoard_id(String board_id);
 	
 	public boolean deleteAll(String board_id);
+
+	public boolean replyInsert(ReplyDTO reply);
 	
 }

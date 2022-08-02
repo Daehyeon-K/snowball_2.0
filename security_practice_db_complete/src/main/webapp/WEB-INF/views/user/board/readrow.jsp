@@ -83,16 +83,12 @@
 			댓글 페이지 영역
 			<div class="panel-footer"></div>
 		</div>
-<<<<<<< HEAD
-	</div>  --%>
-=======
-	</div>  
->>>>>>> refs/heads/master
+
 <%@include file="../../includes/footer.jsp" %>   				
 </div>
 			
 <%-- 댓글 작성 모달 폼 --%>
-<%-- <div class="modal" tabindex="-1" id="replyModal" data-rno="1">
+<div class="modal" tabindex="-1" id="replyModal" data-rno="1">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -119,12 +115,12 @@
         <button type="button" class="btn btn-warning" id="modalRegisterBtn">등록</button>        
         <button type="button" class="btn btn-primary=" id="modalModBtn">수정</button>        
         <button type="button" class="btn btn-primary" id="modalRemoveBtn">삭제</button>        
-        <button type="button" class="btn btn-primary" id="modalCloseBtn"  data-dismiss="modal">종료</button>        
+        <button type="button" class="btn btn-primary" id="modalCloseBtn"  data-bs-dismiss="modal">종료</button>        
       </div>
     </div>
   </div>
  
-</div>   --%>
+</div>  
 
 <%-- modify / list 버튼 클릭시 이동할 폼 --%>            
 <form action="" id="operForm">
@@ -133,15 +129,21 @@
 	<input type="hidden" value="${cri.amount}" name="amount"/>
 	<input type="hidden" value="${cri.type}" name="type"/>
 	<input type="hidden" value="${cri.keyword}" name="keyword"/>
-	<input type="hidden" value='<sec:authentication property="principal.user.mem_name"/>' name="mem_name"/>
+	<input type="hidden" value='<sec:authentication property="principal.username"/>' name="mem_name"/>
 </form>
 <script>
 	let board_id = '${dto.board_id}';
+	
+	<sec:authorize access="isAuthenticated()">
+/*     	 mem_name = '<sec:authentication property="principal.user.mem_name"/>';  */
+    	mem_name = '<sec:authentication property="principal.username"/>';
+	</sec:authorize>  
+
 	
 	let csrfHeaderName = "${_csrf.headerName}";
 	let csrfTokenValue = "${_csrf.token}";
 </script>
 <script src="/resources/js/read_row.js"></script>
-<!-- <script src="/resources/js/reply.js"></script>  -->
+<script src="/resources/js/reply.js"></script> 
 
 
