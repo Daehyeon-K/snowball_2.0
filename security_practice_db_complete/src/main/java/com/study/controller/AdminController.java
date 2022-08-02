@@ -230,6 +230,7 @@ public class AdminController {
 	
 		// register 등록 성공 시 list로
 		return "redirect:/admin/company/companyList";
+	
 	}
 	
 	@GetMapping("/company/companyDelete")
