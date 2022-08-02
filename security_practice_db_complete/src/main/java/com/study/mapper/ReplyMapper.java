@@ -8,7 +8,7 @@ import com.study.dto.CriteriaDTO;
 import com.study.dto.ReplyDTO;
 
 public interface ReplyMapper {
-	public int replyInsert(@Param("mem_id") String mem_id,@Param("board_id") String board_id,@Param("reply_content") String reply_content);
+	public int replyInsert(ReplyDTO reply);
 	
 	public ReplyDTO replyRow(String reply_id);
 	

@@ -25,8 +25,8 @@ public class ReplyServiceImpl implements ReplyService {
 	
 	@Transactional
 	@Override
-	public boolean replyInsert(@Param("mem_id") String mem_id,@Param("board_id") String board_id,@Param("reply_content") String reply_content) {
-		return mapper.replyInsert(mem_id,board_id,reply_content)==1?true:false;
+	public boolean replyInsert(ReplyDTO reply) {
+		return mapper.replyInsert(reply)==1?true:false;
 	}
 
 
@@ -72,7 +72,6 @@ public class ReplyServiceImpl implements ReplyService {
 	public boolean deleteAll(String board_id) {
 		return false;
 	}
-
 
 
 }
