@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.study.dto.AuthorityDTO;
+import com.study.dto.ChangePwdDTO;
 import com.study.dto.CriteriaDTO;
 import com.study.dto.MemDTO;
 
@@ -21,8 +22,8 @@ public interface AdminUserControlService {
 	public boolean userInsert(MemDTO user);
 	
 	// 비밀번호 변경
+	public boolean pwdChange(ChangePwdDTO change);
 //	public boolean pwdChange(@Param("mem_pwd") String mem_pwd, @Param("mem_id") String mem_id);
-//	public boolean pwdChange(MemDTO changePwd);
 	
 	
 	// 태현

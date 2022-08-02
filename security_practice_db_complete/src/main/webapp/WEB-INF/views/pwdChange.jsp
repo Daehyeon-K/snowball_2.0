@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -40,15 +41,21 @@
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4"><a href="/" style="text-decoration: none;color: black">Comapping</a></h3></div>
                                     <div class="card-body">
                                         <form action="" method="post" class="form-signin">
-                                            <div class="form-floating mb-3">
-                                            	<input type="password" id="current_password" name="current_password" class="form-control" placeholder="아이디를 입력해 주세요" required autofocus/>
-                                                <label for="current_password">현재 비밀번호</label>
+                                        	<div class="form-floating mb-3">
+                                        		<input type="text" id="mem_id" name="mem_id" value='<sec:authentication property="principal.user.mem_name"/>' class="form-control" readonly/>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input type="password" id="new_password" name="new_password" class="form-control" placeholder="비밀번호를 입력해 주세요" required/>   
+                                            	<input type="password" id="mem_pwd" name="mem_pwd" class="form-control" placeholder="현재 비밀번호를 입력하세요" required autofocus/>
+                                                <label for="mem_pwd">현재 비밀번호</label>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input type="password" id="new_mem_pwd" name="new_mem_pwd" class="form-control" placeholder="새 비밀번호를 입력하세요" required/>   
                                                 <label for="new_password">새 비밀번호</label>
                                             </div>
-                         
+                         					<div class="form-floating mb-3">
+                                                <input type="password" id="cur_new_mem_pwd" name="cur_new_mem_pwd" class="form-control" placeholder="새 비밀번호를 다시 입력하세요" required/>   
+                                                <label for="cur_new_mem_pwd">새 비밀번호 확인</label>
+                                            </div>
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 <button class="btn btn-lg btn-primary btn-block" type="submit" >변경하기</button>
                                             </div>
