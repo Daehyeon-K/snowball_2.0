@@ -16,4 +16,8 @@ public class ApprovalFileDTO {
    private String approval_file_dir; //upload_path
    private String approval_file_name; //filename
    private boolean approval_file_type; //filetype
+   
+   
+   
+   
 }
