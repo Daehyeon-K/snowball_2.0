@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.study.dto.ApprovalDTO;
 import com.study.dto.AuthorityDTO;
+import com.study.dto.ChangePwdDTO;
 import com.study.dto.CriteriaDTO;
 import com.study.dto.MemDTO;
 
@@ -33,8 +34,10 @@ public interface AdminUserControlMapper {
 	
 	// 비밀번호 변경
 //	public int pwdChange(@Param("mem_pwd") String mem_pwd, @Param("mem_id") String mem_id);
-//	public int pwdChange(MemDTO changePwd);
+	public int pwdChange(ChangePwdDTO change);
 	
+	//비밀번호 변경 시 디비 정보과 비교해야하기 때문에 비밀번호만 따로 추출하는 메소드 생성
+		public String pwdSelect(String mem_id);
 	
 	// 태현 - 
 	public MemDTO read(String mem_id);

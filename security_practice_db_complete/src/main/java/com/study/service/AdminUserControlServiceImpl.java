@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.study.dto.AuthorityDTO;
+import com.study.dto.ChangePwdDTO;
 import com.study.dto.CriteriaDTO;
 import com.study.dto.CustomUser;
 import com.study.dto.MemDTO;
@@ -95,23 +96,39 @@ public class AdminUserControlServiceImpl implements AdminUserControlService {
 
 	
 	
-	// 사용자가 직접 비밀번호 변경하기 => 암호화된 비밀번호 디코딩하고 다시 인코딩하기
-//	@Override
-//	public boolean pwdChange(String mem_pwd, String mem_id) {
-//		
-//		if(encoder.matches(mem_pwd,   )) {
-//			return true;
-//		}
-//		
-//		
-//		return false;
-//	}
-	
-//	@Override
-//	public boolean pwdChange(String mem_pwd, String mem_id) {
-//		return mapper.pwdChange(mem_pwd, mem_id)==1?true:false;
-//	}
-	
+	@Override
+	public boolean pwdChange(ChangePwdDTO change) {
+		
+		System.out.println("저장된 암호 잘 뽑은건지 확인 : "+mapper.pwdSelect(change.getMem_id()));
+		
+		// 사용자가 입력한 현재 비밀번호와 디비에 암호화로 저장된 비밀번호와 같은지 확인
+		if(encoder.matches(change.getMem_pwd(), mapper.pwdSelect(change.getMem_id()))) {
+			
+			change.setNew_mem_pwd(encoder.encode(change.getNew_mem_pwd()));
+			change.setCur_new_mem_pwd(encoder.encode(change.getCur_new_mem_pwd()));
+			mapper.pwdChange(change);
+			System.out.println("새 비밀번호 찍기 : "+change.getCur_new_mem_pwd());
+			
+			return true;
+			
+			// 현재 비밀번호가 일치한다면, 새 비밀번호와 새 비밀번호 확인과 일치하는지 확인
+//			if(change.getNew_mem_pwd().equals(change.getCur_new_mem_pwd())) {
+//				System.out.println("현재 비밀번호 찍기 : "+change.getMem_pwd());
+//				// 다 일치한다면 비밀번호 변경하기
+//				mapper.pwdChange(change);
+//				System.out.println("새 비밀번호 찍기 : "+change.getNew_mem_pwd());
+//				
+//				// 변경한 비밀번호 다시 암호화하기
+//				encoder.encode(change.getCur_new_mem_pwd());
+//				System.out.println(change.getCur_new_mem_pwd());
+//				
+//				return true;
+//			}	
+			
+			
+		}
+		return false;
+	}
 	
 
 }

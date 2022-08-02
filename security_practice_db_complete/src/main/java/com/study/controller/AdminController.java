@@ -1,12 +1,16 @@
 package com.study.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -74,24 +78,46 @@ public class AdminController {
 	
 	//관리자 - 직원 추가 => 회원가입 부분
 	@GetMapping("/mem/memInsert")
-	public String userInsertGet() {
+	public String userInsertGet(Model model) {
 		log.info("관리자가 사용자 추가해주기");
+		model.addAttribute("user", new MemDTO());
 		return "/admin/mem/mem_insert";
 	}
 	
 	
 	// 직원 추가하는 폼 처리하기 => 회원가입 부분!!!!! insertUser
 	@PostMapping("/mem/memInsert")
-	public String userInsert(MemDTO user) {
+	public String userInsert(Model model, @Valid @ModelAttribute("user") MemDTO  user, BindingResult bindingResult) {
 		log.info("직원 추가하기(회원가입)" + user);
+		
+		//model.addAttribute("user", user);
+		
+		if(bindingResult.hasErrors()) {
+			log.info("@@@@에러@@@@직원 추가하기(회원가입) : " + bindingResult.toString());
+			System.out.print("출력 에러");
+	        return "/admin/mem/mem_insert";
+		}
 		
 		if(controlService.userInsert(user)) {
 			return "redirect:/admin/mem/memList";
 		}
-		return "redirect:/admin/mem/memInsert";
+		return "/admin/mem/mem_insert";
 	}
 	
-	
+	/* 날짜 유효성 검증 함수 - 미완 */
+//	public String formatCheck(String date, String goodReturnPath, String badReturnPath) {
+//			try {
+//				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//				sdf.setLenient(false);
+//				sdf.parse(date);
+//				System.out.println("날짜 형식에 맞음 : "+date);
+//				return goodReturnPath;
+//			} catch(ParseException e) {
+//				System.out.println("날짜 형식에 맞지 않음 : "+date);
+//				// e.printStackTrace();
+//				return badReturnPath;
+//		}
+	/* 날짜 유효성 검증 함수 끝 */
 	
 	
 	   // 사용자 - 태현
