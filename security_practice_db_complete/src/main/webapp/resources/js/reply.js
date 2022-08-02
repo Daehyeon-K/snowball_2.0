@@ -39,7 +39,7 @@ let replyService=(function(){
             }
          }         
       })      
-   }//getList 종료
+   } //getList 종료
    
    
    function get(reply_id,callback){      
@@ -52,7 +52,7 @@ let replyService=(function(){
             }
          }         
       })         
-   }//get 종료   
+   } //get 종료   
    
    
    function update(reply,callback){      
@@ -71,7 +71,7 @@ let replyService=(function(){
             }
          }               
       })
-   }//update 종료
+   } //update 종료
    
    
    function remove(reply_id,callback){      
@@ -88,7 +88,7 @@ let replyService=(function(){
             }
          }               
       })
-   }//remove 종료
+   } //remove 종료
    
    
    //  1651629247000
@@ -116,7 +116,7 @@ let replyService=(function(){
          
          return [yy,'/',(mm>9?'':'0')+mm, '/', (dd>9?'':'0')+dd].join('');
       }      
-   }//displayTime
+   } //displayTime
    
    
    return {
@@ -149,7 +149,7 @@ $(function(){
    let modal = $(".modal");
    // 모달 창 안에 있는 input 요소 찾기
    let modalInputReply = modal.find("input[name='reply_content']");
-   let modalInputReplyer = modal.find("input[name='mem_id']");
+   let modalInputReplyer = modal.find("input[name='mem_name']");
    let modalInputReplyDate = modal.find("input[name='reply_regdate']");
    
    let modalModBtn = $("#modalModBtn");
@@ -180,13 +180,13 @@ $(function(){
    
    
    // 댓글 모달 창 등록 버튼 클릭 시
-   $("#modalRegisterBtn").click(function(){
+    $("#modalRegisterBtn").click(function(){
       let reply = {
-         board_id:board_id,
-         reply_content:modalInputReply.val(),
-         mem_id:modalInputReplyer.val()
+      	reply_content:modalInputReply.val(),
+      	mem_name :modalInputReplyer.val(),
+        board_id:board_id,
+
       };
-      
       console.log(reply);
       
       
@@ -209,7 +209,6 @@ $(function(){
          }
       });         
    })
-   
    
    function showList(page){
       
