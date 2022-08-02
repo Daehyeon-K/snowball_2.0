@@ -100,15 +100,14 @@
 		where m.mem_id = #{mem_id}
 	</select>
 	
-	<!-- <update id="pwdChange">
-		update mem set mem_pwd = #{mem_pwd} where mem_id = #{mem_id}
-	</update> -->
+	<update id="pwdChange">
+		update mem set mem_pwd = #{cur_new_mem_pwd} where mem_id = #{mem_id}
+	</update>
 	
 	
-	
-	
-	
-	
+	<select id="pwdSelect" resultType="String">
+		select mem_pwd from mem where mem_id = #{mem_id}
+	</select>
 	
 	
 	<!-- 태현 - 사용자 읽기, 수정, 삭제 부분 -->

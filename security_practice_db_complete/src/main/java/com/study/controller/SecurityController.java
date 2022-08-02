@@ -3,6 +3,8 @@ package com.study.controller;
 import java.security.Principal;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.study.dto.ChangePwdDTO;
 import com.study.dto.CriteriaDTO;
 import com.study.dto.CustomUser;
 import com.study.dto.MemDTO;
@@ -43,13 +46,13 @@ public class SecurityController {
 	private MemoService memoService;
 	
 	
-	// 3. 인코드 도입하기
-	@Autowired 
-    private PasswordEncoder encoder;
-	
 	// 여기도 사용해야해서 - 비밀번호 변경
 	@Autowired
 	private AdminUserControlService controlService;
+	
+	
+	
+	
 	
 	
 	
@@ -163,15 +166,28 @@ public class SecurityController {
 		log.info("비밀번호 변경 jsp");
     }
 
-//    @PostMapping("/pwdChange")
-//    public String pwdChange(String mem_pwd, Principal principal, RedirectAttributes rttr) {
-//     
-//    	log.info("비밀번호 바꾸기 => 현재 정보 : "+mem_pwd + principal.getName());
-//    	
-////    	controlService.pwdChange(changePwd);
-//    	
-//        return "redirect:/";
-//    }
+	@PostMapping("/pwdChange")
+    public String pwdChange(ChangePwdDTO change, HttpSession session) {
+    	log.info("현재 바뀐 정보 : "+change.getMem_pwd()+ " , " + change.getMem_id());
+    	
+    	// 사용자 아이디 넣어주기
+//    	change.setMem_id(principal.getName());
+    	
+    	// 비밀번호 변경하기
+    	// 새 비밀번호랑 새 비밀번호 확인이랑 같지 않고 기존 비밀번호랑 새 비밀번호가 같거나 기존 비밀번호랑 새 비밀번호 확인이랑 같으면 false 므로 다시 같은 페이지 보여주기
+		if(!change.getNew_mem_pwd().equals(change.getCur_new_mem_pwd()) || (change.getMem_pwd().equals(change.getNew_mem_pwd())) || (change.getMem_pwd().equals(change.getCur_new_mem_pwd())) ) {
+			return "redirect:/pwdChange";
+		}
+//    	controlService.pwdChange(change);
+    	
+        controlService.pwdChange(change);
+		log.info("비밀번호 변경 후 : "+change.getCur_new_mem_pwd()); //여기까지 잘됨
+		
+		session.invalidate();
+		log.info("세션 강제 종료");
+		
+		return "redirect:/login";
+    }
 
 	
 }
