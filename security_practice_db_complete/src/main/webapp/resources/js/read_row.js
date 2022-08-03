@@ -21,7 +21,8 @@ $(function(){
       operForm.attr("action","/user/board/delete");
       operForm.attr("method","get");
       operForm.submit();
-   })      
+   })
+   
             
 })
       

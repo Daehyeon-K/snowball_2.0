@@ -225,7 +225,7 @@ public class SecurityController {
 		change.setMem_id(principal.getName());
 		
 		controlService.pwdChange(change); // 조건을 다 만족한다면 비밀번호 변경하기
-		log.info("비밀번호 변경 후 : "+change.getCur_new_mem_pwd()); //여기까지 잘됨
+		log.info("비밀번호 변경 후 : "+change.getCur_new_mem_pwd()); 
 		
 		session.invalidate();
 		log.info("세션 강제 종료");
