@@ -15,6 +15,14 @@
 	</properties>
 	<dependencies>
 	
+	   <!-- 웹 소켓 라이브러리 활성회 -->
+  			<!-- https://mvnrepository.com/artifact/org.springframework/spring-websocket -->
+	   <dependency>
+	      <groupId>org.springframework</groupId>
+	      <artifactId>spring-websocket</artifactId>
+	      <version>5.3.18</version>
+	   </dependency>
+	
 		<!-- 이메일 -->
 	      <!-- https://mvnrepository.com/artifact/javax.mail/javax.mail-api -->
 	      <dependency>
