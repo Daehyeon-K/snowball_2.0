@@ -41,9 +41,6 @@
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4"><a href="/" style="text-decoration: none;color: black">Comapping</a></h3></div>
                                     <div class="card-body">
                                         <form action="" method="post" class="form-signin">
-                                        	<div class="form-floating mb-3">
-                                        		<input type="text" id="mem_id" name="mem_id" value='<sec:authentication property="principal.user.mem_name"/>' class="form-control" readonly/>
-                                            </div>
                                             <div class="form-floating mb-3">
                                             	<input type="password" id="mem_pwd" name="mem_pwd" class="form-control" placeholder="현재 비밀번호를 입력하세요" required autofocus/>
                                                 <label for="mem_pwd">현재 비밀번호</label>
