@@ -12,9 +12,7 @@
 	<main>
 		<div class="container-fluid px-4">
 			<h1 class="mt-4 breadcrumb mb-4 layout-center">게시글 보기</h1>
-			<ol class="breadcrumb mb-4">
-				<li class="breadcrumb-item active">read board</li>
-			</ol>
+
 
 			<div>
 				<form action="" method="post" role="form">
@@ -68,7 +66,7 @@
 						<sec:authorize access="isAuthenticated()">
 							<c:if test="${info.username == dto.mem_id}">
 								<button type="button" class="btn btn-success" id="ModBtn">수정</button>
-								<button type="button" class="btn btn-danger" id="RemoveBtn" onclick="test()">삭제</button>
+								<button type="button" class="btn btn-danger" id="RemoveBtn">삭제</button>
 							</c:if>
 						</sec:authorize>
 
@@ -176,16 +174,8 @@
    let csrfHeaderName = "${_csrf.headerName}";
    let csrfTokenValue = "${_csrf.token}";
 </script>
-<script>
-function test(){
-	if(confirm("삭제하시겠습니까?")) {
-		alert("삭제가 완료되었습니다.")
-	} else {
-		location.href="/board/readrow?board_id=${dto.board_id}"
-	}
-}
-</script>
-				<script src="/resources/js/read_row.js"></script>
-				<script src="/resources/js/reply.js"></script>
-				<script src="/resources/js/read2.js"></script>
-				<script src="/resources/js/upload2.js"></script>
+
+<script src="/resources/js/read_row.js"></script>
+<script src="/resources/js/reply.js"></script>
+<script src="/resources/js/read2.js"></script>
+<script src="/resources/js/upload2.js"></script>

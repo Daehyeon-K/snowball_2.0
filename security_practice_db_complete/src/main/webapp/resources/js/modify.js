@@ -13,7 +13,12 @@ $(function(){
       
       if(oper == "modify"){
          operForm = $("[role='form']");
-      	
+		 if(confirm("수정 하시겠습니까?")) {
+			alert("수정이 완료되었습니다")
+		} else {
+			
+		}
+		      	
       } else if(oper == "list"){
          operForm.find("[name='board_id']").remove();
          operForm.attr('action','/user/board/list');

@@ -10,9 +10,7 @@
                 <main>
                     <div class="container-fluid px-4">
                     	<h1 class="mt-4 breadcrumb mb-4 layout-center">게시글 수정</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">modify board</li>
-                        </ol>
+
 
 <div>
 <form action="/user/board/modify" method="post" role="form">
@@ -35,8 +33,8 @@
   
  <div class="form-groups">
   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-   <button type="submit" data-oper='modify' class="btn btn-success">Modify</button>              			
-   <button type="submit" data-oper='list' class="btn btn-danger">List</button> 
+   <button type="submit" data-oper='modify' class="btn btn-success">수정</button>              			
+   <button type="submit" data-oper='list' class="btn btn-danger">리스트</button> 
  </div>
 </form>
 <%@include file="../../../views/includes/footer.jsp" %>
