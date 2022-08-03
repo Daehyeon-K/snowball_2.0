@@ -196,8 +196,11 @@ public class SecurityController {
 			log.info("사용자가 입력한 현재 비밀번호 : "+change.getMem_pwd());
 			log.info("사용자가 입력한 새 비밀번호 : "+change.getNew_mem_pwd());
 			log.info("사용자가 입력한 새 비밀번호 확인 : "+change.getCur_new_mem_pwd());
+			log.info("");
 			
-			log.info("밑에 4개 중 하나라도 true 나오면 비밀번호 변겨 불가!!!");
+			log.info("밑에 4개 중 하나라도 true 나오면 비밀번호 변경 불가!!!");
+			
+			log.info("");
 			log.info("새 비밀번호!=새 비밀번호 확인 : "+(!change.getNew_mem_pwd().equals(change.getCur_new_mem_pwd())));
 			log.info("현재 비밀번호==새 비밀번호 : "+(change.getMem_pwd().equals(change.getNew_mem_pwd())));
 			log.info("현재 비밀번호==새 비밀번호 확인 : "+(change.getMem_pwd().equals(change.getCur_new_mem_pwd())));
