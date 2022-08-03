@@ -32,7 +32,8 @@
   </div>
   <div class="form-group">
     <label for="approval_reject">내용</label>
-    <input type="text" class="form-control" name="mail_content" >
+    <!-- <input type="text" class="form-control" name="mail_content" > -->
+    <textarea name="mail_content" class="form-control" cols="30" rows="10"></textarea>
   </div>
   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
   <input type="submit" value="전송">

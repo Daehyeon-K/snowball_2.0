@@ -224,10 +224,9 @@
                             <!-- 채팅 기능 메뉴 -->
                             <div class="sb-sidenav-menu-heading">채팅</div>
                            <!-- 채팅 메뉴 띄우기 -->
-                           <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsechats" aria-expanded="false" aria-controls="collapsechats">
-                                <div class="sb-nav-link-icon"><i class="fas fa-clipchat"></i></div>
-                                채팅
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                           <a class="nav-link collapsed" href="/user/chatting/chat" data-bs-toggle="collapse" data-bs-target="#collapsechats" aria-expanded="false" aria-controls="collapsechats">
+                                <div class="sb-nav-link-icon"><i class="far fa-comment-dots"></i></div>
+                  				채팅                               
                             </a>
                            
                             <!-- 관리자 메뉴 -->
