@@ -36,6 +36,21 @@
  <div class="form-groups">
   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
   
+   <%-- 파일 첨부 영역 --%>
+  <div class="row">
+     	<div class="col-lg-12">
+     	<div class="panel panel-default">
+     		<div class="panel-heading"><i class="fa fas fa-file"></i>파일첨부</div>
+     			<div class="uploadResult">
+     				<ul><!-- 첨부파일 정보 --></ul>
+     			</div>
+     		</div>
+     	</div>
+     </div>
+	<div class="bigPictureWrapper1">
+		<div class="bigPicture1"></div>
+	</div>
+  
   <!-- 리스트 버튼은 누구나 다 보여져야하니까 권한 걸지 않기 -->
   <button type="button" class="btn btn-info" >리스트</button>   
   
@@ -145,4 +160,6 @@
 </script>
 <script src="/resources/js/read_row.js"></script>
 <script src="/resources/js/reply.js"></script> 
+<script src="/resources/js/upload2.js"></script> 
+<script src="/resources/js/read2.js"></script> 
 

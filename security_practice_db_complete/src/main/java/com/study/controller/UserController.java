@@ -672,6 +672,17 @@ public class UserController {
 		}
 		return image;
 	} // 썸네일 끝
+	
+	// 첨부 파일 부분
+	   @GetMapping("/board/getAttachList")
+	   public ResponseEntity<List<BoardFileDTO>> boardgetAttachList(String board_id) {
+	      log.info("첨부파일 "+board_id);
+	      
+	      boardService.attachList(board_id);
+	      
+	      return new ResponseEntity<List<BoardFileDTO>>(boardService.attachList(board_id) ,HttpStatus.OK);
+	      
+	   } // 첨부파일 끝
 
 	// 다운로드 부분
 	// 다운로드

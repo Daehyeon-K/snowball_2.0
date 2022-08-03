@@ -54,11 +54,11 @@ $(function(){
          }
       })
       
-      
+      })
    }) //uploadBtn 종료
    
 
-   function showImage(fileCallPath){
+	function showImage(fileCallPath){
      $(".bigPictureWrapper1").css("display","flex").show();
    
      $(".bigPicture1").html("<img src='/user/board/display?fileName="+fileCallPath+"'>").animate({width:'100%',height:'100%'},1000);
