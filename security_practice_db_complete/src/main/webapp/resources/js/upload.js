@@ -65,9 +65,9 @@ $(function(){
       
       $(result).each(function(idx,obj){
          if(obj.fileType) {
-               //썸네일 이미지 보여주기
-               //썸네일 이미지 경로
-               let fileCallPath = encodeURIComponent(obj.approval_file_dir+"\\s_"+obj.approval_file_id+"_"+obj.approval_file_name);
+            //썸네일 이미지 보여주기
+            //썸네일 이미지 경로
+            let fileCallPath = encodeURIComponent(obj.approval_file_dir+"\\s_"+obj.approval_file_id+"_"+obj.approval_file_name);
             
             //원본 파일 이미지 경로
             let oriPath = obj.approval_file_dir+"\\"+obj.approval_file_id+"_"+obj.approval_file_name;      
@@ -105,8 +105,8 @@ $(function(){
    }//showIpladFile 종료
 
 })
-//   function showImage(fileCallPath){
-//      $(".bigPictureWrapper").css("display","flex").show();
-//   
-//      $(".bigPicture").html("<img src='/display?fileName="+fileCallPath+"'>").animate({width:'100%',height:'100%'},1000);
-//   }
+  function showImage(fileCallPath){
+      $(".bigPictureWrapper").css("display","flex").show();
+   
+      $(".bigPicture").html("<img src='/display?fileName="+fileCallPath+"'>").animate({width:'100%',height:'100%'},1000);
+   }
