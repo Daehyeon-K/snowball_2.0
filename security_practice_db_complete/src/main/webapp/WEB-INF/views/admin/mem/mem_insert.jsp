@@ -6,9 +6,9 @@
 <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                    	<h1 class="mt-4 breadcrumb mb-4 layout-center">
-							<input type="text" name="mem_id" value='사용자 추가' class="login-name" readonly/>   
-						</h1>
+                       <h1 class="mt-4 breadcrumb mb-4 layout-center">
+                     <input type="text" name="mem_id" value='사용자 추가' class="login-name" readonly/>   
+                  </h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Member Insert</li>
                         </ol>

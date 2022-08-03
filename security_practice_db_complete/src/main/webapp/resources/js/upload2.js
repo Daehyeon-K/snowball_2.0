@@ -53,13 +53,22 @@ $(function(){
             showUploadFile(result);
          }
       })
+<<<<<<< HEAD
       
       })
+=======
+      })
+      
+>>>>>>> branch 'master' of https://github.com/Daehyeon-K/snowball_2.0
    }) //uploadBtn 종료
    
 
+<<<<<<< HEAD
 	function showImage(fileCallPath){
+=======
+   /*function showImage(fileCallPath){
+>>>>>>> branch 'master' of https://github.com/Daehyeon-K/snowball_2.0
      $(".bigPictureWrapper1").css("display","flex").show();
    
      $(".bigPicture1").html("<img src='/user/board/display?fileName="+fileCallPath+"'>").animate({width:'100%',height:'100%'},1000);
-  }
+  }*/

@@ -2,6 +2,8 @@ package com.study.service;
 
 import java.util.List;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.study.dto.AuthorityDTO;

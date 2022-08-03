@@ -2,9 +2,9 @@
  * 
  */
 $(function(){
-	$(".btn-primary").click(function(){
+	/*$(".btn-primary").click(function(){
 		location.href="/user/board/create";
-	})
+	})*/
 	
 	$.getJSON({
 	url : '/user/board/getAttachList',

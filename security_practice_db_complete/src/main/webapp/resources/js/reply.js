@@ -159,7 +159,7 @@ $(function(){
    let modalCloseBtn = $("#modalCloseBtn");
    
    // New Reply 클릭시
-   $("#addReplyBtn").click(function(e){
+   $("#addReplyBtn").click(function(){
    
       //input 태그가 가지고 있는 val 지우기
       modal.find("input").val("");
@@ -189,7 +189,7 @@ $(function(){
     $("#modalRegisterBtn").click(function(){
       let reply = {
       	reply_content:modalInputReply.val(),
-      	mem_name :modalInputReplyer.val(),
+      	mem_id :modalInputReplyer.val(),
         board_id:board_id,
 
       };
