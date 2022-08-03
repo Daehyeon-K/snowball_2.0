@@ -37,7 +37,7 @@ public interface AdminUserControlMapper {
 	public int pwdChange(ChangePwdDTO change);
 	
 	//비밀번호 변경 시 디비 정보과 비교해야하기 때문에 비밀번호만 따로 추출하는 메소드 생성
-		public String pwdSelect(String mem_id);
+	public String pwdSelect(String mem_id);
 	
 	// 태현 - 
 	public MemDTO read(String mem_id);

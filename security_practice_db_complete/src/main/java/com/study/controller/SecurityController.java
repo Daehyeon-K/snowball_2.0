@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +28,9 @@ import com.study.dto.MemDTO;
 import com.study.dto.MemoDTO;
 import com.study.dto.MsgDTO;
 import com.study.dto.PageDTO;
+import com.study.mapper.AdminUserControlMapper;
 import com.study.service.AdminUserControlService;
+import com.study.service.AdminUserControlServiceImpl;
 import com.study.service.MemoService;
 import com.study.service.MsgService;
 
@@ -49,6 +52,14 @@ public class SecurityController {
 	// 여기도 사용해야해서 - 비밀번호 변경
 	@Autowired
 	private AdminUserControlService controlService;
+	
+	@Autowired
+	private AdminUserControlMapper controlMapper;
+	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
+	
+	
 	
 	
 	
@@ -161,32 +172,66 @@ public class SecurityController {
 	
 	
 	// 비밀번호 변경하기
-	@GetMapping("/pwdChange")
-    public void pwdChangeGet() {
+	@GetMapping("/user/pwdChange")
+    public String pwdChangeGet() {
 		log.info("비밀번호 변경 jsp");
+		return "/pwdChange";
     }
 
-	@PostMapping("/pwdChange")
-    public String pwdChange(ChangePwdDTO change, HttpSession session) {
-    	log.info("현재 바뀐 정보 : "+change.getMem_pwd()+ " , " + change.getMem_id());
+	@PostMapping("/user/pwdChange")
+    public String pwdChange(ChangePwdDTO change, HttpSession session, Principal principal) {
+    	log.info("사용자아이디 : " + principal.getName()+", 현재 비밀번호 : "+change.getMem_pwd()+", 새 비밀번호 : "+change.getNew_mem_pwd()+", 새 비밀번호 확인 : "+change.getCur_new_mem_pwd());
     	
     	// 사용자 아이디 넣어주기
 //    	change.setMem_id(principal.getName());
     	
     	// 비밀번호 변경하기
-    	// 새 비밀번호랑 새 비밀번호 확인이랑 같지 않고 기존 비밀번호랑 새 비밀번호가 같거나 기존 비밀번호랑 새 비밀번호 확인이랑 같으면 false 므로 다시 같은 페이지 보여주기
-		if(!change.getNew_mem_pwd().equals(change.getCur_new_mem_pwd()) || (change.getMem_pwd().equals(change.getNew_mem_pwd())) || (change.getMem_pwd().equals(change.getCur_new_mem_pwd())) ) {
-			return "redirect:/pwdChange";
-		}
-//    	controlService.pwdChange(change);
+    	log.info("매퍼 잘 되는지 확인 : "+controlMapper.pwdSelect(principal.getName())); //여기까진 잘됨
     	
-        controlService.pwdChange(change);
+    	// 새 비밀번호!=새 비밀번호 확인 || 현재 비밀번호==새 비밀번호 || 현재 비밀번호==새 비밀번호 확인 || 현재 비밀번호!=디비 저장된 현재 비밀번호 => 하나라도 참이면 비밀번호 변경 불가!!!!!!!
+		if( !change.getNew_mem_pwd().equals(change.getCur_new_mem_pwd()) || change.getMem_pwd().equals(change.getNew_mem_pwd()) || change.getMem_pwd().equals(change.getCur_new_mem_pwd()) || !encoder.matches(change.getMem_pwd(), controlMapper.pwdSelect(principal.getName())) ) {
+			log.info("비밀번호 변경 불가");
+			
+			log.info("디비에 저장된 비밀번호 : "+controlMapper.pwdSelect(principal.getName()));
+			log.info("사용자가 입력한 현재 비밀번호 : "+change.getMem_pwd());
+			log.info("사용자가 입력한 새 비밀번호 : "+change.getNew_mem_pwd());
+			log.info("사용자가 입력한 새 비밀번호 확인 : "+change.getCur_new_mem_pwd());
+			
+			log.info("밑에 4개 중 하나라도 true 나오면 비밀번호 변겨 불가!!!");
+			log.info("새 비밀번호!=새 비밀번호 확인 : "+(!change.getNew_mem_pwd().equals(change.getCur_new_mem_pwd())));
+			log.info("현재 비밀번호==새 비밀번호 : "+(change.getMem_pwd().equals(change.getNew_mem_pwd())));
+			log.info("현재 비밀번호==새 비밀번호 확인 : "+(change.getMem_pwd().equals(change.getCur_new_mem_pwd())));
+			log.info("현재 비밀번호!=디비 저장된 현재 비밀번호 : "+(!encoder.matches(change.getMem_pwd(), controlMapper.pwdSelect(principal.getName()))));
+			
+			return "redirect:/user/pwdChange";
+		}
+		
+		// 비밀번호 성공하는 경로
+    	// 현재 비밀번호==디비 비밀번호 && 새 비밀번호==새 비밀번호 확인 && 현재 비밀번호!=새 비밀번호 && 현재 비밀번호!=새 비밀번호 확인 
+//    	if( change.getNew_mem_pwd().equals(change.getCur_new_mem_pwd()) && change.getMem_pwd().equals(controlMapper.pwdSelect(principal.getName()))  ) {
+//    		controlService.pwdChange(change);
+//    		log.info("비밀번호 변경 후 : "+change.getCur_new_mem_pwd()); //여기까지 잘됨
+//    		
+//    		session.invalidate();
+//    		log.info("세션 강제 종료");
+//    		
+//    		return "redirect:/login";
+//    	}
+//    	return "redirect:/user/pwdChange";
+		
+		log.info("비밀번호 변경 성공");
+		
+		//로그인된 사용자 아이디로 초기화해주기 => 이래야 현재 로그인된 사용자 아이디로 셋팅되면서 mybatis.xml 에 mem_id가 정확하게 들어감
+		change.setMem_id(principal.getName());
+		
+		controlService.pwdChange(change); // 조건을 다 만족한다면 비밀번호 변경하기
 		log.info("비밀번호 변경 후 : "+change.getCur_new_mem_pwd()); //여기까지 잘됨
 		
 		session.invalidate();
 		log.info("세션 강제 종료");
 		
 		return "redirect:/login";
+		
     }
 
 	

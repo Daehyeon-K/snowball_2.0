@@ -11,3 +11,9 @@ select * from approval_commit;
 
 
 select mem_seq.nextval from dual;
+
+select mem_pwd from mem where mem_id = '20221001';
+
+select * from mem;
+
+delete from mem where mem_id='';
