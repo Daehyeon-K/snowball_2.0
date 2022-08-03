@@ -8,7 +8,7 @@ $("#button-send").on("click", function(e) {
 	$('#msg').val('')
 });
 
-var sock = new SockJS('http://localhost:9292/chatting');
+var sock = new SockJS('http://localhost:9001/chatting');
 sock.onmessage = onMessage;
 sock.onclose = onClose;
 sock.onopen = onOpen;
