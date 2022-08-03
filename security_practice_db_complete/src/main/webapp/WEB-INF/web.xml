@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+<web-app version="2.5" xmlns="http://JAVA.sun.com/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
@@ -55,5 +55,18 @@
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
+	<!-- 채팅 서블릿  -->
+	<servlet>
+	    <servlet-name>appServlet</servlet-name>
+	    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	    <init-param>
+	    <param-name>contextConfigLocation</param-name>
+	    <param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
+	    </init-param>
+	    <load-on-startup>1</load-on-startup>
+	    <async-supported>true</async-supported>
+	    <!-- async-supported 태그 설정 : 1대1 대화가 아닌 클라이언트 다수가 동시 데이터 전송을 처리하기 위한 비동기 제어 처리  -->
+	</servlet>
 	
 </web-app>

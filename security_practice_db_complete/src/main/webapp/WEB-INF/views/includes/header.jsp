@@ -115,7 +115,7 @@
 	                    
 	                    <!-- 드롭다운 메뉴 내 항목 -->
 	                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-	                       <li><a class="dropdown-item" href="/user/pwdChange">비밀번호 변경</a></li>
+	                       <li><a class="dropdown-item" href="/pwdChange">비밀번호 변경</a></li>
 	                        <!-- <li><hr class="dropdown-divider" /></li> -->
 	                        <li><sec:authorize access="isAuthenticated()">
 									<form action="/logout" method="post" class="dropdown-item">
@@ -221,6 +221,14 @@
                                     <a class="nav-link" href="/user/board/list">커뮤니티</a>
                                 </nav>
                             </div>
+                            <!-- 채팅 기능 메뉴 -->
+                            <div class="sb-sidenav-menu-heading">채팅</div>
+                           <!-- 채팅 메뉴 띄우기 -->
+                           <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsechats" aria-expanded="false" aria-controls="collapsechats">
+                                <div class="sb-nav-link-icon"><i class="fas fa-clipchat"></i></div>
+                                채팅
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
                            
                             <!-- 관리자 메뉴 -->
                             <!-- 관리자 메뉴 포괄 헤더 내용 -->
