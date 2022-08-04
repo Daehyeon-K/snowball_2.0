@@ -1,5 +1,6 @@
 package com.study.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MemDTO {
+public class MemDTO implements Serializable{
 //   private String mem_id;
 //   private String grade_id;
 //   private String company_id;

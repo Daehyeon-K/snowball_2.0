@@ -129,8 +129,11 @@
 	</delete>
 	
 	
-	
-	
+	<!-- 원청 불러오기 -->
+	<select id = "getCompanies" resultType="com.study.dto.CompanyDTO">
+		select *
+        from company
+    </select>
 	
 	
 

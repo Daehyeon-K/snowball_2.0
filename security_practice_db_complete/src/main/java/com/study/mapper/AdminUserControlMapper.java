@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.study.dto.ApprovalDTO;
 import com.study.dto.AuthorityDTO;
 import com.study.dto.ChangePwdDTO;
+import com.study.dto.CompanyDTO;
 import com.study.dto.CriteriaDTO;
 import com.study.dto.MemDTO;
 
@@ -43,4 +44,7 @@ public interface AdminUserControlMapper {
 	public MemDTO read(String mem_id);
 	public int update(MemDTO updateDto);
 	public int delete(String mem_id);
+	
+	// 원청 불러오기
+	public List<CompanyDTO> getCompanies();
 }

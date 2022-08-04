@@ -81,6 +81,9 @@ public class AdminController {
    public String userInsertGet(Model model) {
       log.info("관리자가 사용자 추가해주기");
       model.addAttribute("user", new MemDTO());
+      List<CompanyDTO> companies = controlService.getCompanies();
+      log.info("원청들 불러오기 희희");
+      model.addAttribute("companies",companies);
       return "/admin/mem/mem_insert";
    }
    
@@ -89,9 +92,7 @@ public class AdminController {
    @PostMapping("/mem/memInsert")
    public String userInsert(Model model, @Valid @ModelAttribute("user") MemDTO  user, BindingResult bindingResult) {
       log.info("직원 추가하기(회원가입)" + user);
-      
-      //model.addAttribute("user", user);
-      
+            
       if(bindingResult.hasErrors()) {
          log.info("@@@@에러@@@@직원 추가하기(회원가입) : " + bindingResult.toString());
          System.out.print("출력 에러");

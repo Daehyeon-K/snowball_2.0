@@ -8,8 +8,10 @@ import org.apache.ibatis.annotations.Param;
 
 import com.study.dto.AuthorityDTO;
 import com.study.dto.ChangePwdDTO;
+import com.study.dto.CompanyDTO;
 import com.study.dto.CriteriaDTO;
 import com.study.dto.MemDTO;
+import com.study.dto.MemGradeDTO;
 
 public interface AdminUserControlService {
 
@@ -32,4 +34,7 @@ public interface AdminUserControlService {
 	public MemDTO getRow(String mem_id);
 	public boolean update(MemDTO updateDto);
 	public boolean delete(String mem_id);
+	
+	// 원청 불러오기
+	public List<CompanyDTO> getCompanies();
 }
