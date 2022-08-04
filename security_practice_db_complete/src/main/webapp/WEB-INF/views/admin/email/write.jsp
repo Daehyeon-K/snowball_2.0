@@ -13,7 +13,7 @@
                             <li class="breadcrumb-item active">Email Send</li>
                         </ol>
 
-<form action="/admin/email/send.do" method="post">
+<form action="/admin/email/send.do?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
   <div class="form-group">
     <label for="mem_id">발신자 명</label>
 	<input type="text" name="mail_name" class="form-control" />
@@ -32,9 +32,14 @@
   </div>
   <div class="form-group">
     <label for="approval_reject">내용</label>
-    <input type="text" class="form-control" name="mail_content" >
+    <!-- <input type="text" class="form-control" name="mail_content" > -->
+    <textarea name="mail_content" class="form-control" cols="30" rows="10"></textarea>
   </div>
-  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+   <div class="form-group">
+   	<label for="attach">파일첨부</label>
+   	<input type="file" name="attach" id="attach" />
+   </div>
+<%--   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> --%>
   <input type="submit" value="전송">
 </form>
 

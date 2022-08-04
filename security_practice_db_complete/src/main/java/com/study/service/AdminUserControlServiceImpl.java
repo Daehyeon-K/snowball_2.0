@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.study.dto.AuthorityDTO;
 import com.study.dto.ChangePwdDTO;
+import com.study.dto.CompanyDTO;
 import com.study.dto.CriteriaDTO;
 import com.study.dto.CustomUser;
 import com.study.dto.MemDTO;
@@ -128,6 +129,12 @@ public class AdminUserControlServiceImpl implements AdminUserControlService {
 			
 		}
 		return false;
+	}
+	
+	
+	@Override
+	public List<CompanyDTO> getCompanies() {
+		return mapper.getCompanies();
 	}
 	
 

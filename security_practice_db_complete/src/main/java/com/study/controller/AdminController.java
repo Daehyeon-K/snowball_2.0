@@ -54,11 +54,6 @@ public class AdminController {
    @Inject
    MailService mailService;
    
-   
-   
-   
-   
-   
    //관리자 - 직원 리스트
    @GetMapping("/mem/memList")
    public String adminMemList(Model model, @ModelAttribute("cri") CriteriaDTO cri) {
@@ -81,6 +76,9 @@ public class AdminController {
    public String userInsertGet(Model model) {
       log.info("관리자가 사용자 추가해주기");
       model.addAttribute("user", new MemDTO());
+      List<CompanyDTO> companies = controlService.getCompanies();
+      log.info("원청들 불러오기 희희");
+      model.addAttribute("companies",companies);
       return "/admin/mem/mem_insert";
    }
    
@@ -89,9 +87,7 @@ public class AdminController {
    @PostMapping("/mem/memInsert")
    public String userInsert(Model model, @Valid @ModelAttribute("user") MemDTO  user, BindingResult bindingResult) {
       log.info("직원 추가하기(회원가입)" + user);
-      
-      //model.addAttribute("user", user);
-      
+            
       if(bindingResult.hasErrors()) {
          log.info("@@@@에러@@@@직원 추가하기(회원가입) : " + bindingResult.toString());
          System.out.print("출력 에러");
@@ -308,6 +304,9 @@ public class AdminController {
       public String send(@ModelAttribute MailDTO mailDto, Model model) { // 발송 버튼을 누르면 매핑 되는 메소드
          
          log.info("email"+mailDto);
+         
+         
+         
          
          MailDTO mailDtoDB = new MailDTO();
          

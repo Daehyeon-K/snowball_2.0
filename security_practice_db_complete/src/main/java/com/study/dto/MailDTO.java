@@ -1,8 +1,10 @@
 package com.study.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,5 +23,8 @@ public class MailDTO {
    private String mail_content; // 메일 내용
    @DateTimeFormat(pattern = "yyyy-MM-dd")
    private Date mail_send_date;  // 발신 일시 sysdate
+   
+   //첨부파일 정보
+   private MultipartFile attach;
    
 }

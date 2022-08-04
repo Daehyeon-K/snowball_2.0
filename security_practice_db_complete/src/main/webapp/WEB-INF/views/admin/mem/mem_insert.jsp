@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@include file="../../includes/header.jsp" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <div id="layoutSidenav_content">
                 <main>
@@ -22,18 +23,36 @@
    </div>
    <div class="form-group col-md-6">
      <label for="grade_id">직급</label>
-     <form:input path="grade_id" type="text" class="form-control" name="grade_id" required="required"/>
-     <small><form:errors path="grade_id" style="color: red"/></small>
+     <select name="grade_id" id="grade_id" class="form-control" required>
+         <option value="1SW">사원</option>
+         <option value="2DL">대리</option>
+         <option value="3GZ">과장</option>
+         <option value="4BZ">부장</option>
+         <option value="5SZ">사장</option>
+      </select>
+<%--      <form:input path="grade_id" type="text" class="form-control" name="grade_id" required="required"/>
+     <small><form:errors path="grade_id" style="color: red"/></small> --%>
    </div>
    <div class="form-group col-md-6">
      <label for="company_id">원청</label>
-     <form:input path="company_id" type="text" class="form-control" name="company_id" placeholder="Enter Company ID"/>
-     <small><form:errors path="company_id" style="color: red"/></small>
+     <select name="company_id" id="company_id" class="form-control" required> <!-- 옵션을 select 이용해서 불러오기는 안될지 -->
+       <c:forEach var="companies" items="${companies}">
+         <option value="${companies.company_id}">${companies.company_name}</option>
+      </c:forEach>
+   </select>
+     <%-- <form:input path="company_id" type="text" class="form-control" name="company_id" placeholder="Enter Company ID"/>
+     <small><form:errors path="company_id" style="color: red"/></small> --%>
    </div>
    <div class="form-group col-md-6">
      <label for="dept_id">부서</label>
-     <form:input path="dept_id" type="text" class="form-control" name="dept_id"/>
-     <small><form:errors path="dept_id" style="color: red"/></small>
+     <select name="dept_id" id="dept_id" class="form-control" required>
+         <option value="IS">인사부</option>
+         <option value="GB">개발부</option>
+         <option value="GH">기획부</option>
+         <option value="CM">총무부</option>
+      </select>
+     <%-- <form:input path="dept_id" type="text" class="form-control" name="dept_id"/>
+     <small><form:errors path="dept_id" style="color: red"/></small> --%>
    </div>
   <div class="form-group col-md-6">
     <label for="mem_name">이름</label>

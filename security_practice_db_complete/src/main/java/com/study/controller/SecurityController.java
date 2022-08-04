@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -175,35 +177,42 @@ public class SecurityController {
 	
 	// 비밀번호 변경하기
 	@GetMapping("/user/pwdChange")
-    public String pwdChangeGet() {
+    public String pwdChangeGet(Model model) {
 		log.info("비밀번호 변경 jsp");
+		model.addAttribute("change", new ChangePwdDTO());
 		return "/pwdChange";
     }
 
 	@PostMapping("/user/pwdChange")
-    public String pwdChange(ChangePwdDTO change, HttpSession session, Principal principal) {
-    	log.info("사용자아이디 : " + principal.getName()+", 현재 비밀번호 : "+change.getMem_pwd()+", 새 비밀번호 : "+change.getNew_mem_pwd()+", 새 비밀번호 확인 : "+change.getCur_new_mem_pwd());
+    public String pwdChange(Model model, @Valid @ModelAttribute("change") ChangePwdDTO change, BindingResult bindingResult, HttpSession session, Principal principal) {
+    	log.info("사용자아이디 : " + change.getMem_id()+", 현재 비밀번호 : "+change.getMem_pwd()+", 새 비밀번호 : "+change.getNew_mem_pwd()+", 새 비밀번호 확인 : "+change.getCur_new_mem_pwd());
     	
     	// 사용자 아이디 넣어주기
-//    	change.setMem_id(principal.getName());
+//    	change.setMem_id(change.getMem_id());
     	
     	// 비밀번호 변경하기
-    	log.info("매퍼 잘 되는지 확인 : "+controlMapper.pwdSelect(principal.getName())); //여기까진 잘됨
+    	log.info("매퍼 잘 되는지 확인 : "+controlMapper.pwdSelect(change.getMem_id())); //여기까진 잘됨
+    	
+    	if(bindingResult.hasErrors()) {
+            log.info("@@@@에러@@@@비밀번호 변경하기 : " + bindingResult.toString());
+            System.out.print("출력 에러");
+              return "/pwdChange";
+         }
     	
     	// 새 비밀번호!=새 비밀번호 확인 || 현재 비밀번호==새 비밀번호 || 현재 비밀번호==새 비밀번호 확인 || 현재 비밀번호!=디비 저장된 현재 비밀번호 => 하나라도 참이면 비밀번호 변경 불가!!!!!!!
 		if( !change.getNew_mem_pwd().equals(change.getCur_new_mem_pwd()) || change.getMem_pwd().equals(change.getNew_mem_pwd()) || change.getMem_pwd().equals(change.getCur_new_mem_pwd()) || !encoder.matches(change.getMem_pwd(), controlMapper.pwdSelect(principal.getName())) ) {
 			log.info("비밀번호 변경 불가");
 			
-			log.info("디비에 저장된 비밀번호 : "+controlMapper.pwdSelect(principal.getName()));
+			log.info("디비에 저장된 비밀번호 : "+controlMapper.pwdSelect(change.getMem_id()));
 			log.info("사용자가 입력한 현재 비밀번호 : "+change.getMem_pwd());
 			log.info("사용자가 입력한 새 비밀번호 : "+change.getNew_mem_pwd());
 			log.info("사용자가 입력한 새 비밀번호 확인 : "+change.getCur_new_mem_pwd());
 			
-			log.info("밑에 4개 중 하나라도 true 나오면 비밀번호 변겨 불가!!!");
+			log.info("밑에 4개 중 하나라도 true 나오면 비밀번호 변경 불가!!!");
 			log.info("새 비밀번호!=새 비밀번호 확인 : "+(!change.getNew_mem_pwd().equals(change.getCur_new_mem_pwd())));
 			log.info("현재 비밀번호==새 비밀번호 : "+(change.getMem_pwd().equals(change.getNew_mem_pwd())));
 			log.info("현재 비밀번호==새 비밀번호 확인 : "+(change.getMem_pwd().equals(change.getCur_new_mem_pwd())));
-			log.info("현재 비밀번호!=디비 저장된 현재 비밀번호 : "+(!encoder.matches(change.getMem_pwd(), controlMapper.pwdSelect(principal.getName()))));
+			log.info("현재 비밀번호!=디비 저장된 현재 비밀번호 : "+(!encoder.matches(change.getMem_pwd(), controlMapper.pwdSelect(change.getMem_id()))));
 			
 			return "redirect:/user/pwdChange";
 		}
