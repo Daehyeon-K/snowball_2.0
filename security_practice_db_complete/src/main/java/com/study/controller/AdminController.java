@@ -54,11 +54,6 @@ public class AdminController {
    @Inject
    MailService mailService;
    
-   
-   
-   
-   
-   
    //관리자 - 직원 리스트
    @GetMapping("/mem/memList")
    public String adminMemList(Model model, @ModelAttribute("cri") CriteriaDTO cri) {
