@@ -69,4 +69,21 @@
 	    <!-- async-supported 태그 설정 : 1대1 대화가 아닌 클라이언트 다수가 동시 데이터 전송을 처리하기 위한 비동기 제어 처리  -->
 	</servlet>
 	
+	<error-page>
+		<error-code>400</error-code>
+		<location>/WEB-INF/views/error/400.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/views/error/404.jsp</location>
+	</error-page>
+	<error-page>	
+		<error-code>405</error-code>
+		<location>/WEB-INF/views/error/405.jsp</location>
+	</error-page>
+	<error-page>	
+		<error-code>500</error-code>
+		<location>/WEB-INF/views/error/500.jsp</location>
+	</error-page>
+	
 </web-app>

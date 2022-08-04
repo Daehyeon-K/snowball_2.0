@@ -3,6 +3,7 @@ package com.study.controller;
 import java.security.Principal;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
@@ -86,6 +87,7 @@ public class SecurityController {
 		log.info("접근제한");
 		return "accessdenied";
 	}
+	
 	
 
 	

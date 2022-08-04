@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+.number{
+	margin:100px auto;
+	color: #fcc7cf;
+	font-size:50px;
+	text-align:center;
+}
+
+.title{
+	color: #ff8a8a;
+	font-size:30px;
+	text-align:center;
+}
+
+.btn{
+	width: 180px;
+    height: 70px;
+    margin: 40px auto;
+    display:block;
+    border: solid 5px #bad1eb;
+    border-radius: 50px;
+    background-color: white;
+    color:#7ccbed;
+    font-size: 20px;
+}
