@@ -8,17 +8,26 @@
 		approval_file_dir, approval_file_name, approval_file_type)
 		values(#{approval_file_id},concat('APPR',
 		approval_seq.currval),#{approval_file_dir},#{approval_file_name},#{approval_file_type})
-
 	</insert>
-	
+
 	<!-- 게시판 첨부파일 -->
 	<insert id="BoardFile">
 		<!-- AttachDTO 맞춰야함 -->
 		insert into board_file(board_file_id, board_id,
-		board_file_dir, board_file_name, board_file_type)
+		board_file_dir,
+		board_file_name, board_file_type)
 		values(#{board_file_id},concat('BOARD',
 		board_seq.currval),#{board_file_dir},#{board_file_name},#{board_file_type})
+	</insert>
 
+	<!-- 게시판 첨부파일 -->
+	<insert id="MailFile">
+		<!-- AttachDTO 맞춰야함 -->
+		insert into mail_file(mail_file_id, mail_id,
+		mail_file_dir,
+		mail_file_name, mail_file_type)
+		values(#{mail_file_id},concat('Mail',
+		mail_file_seq.currval),#{mail_file_dir},#{mail_file_name},#{mail_file_type})
 	</insert>
 
 
@@ -27,7 +36,7 @@
 		select * from approval_file where
 		approval_id = #{approval_id}
 	</select>
-	
+
 	<!-- approval_id 첨부파일 목록 추출 -->
 	<select id="filelist" resultType="com.study.dto.BoardFileDTO">
 		select * from board_file where
