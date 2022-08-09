@@ -224,7 +224,7 @@
                             <!-- 채팅 기능 메뉴 -->
                             <div class="sb-sidenav-menu-heading">채팅</div>
                            <!-- 채팅 메뉴 띄우기 -->
-                           <a class="nav-link collapsed" href="/user/chatting/chat" data-bs-toggle="collapse" data-bs-target="#collapsechats" aria-expanded="false" aria-controls="collapsechats">
+                           <a class="nav-link collapsed" href="/user/chatting/chat">
                                 <div class="sb-nav-link-icon"><i class="far fa-comment-dots"></i></div>
                   				채팅                               
                             </a>
@@ -262,3 +262,4 @@
                     </div>
                 </nav>
             </div>
+<script src="/resources/js/scripts.js"></script>
