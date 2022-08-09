@@ -19,4 +19,5 @@ public interface MsgService {
 	public MsgDTO msgReadRow(String msg_id);
 	public boolean msgInsert(@Param("mem_id") String mem_id ,@Param("receiver_id") String receiver_id, @Param("msg_content") String msg_content);
 	public boolean msgDelete(String msg_id);
+	
 }
