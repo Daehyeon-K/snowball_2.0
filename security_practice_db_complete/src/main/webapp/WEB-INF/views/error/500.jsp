@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Co-Mapping: ERROR 500</title>
 <link rel="stylesheet" href="/resources/css/error.css" />
 </head>
 <body>
