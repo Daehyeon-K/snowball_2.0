@@ -14,7 +14,7 @@
                             <li class="breadcrumb-item active">Member List</li>
                         </ol>
 
- <div class="col-md-8">
+ <div class="max-width">
           <!--search Form-->
           	<form action="" method="get" id="searchForm">
        	    	<input type="hidden" name="pageNum" value="${cri.pageNum}" /> 
@@ -31,7 +31,7 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">직원ID</th>
+      <th scope="col">ID</th>
       <th scope="col">부서</th>
       <th scope="col">원청</th>
       <th scope="col">부서</th>
