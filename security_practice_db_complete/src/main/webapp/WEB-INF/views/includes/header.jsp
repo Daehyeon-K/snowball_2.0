@@ -224,10 +224,16 @@
                             <!-- 채팅 기능 메뉴 -->
                             <div class="sb-sidenav-menu-heading">채팅</div>
                            <!-- 채팅 메뉴 띄우기 -->
-                           <a class="nav-link collapsed" href="/user/chatting/chat" data-bs-toggle="collapse" data-bs-target="#collapsechats" aria-expanded="false" aria-controls="collapsechats">
+                           <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsechats" aria-expanded="false" aria-controls="collapsechats">
                                 <div class="sb-nav-link-icon"><i class="far fa-comment-dots"></i></div>
-                  				채팅                               
-                            </a>
+                  				채팅
+                  			</a>
+                            <div class="collapse" id="#collapsechats" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link collapsed" href="/user/chatting/chat"><i class="far fa-comment-dots">채팅</i></a>
+                                </nav>
+                            </div>
+                            
                            
                             <!-- 관리자 메뉴 -->
                             <!-- 관리자 메뉴 포괄 헤더 내용 -->
@@ -262,3 +268,4 @@
                     </div>
                 </nav>
             </div>
+<script src="/resources/js/scripts.js"></script>
