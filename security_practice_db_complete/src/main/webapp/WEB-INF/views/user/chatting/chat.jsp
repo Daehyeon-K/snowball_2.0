@@ -28,6 +28,9 @@
 			</div>
 		<%@include file="../../../views/includes/footer.jsp"%>
 
-
+<script>
+   let username ='<sec:authentication property="principal.user.mem_name"/>';
+   let userid ='<sec:authentication property="principal.user.mem_id"/>';
+</script>
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
-<script src="/resources/js/sockJS.js"></script>
+<script src="/resources/js/sockJS.js?ver=3"></script>
