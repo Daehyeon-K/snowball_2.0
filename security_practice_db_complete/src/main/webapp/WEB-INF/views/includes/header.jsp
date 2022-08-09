@@ -262,3 +262,4 @@
                     </div>
                 </nav>
             </div>
+<script src="/resources/js/scripts.js"></script>
