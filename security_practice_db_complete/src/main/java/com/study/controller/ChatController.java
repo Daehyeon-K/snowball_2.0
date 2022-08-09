@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ChatController {
 
-	@GetMapping("user/chatting/chat")
+	@GetMapping("/user/chatting/chat")
 	public void chat(Model model) {
 		
 		CustomUser user = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
