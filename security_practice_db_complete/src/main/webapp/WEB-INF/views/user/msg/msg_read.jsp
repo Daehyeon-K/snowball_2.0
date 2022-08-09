@@ -27,7 +27,7 @@
     				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
    					<button type="button" class="btn btn-primary " onclick="location='/user/index'">목록</button>
    					<!-- Button trigger modal -->
-					<button type="button" class="btn btn-primary msgDelete" onclick="alert('쪽지가 삭제되었습니다.')">
+					<button type="button" class="btn btn-primary msgDelete">
 					 삭제
 					</button>
    				</div>
