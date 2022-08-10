@@ -24,7 +24,7 @@
    <label for="approval_type_id">결재종류</label>
    <div class="form-group md-4">
       <select name="approval_type_id" id="approval_type_id" class="form-control">
-         <option value="BP">비품신청</option>
+         <option value="BP">비품신청 ▼</option>
          <option value="HG">휴가신청</option>
       </select>
    </div>
@@ -71,8 +71,9 @@
   <div class="uploadDiv">
          <input type="file" name="uploadFile" id="" multiple />
    </div>
-  <button id="uploadBtn" class="btn btn-primary">신청하기</button>
-  <button type="button" class="btn btn-primary back-user">돌아가기</button>
+   <br />
+  <button id="uploadBtn" class="btn btn-default">신청하기</button>
+  <button type="button" class="btn btn-default back-user">돌아가기</button>
 </form>
 </body>
 <script>

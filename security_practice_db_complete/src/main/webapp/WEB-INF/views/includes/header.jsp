@@ -28,8 +28,16 @@
 		#calendar{
 		height:38rem;
 		}
-		</style>
 		
+		/* 메인페이지 배경색 설정 */
+		.breadcrumb {
+		    padding: 8px 15px;
+		    margin-bottom: 20px;
+		    list-style: none;
+		    background-color: white !important;
+		    border-radius: 4px;
+		}
+		</style>
 		
 		<!-- CDN - Bootstrap 4.6.1 -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
@@ -146,19 +154,22 @@
                              
                             <!-- 전자결재 메뉴 -->
                             <!-- 전자결재 메뉴 포괄 헤더 내용 -->
-                            <div class="sb-sidenav-menu-heading">전자결재</div>
-                            <!-- 전자결재 상위 메뉴 -->
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseApprovals" aria-expanded="false" aria-controls="collapseApprovals">
-                                <div class="sb-nav-link-icon"><i class="fas fa-file-alt"></i></div>
-                                전자결재
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
+                            
+	                        <div class="sb-sidenav-menu-heading">전자결재</div>
+	                            <!-- 전자결재 상위 메뉴 -->
+	                            <div class="hover-action">
+	                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseApprovals" aria-expanded="false" aria-controls="collapseApprovals">
+	                                <div class="sb-nav-link-icon"><i class="fas fa-file-alt"></i></div>
+	                                전자결재
+	                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+	                            </a>
+	                        </div>
                             <!-- 전자결재 하위 메뉴 -->
                             <div class="collapse" id="collapseApprovals" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/user/approvalInsert">결재 기안</a>
-                                    <a class="nav-link" href="/user/approvalList">결재 조회</a>
-                                    <a class="nav-link" href="/user/approvalCommitList">결재 수신</a>
+                                    <div class="hover-action"><a class="nav-link" href="/user/approvalInsert">결재 기안</a></div>
+                                    <div class="hover-action"><a class="nav-link" href="/user/approvalList">결재 조회</a></div>
+                                    <div class="hover-action"><a class="nav-link" href="/user/approvalCommitList">결재 수신</a></div>
                                 </nav>
                             </div>
                             
@@ -166,27 +177,31 @@
                             <!-- 업무지원 메뉴 포괄 헤더 내용 -->
                             <div class="sb-sidenav-menu-heading">업무지원</div>
                             <!-- 업무지원-인사 상위 메뉴 -->
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseSupports" aria-expanded="false" aria-controls="collapseSupports">
-                                <div class="sb-nav-link-icon"><i class="fas fa-building"></i></div>
-                                인사
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
+                            <div class="hover-action">
+	                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseSupports" aria-expanded="false" aria-controls="collapseSupports">
+	                                <div class="sb-nav-link-icon"><i class="fas fa-building"></i></div>
+	                                인사
+	                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+	                            </a>
+	                        </div>
                             <!-- 업무지원-인사 하위 메뉴 -->
                             <div class="collapse" id="collapseSupports" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/user/support/hr/att">근태 리스트</a>
+                                    <div class="hover-action"><a class="nav-link" href="/user/support/hr/att">근태 리스트</a></div>
                                 </nav>
                             </div>
                             <!-- 업무지원-파견 상위 메뉴 -->
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseDSupports" aria-expanded="false" aria-controls="collapseDSupports">
-                                <div class="sb-nav-link-icon"><i class="fas fa-briefcase"></i></div>
-                                파견
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
+                            <div class="hover-action">
+	                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseDSupports" aria-expanded="false" aria-controls="collapseDSupports">
+	                                <div class="sb-nav-link-icon"><i class="fas fa-briefcase"></i></div>
+	                                파견
+	                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+	                            </a>
+	                        </div>
                             <!-- 업무지원-파견 하위 메뉴 -->
                             <div class="collapse" id="collapseDSupports" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/user/support/dispatch/att">근태 리스트</a>
+                                    <div class="hover-action"><a class="nav-link" href="/user/support/dispatch/att">근태 리스트</a></div>
                                 </nav>
                             </div>
                             
@@ -194,15 +209,17 @@
                             <!-- 공지메일 메뉴 포괄 헤더 내용 -->
                             <div class="sb-sidenav-menu-heading">메일</div>
                             <!-- 공지메일 상위 메뉴 -->
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseMail" aria-expanded="false" aria-controls="collapseMail">
-                                <div class="sb-nav-link-icon"><i class="fas fa-envelope"></i></div>
-                                공지메일
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
+                            <div class="hover-action">
+	                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseMail" aria-expanded="false" aria-controls="collapseMail">
+	                                <div class="sb-nav-link-icon"><i class="fas fa-envelope"></i></div>
+	                                공지메일
+	                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+	                            </a>
+	                        </div>
                             <!-- 공지메일 하위 메뉴 -->
                             <div class="collapse" id="collapseMail" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/user/email/noticeList">메일 리스트</a>
+                                    <div class="hover-action"><a class="nav-link" href="/user/email/noticeList">메일 리스트</a></div>
                                 </nav>
                             </div>
                             
@@ -210,24 +227,28 @@
                             <!-- 게시판 메뉴 포괄 헤더 내용 -->
                             <div class="sb-sidenav-menu-heading">게시판</div>
                             <!-- 게시판 상위 메뉴 -->
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseBoards" aria-expanded="false" aria-controls="collapseBoards">
-                                <div class="sb-nav-link-icon"><i class="fas fa-clipboard"></i></div>
-                                게시판
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
+                            <div class="hover-action">
+	                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseBoards" aria-expanded="false" aria-controls="collapseBoards">
+	                                <div class="sb-nav-link-icon"><i class="fas fa-clipboard"></i></div>
+	                                게시판
+	                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+	                            </a>
+	                        </div>
                             <!-- 게시판 하위 메뉴 -->
                             <div class="collapse" id="collapseBoards" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/user/board/list">커뮤니티</a>
+                                    <div class="hover-action"><a class="nav-link" href="/user/board/list">커뮤니티</a></div>
                                 </nav>
                             </div>
                             <!-- 채팅 기능 메뉴 -->
                             <div class="sb-sidenav-menu-heading">채팅</div>
                            <!-- 채팅 메뉴 띄우기 -->
-                           <a class="nav-link collapsed" href="/user/chatting/chat">
-                                <div class="sb-nav-link-icon"><i class="far fa-comment-dots"></i></div>
-                  				채팅                               
-                            </a>
+                           <div class="hover-action">
+	                           <a class="nav-link collapsed" href="/user/chatting/chat">
+	                                <div class="sb-nav-link-icon"><i class="far fa-comment-dots"></i></div>
+	                  				채팅                               
+	                            </a>
+	                        </div>
                            
                             <!-- 관리자 메뉴 -->
                             <!-- 관리자 메뉴 포괄 헤더 내용 -->
@@ -236,18 +257,20 @@
 								<c:if test="${info.username == 'admin'}">
                            			<div class="sb-sidenav-menu-heading">관리자</div>
                            			<!-- 관리자 상위 메뉴 -->
-		                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAdmin" aria-expanded="false" aria-controls="collapseAdmin">
-		                                <div class="sb-nav-link-icon"><i class="fas fa-certificate"></i></div>
-		                                	관리자페이지
-		                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-		                            </a>
+                           			<div class="hover-action">
+			                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAdmin" aria-expanded="false" aria-controls="collapseAdmin">
+			                                <div class="sb-nav-link-icon"><i class="fas fa-certificate"></i></div>
+			                                	관리자페이지
+			                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+			                            </a>
+	                            	</div>
 		                            <!-- 관리자 하위 메뉴 -->
 		                            <div class="collapse" id="collapseAdmin" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 		                                <nav class="sb-sidenav-menu-nested nav">
-		                                  	 <a class="nav-link" href="/admin/mem/memInsert">사용자 추가하기</a>
-		                                   	 <a class="nav-link" href="/admin/mem/memList">사용자 조회하기</a>
-		                                   	 <a class="nav-link" href="/admin/company/companyList">원청 조회하기</a>
-		                                   	 <a class="nav-link" href="/admin/email/write.do">메일 전송하기</a>
+		                                  	 <div class="hover-action"><a class="nav-link" href="/admin/mem/memInsert">사용자 추가하기</a></div>
+		                                   	 <div class="hover-action"><a class="nav-link" href="/admin/mem/memList">사용자 조회하기</a></div>
+		                                   	 <div class="hover-action"><a class="nav-link" href="/admin/company/companyList">원청 조회하기</a></div>
+		                                   	 <div class="hover-action"><a class="nav-link" href="/admin/email/write.do">메일 전송하기</a></div>
 		                                </nav>
 		                            </div>
                             	</c:if>

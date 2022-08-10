@@ -7,15 +7,15 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4 breadcrumb mb-4 layout-center">
+                        <h1 class="mt-4 breadcrumb mb-4 layout-center bg-color">
 							<input type="text" name="mem_id" value='<sec:authentication property="principal.user.mem_name"/>님 안녕하세요' class="login-name" readonly/>   
 						</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Main Page</li>
+                            <li class="breadcrumb-item active margin-update">Main Page</li>
                         </ol>
                         
-                         <div class="row">
-                            <div class="col-xl-6">
+                         <div class="row" style="margin-left: 0px; margin-right: 0px;">
+                            <div class="col-xl-6" style = "padding-left: 0px; padding-right: 7.5px">
                                 <div class="card mb-4" style="height: 98%;">
                                     <div class="card-header">
                                         <i class="fas fa-chart-area me-1"></i>
@@ -85,7 +85,7 @@
 									</div>
                                 </div>
                             </div>
-                            <div class="col-xl-6">
+                            <div class="col-xl-6" style="padding-right: 0px; padding-left: 7.5px;">
                                 <div class="card mb-4">
                                     <div class="card-header">
                                         <i class="fas fa-chart-bar me-1"></i>
@@ -112,15 +112,15 @@
                               <div class="row">
 								  <div class="col-mb-3 memocl">
 								 	<form action="" method="post" role="form" id="listForm" >
-										<div>	
+										<div style="padding-bottom: 5px;padding-left: 15px;">	
 											<%-- <input class="form-control" style="width: 15%;" type="text" name="mem_name" value='<sec:authentication property="principal.user.mem_name"/>' readonly="readonly"/>
 											<input type="hidden" style="width: 15%;" name="mem_id" value='<sec:authentication property="principal.username"/>' readonly="readonly"/> --%>
 											<input class="form-control" style="width: 15%;" type="text" name="mem_name" value="${memoRead.mem_id}" readonly="readonly"/>
 										</div>
-										<div class="col-mb-6">
+										<div class="col-mb-6" style="padding-top: 5px;padding-bottom: 5px;padding-left: 15px;">
 									  <textarea class="form-control" style="resize: none;" rows="7" name="memo_content">${memoRead.memo_content}</textarea>
 									  </div>
-									  <div class="col-mb-3">
+									  <div class="col-mb-3" style="padding-top: 5px;padding-bottom: 5;padding-bottom: 5px;padding-left: 15px;">
 									  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 								      <button type="submit" class="btn btn-primary" id="memoUpdate">Update</button>
 								      </div>
