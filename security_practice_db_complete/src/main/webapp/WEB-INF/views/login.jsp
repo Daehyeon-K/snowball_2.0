@@ -87,10 +87,10 @@
                                     <i class="fa fa-user fa-2x"></i>
 									<h3 class="text-center font-weight-light my-2 justify-items-center">Co-Mapping</h3>
 									</div> -->
-									<div class="row card-header mt-3">
+									<div class="row-login card-header mt-3">
 										<div class="col-xs-3">
 											<i class="fa fa-user fa-3x" style="color:dodgerblue;"></i>
-											<div class="mt-2" style="float:right;font-size: 1.5rem;"><a href="/" style="text-decoration: none;color: black">Comapping</a></div>
+											<div class="mt-2" style="float:right;font-size: 1.5rem;"><a href="/" style="text-decoration: none;color: black;padding-left: 20px;">Comapping</a></div>
 										</div>
 									</div>
 									
