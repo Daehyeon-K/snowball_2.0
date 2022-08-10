@@ -12,6 +12,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
 import javax.mail.internet.MimeUtility;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -20,6 +21,7 @@ import org.springframework.mail.javamail.JavaMailSender; // JavaMailSender
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import com.study.dto.CriteriaDTO;
 import com.study.dto.MailDTO;
 import com.study.dto.MailFileDTO;
 import com.study.mapper.AttachMapper;
@@ -187,14 +189,15 @@ public class MailServiceImpl implements MailService {
 	
 	
 	
-	@Override
-	public List<MailDTO> select(MailDTO mailDto) {
-		
-		return mailMapper.select(mailDto);
-		
-		
-		
-	}
+	/*
+	 * @Override public List<MailDTO> select(MailDTO mailDto) {
+	 * 
+	 * return mailMapper.select(mailDto);
+	 * 
+	 * 
+	 * 
+	 * }
+	 */
 
 	@Override
 	public MailDTO read(String mail_id) {
@@ -223,5 +226,16 @@ public class MailServiceImpl implements MailService {
 	public List<MailFileDTO> attachList(String mail_id) {
 		return attachMapper.mailfile(mail_id);
 	}
+
+	@Override
+	public List<MailDTO> select(@Param("cri") CriteriaDTO cri) {
+		return mailMapper.select(cri);
+	}
+
+	@Override
+	public int totalCnt(@Param("cri") CriteriaDTO cri) {
+		return mailMapper.totalCnt(cri);
+	}
+
 
 }

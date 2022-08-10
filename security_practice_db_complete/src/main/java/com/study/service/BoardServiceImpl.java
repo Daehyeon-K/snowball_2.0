@@ -91,7 +91,7 @@ public class BoardServiceImpl implements BoardService {
 		}
 
 		insertDto.getAttachList().forEach(attach -> {
-			//attach.setApproval_id(insertDto.getApproval_id());
+			//attach.setBoard_id(insertDto.getBoard_id());
 			//첨부파일 삽입
 			attachMapper.BoardFile(attach);
 		});

@@ -39,7 +39,6 @@
 						<input type="hidden" name="${_csrf.parameterName}"
 							value="${_csrf.token}" />
 
-
 						<div class="form-groups">
 							<input type="hidden" name="${_csrf.parameterName}"
 								value="${_csrf.token}" />
