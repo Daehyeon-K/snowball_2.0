@@ -55,9 +55,38 @@ $(function(){
       })
       
       
-   }) //uploadBtn 종료
+   }) //uploadBtn 종료*/
    
-   function showUploadFile(result) {
+   
+})
+  function showImage(fileCallPath){
+      $(".bigPictureWrapper").css("display","flex").show();
+   
+      $(".bigPicture").html("<img src='/display?fileName="+fileCallPath+"'>").animate({width:'100%',height:'100%'},1000);
+   }
+
+//첨부파일 확장자 및 사이즈 확인
+function checkExtension(fileName,fileSize){
+	//확장자 1.jpg
+	let regex = new RegExp("(.*?)\.(png|gif|jpg|txt)$");
+	//파일크기
+	let maxSize = 3145728; //3MB
+	
+	
+	if(!regex.test(fileName)){
+		alert("해당 종류의 파일은 업로드 할 수 없습니다.");
+		return false;
+	}
+	
+	if(fileSize > maxSize){
+		alert("해당 파일은 사이즈를 초과합니다.");
+		return false;
+	}	
+	
+	return true;
+}
+
+function showUploadFile(result) {
       let uploadResult = $(".uploadResult ul");
       
       let str ="";
@@ -79,7 +108,7 @@ $(function(){
             //str += "<a href=\"javascript:showImage(\'"+oriPath+"\')\">";
             str += "<img src='/display?fileName="+fileCallPath+"'></a>";
             str += "<div>"+obj.approval_file_name;
-            str += "<button type='button' class='btn btn-warning btn-circle' data-file='"+fileCallPath+"' data-type='image'>";
+            str += "<button type='button' data-file='"+fileCallPath+"' data-type='image'>";
             str += "<i class='fa fa-times'></i></button>";
             str += "</div></li>";
            }else { //txt 파일
@@ -103,10 +132,3 @@ $(function(){
       
       uploadResult.append(str);
    }//showIpladFile 종료
-
-})
-  function showImage(fileCallPath){
-      $(".bigPictureWrapper").css("display","flex").show();
-   
-      $(".bigPicture").html("<img src='/display?fileName="+fileCallPath+"'>").animate({width:'100%',height:'100%'},1000);
-   }
