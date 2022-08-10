@@ -42,6 +42,9 @@
 						<input type="hidden" name="${_csrf.parameterName}"
 							value="${_csrf.token}" />
 					</div>
+					<div class="uploadResult" style="display:none">
+   						<ul><!-- 첨부파일 정보 --></ul>
+   					</div>
 				</form>
 				<script>
 					let csrfHeaderName = "${_csrf.headerName}";
@@ -49,5 +52,5 @@
 				</script>
 				<%@include file="../../../views/includes/footer.jsp"%>
 			</div>
-			<script src="/resources/js/back.js"></script>
+			<script src="/resources/js/back.js"></script>		
 			<script src="/resources/js/upload2.js"></script>

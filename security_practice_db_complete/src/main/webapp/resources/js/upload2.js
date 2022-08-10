@@ -3,6 +3,31 @@
  */
 
 $(function(){
+	
+	$(":submit").click(function(e){
+		e.preventDefault();
+		
+		let str = "";
+		
+		//li 태그 정보 수집하기
+		$(".uploadResult ul li").each(function(idx,obj){
+			var job = $(obj);
+			
+			str += "<input type='hidden' name='attachList["+idx+"].board_file_id' value='"+job.data("uuid")+"'>";
+			str += "<input type='hidden' name='attachList["+idx+"].board_file_dir' value='"+job.data("path")+"'>";
+			str += "<input type='hidden' name='attachList["+idx+"].board_file_name' value='"+job.data("filename")+"'>";
+			str += "<input type='hidden' name='attachList["+idx+"].board_file_type' value='"+job.data("type")+"'>";			
+		})
+		
+		console.log("form 태그 삽입 전");
+		console.log(str);
+		
+		//폼 보내기
+		$("form").append(str).submit();
+		
+	})
+	
+	
    
    $(":file").change(function(){
       console.log("ajax 파일 업로드 호출");
@@ -12,18 +37,18 @@ $(function(){
       
       // 첨부파일 목록 가져오기
       let inputFile = $("[name='uploadFile']");
-      console.log("첨부파일 목록 가져오기")
-      console.log(inputFile);
+    /*  console.log("첨부파일 목록 가져오기")
+      console.log(inputFile);*/
       
       let files = inputFile[0].files;
-      console.log("첨부파일 뽑기")
-      console.log(files);
+      /*console.log("첨부파일 뽑기")
+      console.log(files);*/
       
       // 폼 객체에 첨부파일들 추가
       for(let i=0;i<files.length;i++){
          console.log("첨부파일 반복 돌리기")
          if(!checkExtension(files[i].name,files[i].size)){
-            console.log("조건문 확인")
+            //console.log("조건문 확인")
             return false;
          }
          
@@ -38,7 +63,7 @@ $(function(){
       
       // 폼 객체 ajax 전송
       $.ajax({
-         url:'/user/board/create',
+         url:'/user/attach/create',
          type:'post',
          processData:false,
          contentType:false,
@@ -48,16 +73,57 @@ $(function(){
          data:formData,
          dataType:'json',
          success:function(result){
-            //console.log(result);
-            $(":file").val("");
+            console.log(result);
+           // $(":file").val("");
             showUploadFile(result);
          }
       })
 
       })
+}) //uploadBtn 종료
+
+
+function showUploadFile(result) {
+      let uploadResult = $(".uploadResult ul");
       
-   }) //uploadBtn 종료
+      let str ="";
+      
+      
+      $(result).each(function(idx,obj){           
+            
+            //fileCallPath : 파라미터로 넘기는 방식, 인코딩 된 방식
+            str += "<li data-path='"+obj.board_file_dir+"' data-uuid='"+obj.board_file_id+"' data-filename='"+obj.board_file_name+"' data-type='"+obj.board_file_type+"'>";            
+            str += "</li>";
+          
+      });
+
+      console.log("업로드 파일 경로");
+      console.log(str);
+      
+      uploadResult.append(str);
+   }//showIpladFile 종료
+
    
+//첨부파일 확장자 및 사이즈 확인
+function checkExtension(fileName,fileSize){
+	//확장자 1.jpg
+	let regex = new RegExp("(.*?)\.(png|gif|jpg|txt)$");
+	//파일크기
+	let maxSize = 3145728; //3MB
+	
+	
+	if(!regex.test(fileName)){
+		alert("해당 종류의 파일은 업로드 할 수 없습니다.");
+		return false;
+	}
+	
+	if(fileSize > maxSize){
+		alert("해당 파일은 사이즈를 초과합니다.");
+		return false;
+	}	
+	
+	return true;
+}
 
    /*function showImage(fileCallPath){
      $(".bigPictureWrapper1").css("display","flex").show();

@@ -106,6 +106,7 @@ public class SecurityController {
 		log.info("사용자 아이디 : "+principal.getName());
 		
 		List<MsgDTO> mList = msgService.mSelect(principal.getName(), cri.getPageNum(),cri.getAmount());
+		
 		int total = msgService.totalCnt(cri,principal.getName());
 		
 		model.addAttribute("pageDto", new PageDTO(cri, total));
