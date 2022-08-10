@@ -137,13 +137,10 @@ public class UserController {
 
 		return "/user/approval/approval_insert";
 	}
-
-	// 사용자 - 결재 추가 POST 부분
-	//@PreAuthorize("isAuthenticated()")
-	@PostMapping("/approvalInsert")
-	public String registerPost(ApprovalDTO insertDto, MultipartFile[] uploadFile) {
-
-		log.info("기안폼등록"+insertDto+"  "+uploadFile);
+	
+	@PostMapping("/approval/attach/create")
+	public ResponseEntity<List<ApprovalFileDTO>> approvalAttachPost(MultipartFile[] uploadFile) {
+		log.info("첨부파일등록 "+uploadFile.length);
 
 		List<ApprovalFileDTO> attachList = new ArrayList<ApprovalFileDTO>();
 
@@ -199,19 +196,70 @@ public class UserController {
 
 				attachList.add(fileDto);
 
-
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
+		
+		return new ResponseEntity<List<ApprovalFileDTO>>(attachList,HttpStatus.OK);
+	}
 
+	// 사용자 - 결재 추가 POST 부분
+	//@PreAuthorize("isAuthenticated()")
+	@PostMapping("/approvalInsert")
+	public String registerPost(ApprovalDTO insertDto/*, MultipartFile[] uploadFile*/) {
 
-		//첨부파일 정보 추가하기
-		insertDto.setAttachList(attachList);
+		log.info("기안폼등록"+insertDto);
 
-
+		/*
+		 * List<ApprovalFileDTO> attachList = new ArrayList<ApprovalFileDTO>();
+		 * 
+		 * // 업로드 기본 폴더 지정 String uploadBasicPath = "c:\\upload";
+		 * 
+		 * // 업로드 세부 폴더 지정 / 날짜 기준으로 나눠주는 String uploadFolderPath = getFolder();
+		 * 
+		 * // 전체 업로드 패스 생성 / 파일 객체 생성 / "c:\\upload\\2022\06\08" File uploadPath = new
+		 * File(uploadBasicPath,uploadFolderPath);
+		 * 
+		 * if(!uploadPath.exists()) { // 폴더가 없다면 폴더들 생성 uploadPath.mkdirs(); }
+		 * 
+		 * String uploadFileName = ""; File save = null;
+		 * 
+		 * for(MultipartFile f : uploadFile) { log.info("파일명 : " +
+		 * f.getOriginalFilename()); log.info("파일크기 : " + f.getSize());
+		 * 
+		 * // 파일명 가져오기 String oriFileName = f.getOriginalFilename();
+		 * 
+		 * //중복 파일명 해결하기 UUID uuid = UUID.randomUUID(); uploadFileName =
+		 * uuid.toString()+"_"+oriFileName;
+		 * 
+		 * //업로드 파일 객체 생성 ApprovalFileDTO fileDto = new ApprovalFileDTO();
+		 * fileDto.setApproval_file_dir(uploadFolderPath);
+		 * fileDto.setApproval_file_name(oriFileName);
+		 * fileDto.setApproval_file_id(uuid.toString());
+		 * 
+		 * 
+		 * save = new File(uploadPath, uploadFileName); try { if(checkImageType(save)) {
+		 * fileDto.setApproval_file_type(true);
+		 * 
+		 * 
+		 * //썸네일 저장 FileOutputStream thumbnail = new FileOutputStream(new
+		 * File(uploadPath,"s_"+uploadFileName)); InputStream in = f.getInputStream();
+		 * Thumbnailator.createThumbnail(in, thumbnail, 80, 80); in.close();
+		 * thumbnail.close(); } // 파일저장 f.transferTo(save);
+		 * 
+		 * attachList.add(fileDto);
+		 * 
+		 * 
+		 * } catch (IllegalStateException e) { e.printStackTrace(); } catch (IOException
+		 * e) { e.printStackTrace(); } }
+		 * 
+		 * 
+		 * //첨부파일 정보 추가하기 insertDto.setAttachList(attachList);
+		 * 
+		 */
 		//글 삽입
 		approvalService.insert(insertDto);
 		return "redirect:/user/approvalList";
@@ -592,7 +640,6 @@ public class UserController {
 		return "redirect:/user/board/list";
 
 	}
-	
 	
 	
 	@PostMapping("/attach/create")
