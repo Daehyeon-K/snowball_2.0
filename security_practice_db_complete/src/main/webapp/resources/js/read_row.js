@@ -6,7 +6,7 @@ $(function(){
    //operForm 가져오기
    let operForm = $("#operForm");
    
-   $(".btn-info").click(function(){
+   $(".info").click(function(){
       location.href = "/user/board/list";
    })
    

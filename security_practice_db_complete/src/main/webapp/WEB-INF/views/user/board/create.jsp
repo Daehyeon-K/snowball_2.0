@@ -43,7 +43,7 @@
 
 					<div class="form-groups">
 					<br /><br /><br /><br /><br /><br /><br /><br />
-						<button type="button" class="btn btn-primary file-css">올리기</button>
+						<button type="button" class="btn btn-primary success">올리기</button>
 						<button type="button" class="btn btn-primary"
 							onclick="location='/user/board/list'">돌아가기</button>
 						<input type="hidden" name="${_csrf.parameterName}"
@@ -66,7 +66,7 @@
 let csrfHeaderName = "${_csrf.headerName}";
 let csrfTokenValue = "${_csrf.token}";
 </script>
-<script src="/resources/js/upload.js"></script>
+<script src="/resources/js/upload2.js"></script>
 <script src="/resources/js/back.js"></script>
 <%@include file="../../../views/includes/footer.jsp"%>
 			

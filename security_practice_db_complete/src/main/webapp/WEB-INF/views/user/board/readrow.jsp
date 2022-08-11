@@ -63,13 +63,12 @@
 						</div>
 
 						<!-- 리스트 버튼은 누구나 다 보여져야하니까 권한 걸지 않기 -->
-						<button type="button" class="btn btn-info">리스트</button>
-						<br /><br />
+						<button type="button" class="btn btn-primary info" style="margin-right:5px;">리스트</button>
 						<!-- 수정 및 삭제버튼은 자기 자신을 제외한 다른 사람 게시물을 수정/삭제 불가해야하므로 권한 조건 걸어주기 -->
 						<sec:authentication property="principal" var="info" />
 						<sec:authorize access="isAuthenticated()">
 							<c:if test="${info.username == dto.mem_id}">
-								<button type="button" class="btn btn-primary success" id="ModBtn">수정</button>
+								<button type="button" class="btn btn-primary success" style="margin-right:5px;" id="ModBtn">수정</button>
 								<button type="button" class="btn btn-primary danger" id="RemoveBtn">삭제</button>
 							</c:if>
 						</sec:authorize>
@@ -78,10 +77,10 @@
 					</div>
 				</form>
 			</div>
-
+			<br /><br />
 			<%-- 댓글 리스트 영역 --%>
 			<div class="row">
-				<div class="col-lg-12">
+				<div class="col-lg-12" style="margin-top:50px;">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<i class="fa fa-comments fa-fw"></i> Reply
