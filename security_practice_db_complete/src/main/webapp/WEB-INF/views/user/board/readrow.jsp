@@ -69,8 +69,8 @@
 						<sec:authentication property="principal" var="info" />
 						<sec:authorize access="isAuthenticated()">
 							<c:if test="${info.username == dto.mem_id}">
-								<button type="button" class="btn btn-success" id="ModBtn">수정</button>
-								<button type="button" class="btn btn-danger" id="RemoveBtn">삭제</button>
+								<button type="button" class="btn btn-primary success" id="ModBtn">수정</button>
+								<button type="button" class="btn btn-primary danger" id="RemoveBtn">삭제</button>
 							</c:if>
 						</sec:authorize>
 
@@ -144,8 +144,7 @@
 								<button type="button" class="btn btn-warning"
 									id="modalRegisterBtn">등록</button>
 								<button type="button" class="btn btn-primary" id="modalModBtn">수정</button>
-								<button type="button" class="btn btn-primary"
-									id="modalRemoveBtn">삭제</button>
+								<button type="button" class="btn btn-primary" id="modalRemoveBtn">삭제</button>
 								<button type="button" class="btn btn-primary" id="modalCloseBtn"
 									data-bs-dismiss="modal">종료</button>
 							</div>

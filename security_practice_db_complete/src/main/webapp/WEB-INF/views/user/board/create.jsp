@@ -3,6 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 <%@include file="../../../views/includes/header.jsp"%>
 
 <div id="layoutSidenav_content">
@@ -18,9 +19,7 @@
                     <div style="letter-spacing:0; word-spacing:0; " >
 
 					
-					<form
-					action="/user/board/create?${_csrf.parameterName}=${_csrf.token}"
-					method="post" role="form" enctype="multipart/form-data">
+					<form action="/user/board/create?${_csrf.parameterName}=${_csrf.token}" method="post" role="form" enctype="multipart/form-data">
 					<div class="form-group">
 						<label for="mem_id">사용자ID</label> <input type="text" name="mem_id"
 							class="form-control"
@@ -44,7 +43,7 @@
 
 					<div class="form-groups">
 					<br /><br /><br /><br /><br /><br /><br /><br />
-						<button type="submit" class="btn btn-primary">올리기</button>
+						<button type="button" class="btn btn-primary file-css">올리기</button>
 						<button type="button" class="btn btn-primary"
 							onclick="location='/user/board/list'">돌아가기</button>
 						<input type="hidden" name="${_csrf.parameterName}"

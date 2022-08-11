@@ -11,7 +11,7 @@ $(function(){
    })
    
    //modify 버튼 클릭시 operForm 이동
-   $(".btn-success").click(function(){
+   $(".success").click(function(){
 	if(confirm("수정하시겠습니까?")) {
       operForm.attr("action","/user/board/modify");
       operForm.submit();
@@ -21,7 +21,7 @@ $(function(){
    })
    
    //삭제 버튼 클릭시 
-	$(".btn-danger").click(function(){
+	$(".danger").click(function(){
 	  if(confirm("삭제하시겠습니까?")) {
 		alert("삭제가 완료되었습니다.");
 		operForm.attr("action","/user/board/delete");

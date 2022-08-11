@@ -117,7 +117,7 @@
 											<input type="hidden" style="width: 15%;" name="mem_id" value='<sec:authentication property="principal.username"/>' readonly="readonly"/> --%>
 											<input class="form-control" style="width: 15%;" type="text" name="mem_name" value="${memoRead.mem_id}" readonly="readonly"/>
 										</div>
-										<div class="col-mb-6" style="padding-top: 5px;padding-bottom: 5px;padding-left: 15px;">
+										<div class="col-mb-6" style="padding-top: 5px;padding-bottom: 5px;padding-left: 15px;padding-right:15px;">
 									  <textarea class="form-control" style="resize: none;" rows="7" name="memo_content">${memoRead.memo_content}</textarea>
 									  </div>
 									  <div class="col-mb-3" style="padding-top: 5px;padding-bottom: 5;padding-bottom: 5px;padding-left: 15px;">

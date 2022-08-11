@@ -4,7 +4,7 @@
 
 $(function(){
 	
-	$(":submit").click(function(e){
+	$(".file-form").click(function(e){
 		e.preventDefault();
 		
 		let str = "";

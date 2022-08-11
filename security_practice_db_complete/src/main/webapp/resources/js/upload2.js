@@ -4,7 +4,7 @@
 
 $(function(){
 	
-	$(":submit").click(function(e){
+	$(".success").click(function(e){
 		e.preventDefault();
 		
 		let str = "";

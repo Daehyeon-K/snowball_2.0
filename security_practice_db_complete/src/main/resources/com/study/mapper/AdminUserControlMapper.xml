@@ -118,7 +118,7 @@
 	
 	<update id="update">
 		update mem
-		set grade_id=#{grade_id}, company_id=#{company_id}, dept_id=#{dept_id}, mem_name=#{mem_name} ,mem_phone=#{mem_phone}, mem_mail=#{mem_mail}, mem_gender=#{mem_gender} , mem_birth=#{mem_birth, jdbcType=DATE} ,mem_addr=#{mem_addr}, mem_sal=#{mem_sal}, mem_pwd=#{mem_pwd} , mem_con_end=#{mem_con_end, jdbcType=DATE}, mem_dcon_end=#{mem_dcon_end,jdbcType=DATE} 
+		set grade_id=#{grade_id}, company_id=#{company_id}, dept_id=#{dept_id}, mem_name=#{mem_name} ,mem_phone=#{mem_phone}, mem_mail=#{mem_mail}, mem_gender=#{mem_gender} , mem_birth=#{mem_birth, jdbcType=DATE} ,mem_addr=#{mem_addr}, mem_sal=#{mem_sal}, mem_con_end=#{mem_con_end, jdbcType=DATE}, mem_dcon_end=#{mem_dcon_end,jdbcType=DATE} 
 		where mem_id=#{mem_id}
 	</update>
 	

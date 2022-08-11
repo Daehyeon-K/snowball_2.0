@@ -46,7 +46,7 @@
       <th scope="col">생년월일</th>
       <th scope="col">주소</th>
       <th scope="col">연봉</th>
-      <th scope="col">비밀번호</th>
+      <!-- <th scope="col">비밀번호</th> -->
       <th scope="col">고용일</th>
       <th scope="col">계약만료</th>
       <th scope="col">원청시작</th>
@@ -67,7 +67,7 @@
 	      <td><fmt:formatDate pattern="yyyy-MM-dd" value="${list.mem_birth}"/></td>
 	      <td>${list.mem_addr}</td>
 	      <td>${list.mem_sal}</td>
-	      <td>${list.mem_pwd}</td>
+	      <%-- <td>${list.mem_pwd}</td> --%>
 	      <td><fmt:formatDate pattern="yyyy-MM-dd" value="${list.mem_con_start}"/></td>
 	      <td><fmt:formatDate pattern="yyyy-MM-dd" value="${list.mem_con_end}"/></td>
 	      <td><fmt:formatDate pattern="yyyy-MM-dd" value="${list.mem_dcon_start}"/></td>

@@ -112,7 +112,7 @@
 	            
 	            <!-- 우 상단 비밀번호 변경, 로그아웃 드롭다운 메뉴 -->
 	            <span class="name-layout">
-	            	<span class="login-name"><sec:authentication property="principal.user.mem_name"/> 님</span>
+	            	<span class="login-name" style="font-size:20px;"><sec:authentication property="principal.user.mem_name"/> 님</span>
 	            	<%-- <input type="text" name="mem_id" value='<sec:authentication property="principal.user.mem_name"/>님' class="login-name" readonly/> --%>
 	            </span>
 	            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">

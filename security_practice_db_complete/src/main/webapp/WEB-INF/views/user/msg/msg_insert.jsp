@@ -4,16 +4,12 @@
       <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">쪽지</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">쪽지 보내기</li>
-                        </ol>
-                        
                         
  		<div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-12" style="margin-top:15px;">
                 	<div class="panel panel-default">
-                        <div class="panel-heading">
+                        <div class="panel-heading" style="background-color: rgba(0, 128, 255, 0.08);">
+                        	쪽지 보내기
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">

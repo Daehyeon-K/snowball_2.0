@@ -93,11 +93,11 @@
     <form:input path="mem_sal" type="text" class="form-control" name="mem_sal" placeholder="Enter Salary" required="required"/>
     <small><form:errors path="mem_sal" style="color: red"/></small>
   </div>
- <div class="form-group col-md-6">
+ <%-- <div class="form-group col-md-6">
     <label for="mem_pwd">비밀번호</label>
     <form:input path="mem_pwd" type="text" class="form-control" name="mem_pwd" placeholder="Enter Password" required="required"/>
     <small><form:errors path="mem_pwd" style="color: red"/></small>
-  </div>
+  </div> --%>
   <div class="form-group col-md-6">
     <label for="mem_con_start">고용일자</label>
     <form:input path="mem_con_start" type="text" class="form-control" name="mem_con_start" placeholder="Enter Start Date of Contraction (YYYY-MM-DD)"/>
@@ -118,9 +118,9 @@
     <form:input path="mem_dcon_end" type="text" class="form-control" name="mem_dcon_end" placeholder="Enter End Date of Dispatch Contraction (YYYY-MM-DD)"/>
     <small><form:errors path="mem_dcon_end" style="color: red"/></small>
   </div>
-  
+  <br /><br />
  <div class="form-group col-md-6">
-  <button type="submit" class="btn btn-primary">사용자 정보 추가</button>
+  <button type="submit" class="btn btn-primary mem-insert-display">사용자 정보 추가</button>
   <button type="button" class="btn btn-primary back-user">돌아가기</button>
   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
  </div>

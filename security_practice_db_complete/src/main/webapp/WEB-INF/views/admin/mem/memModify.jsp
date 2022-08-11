@@ -66,10 +66,10 @@
                 					<label>연봉</label>
                 					<input class="form-control" name="mem_sal" value="${dto.mem_sal}">                				
                 				</div> 
-                				<div class="form-group">
+                				<%-- <div class="form-group">
                 					<label>비밀번호</label>
                 					<input class="form-control" name="mem_pwd" value="${dto.mem_pwd}" readonly="readonly">                				
-                				</div>
+                				</div> --%>
                 				<div class="form-group">
                 					<label>계약일</label>
                 					<input class="form-control" name="mem_con_start" readonly="readonly" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${dto.mem_con_start}"/>">                				

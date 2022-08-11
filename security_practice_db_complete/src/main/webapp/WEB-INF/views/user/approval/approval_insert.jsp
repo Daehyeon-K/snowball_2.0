@@ -75,7 +75,7 @@
 					</ul>
 				</div>
 				<br /><br /><br /><br />
-				<button id="uploadBtn" class="btn btn-primary" style="margin-right:5px;">신청하기</button>
+				<button type="button" id="uploadBtn" class="btn btn-primary file-form" style="margin-right:5px;">신청하기</button>
 				<button type="button" class="btn btn-primary back-user">돌아가기</button>
 			</form>
 									   </div>  

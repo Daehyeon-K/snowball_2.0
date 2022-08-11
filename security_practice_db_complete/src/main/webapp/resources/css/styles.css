@@ -11839,6 +11839,8 @@ body {
 }
 
 
-
+.mem-insert-display {
+	position: static !important;
+}
 
 
