@@ -1,21 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> 
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
-<%@include file="../../includes/header.jsp" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@include file="../../../views/includes/header.jsp"%>
 
 <div id="layoutSidenav_content">
-<main>
-<div class="container-fluid px-4">
-
-<div class="row">
-  <div>
-    <h1 class="page-header">원청 리스트</h1>
-  </div>
-  <!-- /.col-lg-12 -->
-</div>
-<!-- /.row -->
-<div class="row">
+	<main>
+		<div class="container-fluid px-4">
+			<div class="menu-name">
+				<span >원청 조회</span>
+			</div>
+			<ol class="breadcrumb mb-4" style="padding-left: 10px;">
+				<li class="breadcrumb-item active">Dispatch List</li>
+			</ol>
+			
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		
+		
+			<div class="row">
   <div class="col-lg-12">
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -57,13 +59,12 @@ pageEncoding="UTF-8"%>
 			</div>
 		</div>
 	</div>
+			
+			
+		
+		
 </main>
-<%@include file="../../includes/footer.jsp" %>
-</div>
-
 <script src="/resources/js/list.js"></script>  
 <script src="/resources/js/company_list.js"></script>
-
-
-
-\
+<%@include file="../../../views/includes/footer.jsp" %>
+			

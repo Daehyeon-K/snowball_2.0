@@ -1,17 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
-<%@include file="../../includes/header.jsp" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@include file="../../../views/includes/header.jsp"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 
 <div id="layoutSidenav_content">
-<main>
-<div class="container-fluid px-4">
+	<main>
+		<div class="container-fluid px-4">
+			<div class="row menu-card-size">
+               <div class="card mb-4">
+                   <div class="card-header">
+                       <i class="fas fa-chart-area me-1"></i>
+                       원청 등록
+                   </div>
+                   <div class="card-body">
+                    <div style="letter-spacing:0; word-spacing:0; " >
 
-<div class="container center-contents">
-   <div class="row">
-      <form  method="post" class="form-signin">
-         <h1 class="h2 mb-3 font-weight-normal">원청 등록</h1>
-         
+					
+					<form  method="post" class="form-signin">
          <div class="form-group">
          <label>파견 원청 번호</label>
          <input name="company_id" class="form-control" required>
@@ -54,9 +62,13 @@
          <!-- <button class="btn btn-lg btn-primary btn-block" type="submit">원청 등록</button> -->
         <!--  <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="location='/admin/company/companyList'">돌아가기</button> -->
 	      </form>
-	   </div>
-	</div>
-  </div>
-</main>
-<%@include file="../../includes/footer.jsp" %>
+					
+					
+
 </div>
+</div>
+</div>
+</div>
+</main>
+<%@include file="../../../views/includes/footer.jsp"%>
+			

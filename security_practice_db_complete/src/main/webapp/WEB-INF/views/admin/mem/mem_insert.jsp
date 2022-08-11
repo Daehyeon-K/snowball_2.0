@@ -1,21 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@include file="../../includes/header.jsp" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@include file="../../../views/includes/header.jsp"%>
 
 <div id="layoutSidenav_content">
-                <main>
-                    <div class="container-fluid px-4">
-                       <h1 class="mt-4 breadcrumb mb-4 layout-center">
-                     <input type="text" name="mem_id" value='사용자 추가' class="login-name" readonly/>   
-                  </h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Member Insert</li>
-                        </ol>
-
-<div>
-<form:form method="post" modelAttribute="user">
+	<main>
+		<div class="container-fluid px-4">
+			<div class="row menu-card-size">
+               <div class="card mb-4">
+                   <div class="card-header">
+                       <i class="fas fa-chart-area me-1"></i>
+                       사용자 추가
+                   </div>
+                   <div class="card-body">
+                    <div style="letter-spacing:0; word-spacing:0; " >
+                    
+                    
+                   <form:form method="post" modelAttribute="user">
    <div class="form-group col-md-6">
      <label for="mem_id">아이디</label>
      <form:input path="mem_id" type="text" class="form-control" name="mem_id" placeholder="Enter ID" required="required"/>
@@ -24,7 +28,7 @@
    <div class="form-group col-md-6">
      <label for="grade_id">직급</label>
      <select name="grade_id" id="grade_id" class="form-control" required>
-         <option value="1SW">사원</option>
+         <option value="1SW">사원 ▼</option>
          <option value="2DL">대리</option>
          <option value="3GZ">과장</option>
          <option value="4BZ">부장</option>
@@ -37,7 +41,7 @@
      <label for="company_id">원청</label>
      <select name="company_id" id="company_id" class="form-control" required> <!-- 옵션을 select 이용해서 불러오기는 안될지 -->
        <c:forEach var="companies" items="${companies}">
-         <option value="${companies.company_id}">${companies.company_name}</option>
+         <option value="${companies.company_id}">${companies.company_name} ▼</option>
       </c:forEach>
    </select>
      <%-- <form:input path="company_id" type="text" class="form-control" name="company_id" placeholder="Enter Company ID"/>
@@ -46,7 +50,7 @@
    <div class="form-group col-md-6">
      <label for="dept_id">부서</label>
      <select name="dept_id" id="dept_id" class="form-control" required>
-         <option value="IS">인사부</option>
+         <option value="IS">인사부 ▼</option>
          <option value="GB">개발부</option>
          <option value="GH">기획부</option>
          <option value="CM">총무부</option>
@@ -120,7 +124,16 @@
   <button type="button" class="btn btn-primary back-user">돌아가기</button>
   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
  </div>
-</form:form>
+</form:form> 
+                    
+                    
+                    
+</div>  
 </div>
+</div>
+</div>
+</div>
+</main>
 <script src="/resources/js/back.js"></script>
-<%@include file="../../includes/footer.jsp" %>
+<%@include file="../../../views/includes/footer.jsp"%>
+			

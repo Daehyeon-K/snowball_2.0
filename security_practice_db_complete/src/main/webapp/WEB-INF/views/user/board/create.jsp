@@ -1,17 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="../../../views/includes/header.jsp"%>
 
 <div id="layoutSidenav_content">
 	<main>
 		<div class="container-fluid px-4">
-			<h1 class="mt-4 breadcrumb mb-4 layout-center">게시글 작성</h1>
-			<ol class="breadcrumb mb-4">
-				<li class="breadcrumb-item active">register board</li>
-			</ol>
+			<div class="row menu-card-size">
+               <div class="card mb-4">
+                   <div class="card-header">
+                       <i class="fas fa-chart-area me-1"></i>
+                       게시글 작성
+                   </div>
+                   <div class="card-body">
+                    <div style="letter-spacing:0; word-spacing:0; " >
 
-			<div>
-				<form
+					
+					<form
 					action="/user/board/create?${_csrf.parameterName}=${_csrf.token}"
 					method="post" role="form" enctype="multipart/form-data">
 					<div class="form-group">
@@ -28,7 +35,7 @@
 						<label for="board_content">내용</label> <input type="text"
 							name="board_content" class="form-control" required />
 					</div>
-
+					<br />
 					<div class="uploadDiv">
 						<input type="file" name="uploadFile" id="uploadFile" multiple />
 					</div>
@@ -36,6 +43,7 @@
 					<br>
 
 					<div class="form-groups">
+					<br /><br /><br /><br /><br /><br /><br /><br />
 						<button type="submit" class="btn btn-primary">올리기</button>
 						<button type="button" class="btn btn-primary"
 							onclick="location='/user/board/list'">돌아가기</button>
@@ -46,11 +54,20 @@
    						<ul><!-- 첨부파일 정보 --></ul>
    					</div>
 				</form>
-				<script>
-					let csrfHeaderName = "${_csrf.headerName}";
-					let csrfTokenValue = "${_csrf.token}";
-				</script>
-				<%@include file="../../../views/includes/footer.jsp"%>
-			</div>
-			<script src="/resources/js/back.js"></script>		
-			<script src="/resources/js/upload2.js"></script>
+					
+					
+
+</div>  
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+let csrfHeaderName = "${_csrf.headerName}";
+let csrfTokenValue = "${_csrf.token}";
+</script>
+<script src="/resources/js/upload.js"></script>
+<script src="/resources/js/back.js"></script>
+<%@include file="../../../views/includes/footer.jsp"%>
+			

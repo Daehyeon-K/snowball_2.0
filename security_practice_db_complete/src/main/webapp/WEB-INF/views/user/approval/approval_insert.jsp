@@ -8,17 +8,15 @@
 <div id="layoutSidenav_content">
 	<main>
 		<div class="container-fluid px-4">
-			<!-- <h1 class="mt-4 breadcrumb mb-4 layout-center"> -->
-			<div class="menu-name">
-				<span >결재 기안</span>
-			</div>
-				<!-- <input type="text" name="mem_id" value='결재 기안' class="login-name" readonly /> -->
-			<!-- </h1> -->
-			<ol class="breadcrumb mb-4">
-				<li class="breadcrumb-item active">Approval Insert</li>
-			</ol>
-
-			<form action="approvalInsert?${_csrf.parameterName}=${_csrf.token}"
+			<div class="row menu-card-size">
+               <div class="card mb-4">
+                   <div class="card-header">
+                       <i class="fas fa-chart-area me-1"></i>
+                       결재 기안
+                   </div>
+                   <div class="card-body">
+                    <div style="letter-spacing:0; word-spacing:0; " >
+                   	<form action="approvalInsert?${_csrf.parameterName}=${_csrf.token}"
 				method="post" enctype="multipart/form-data">
 				<div class="form-group">
 					<label for="mem_id">사용자ID</label>
@@ -37,10 +35,6 @@
 						</select>
 					</div>
 				</div>
-				<!--  <div class="form-group">
-    <label for="approval_commit_id">결재승인</label>
-    <input type="text" class="form-control" name="approval_commit_id" value="" >
-  </div> -->
 				<div class="form-group">
 					<label for="approval_inter_id">중간승인권자</label>
 					<!-- <input type="text" class="form-control" name="approval_inter_id" value="" readonly> -->
@@ -51,12 +45,6 @@
 							<option value="${interMan.mem_id}">${interMan.mem_name}
 								${interMan.grade_name} ▼</option>
 						</c:forEach>
-						<!-- 
-      <option value="20220001">최지수 과장</option>
-      <option value="20221003">김과장 과장</option>
-      <option value="20220003">이결순 부장</option>
-      <option value="20220008">곽도원 부장</option>
-       -->
 					</select>
 				</div>
 				<div class="form-group">
@@ -68,9 +56,6 @@
 							<option value="${fianlMan.mem_id}">${fianlMan.mem_name}
 								${fianlMan.grade_name} ▼</option>
 						</c:forEach>
-						<!-- 
-      <option value="20220007">정우성 사장</option>
-      -->
 					</select>
 				</div>
 				<div class="form-group">
@@ -89,10 +74,15 @@
 						<!-- 첨부파일 정보 -->
 					</ul>
 				</div>
-				<br />
+				<br /><br /><br /><br />
 				<button id="uploadBtn" class="btn btn-primary" style="margin-right:5px;">신청하기</button>
 				<button type="button" class="btn btn-primary back-user">돌아가기</button>
 			</form>
+									   </div>  
+									</div>
+                                </div>
+                        </div>
+                        </div>
 			</main>
 			<script>
 				let csrfHeaderName = "${_csrf.headerName}";

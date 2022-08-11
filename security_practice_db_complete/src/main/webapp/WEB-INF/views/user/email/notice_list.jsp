@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="../../../views/includes/header.jsp"%>
 
@@ -8,27 +9,29 @@
 	<main>
 		<div class="container-fluid px-4">
 			<div class="menu-name">
-				<span >공지 게시판</span>
+				<span>공지 게시판</span>
 			</div>
 			<ol class="breadcrumb mb-4" style="padding-left: 10px;">
 				<li class="breadcrumb-item active">Email List</li>
 			</ol>
-			
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-			
-			<!--search Form-->
+
+			<script
+				src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
 			<form action="" method="get" id="searchForm"
 				style="text-align: right">
 				<input type="hidden" name="pageNum" value="${cri.pageNum}" /> <input
 					type="hidden" name="amount" value="${cri.amount}" /> 
 					<select name="type" id="" class="select-height">
-					<option value="W"<c:out value="${cri.type == 'W' ? 'selected':'' }"/>>공지내용</option>
-					<option value="T"<c:out value="${cri.type == 'T' ? 'selected':'' }"/>>공지제목</option>
-				</select> 
-				<input type="text" name="keyword" id="" value="${cri.keyword}" />
+					<option value="W"
+						<c:out value="${cri.type == 'W' ? 'selected':'' }"/>>공지내용</option>
+					<option value="T"
+						<c:out value="${cri.type == 'T' ? 'selected':'' }"/>>공지제목</option>
+				</select> <input type="text" name="keyword" id="" value="${cri.keyword}" />
 				<button class="btn btn-default" type="submit" style="padding-top: 0px;padding-bottom: 0px;height:28px;">Search</button>
 			</form>
-			</br>
+			<br />
 			<!-- /.col-lg-12 -->
 			<!-- /.row -->
 			<div class="row">
@@ -73,9 +76,11 @@
 				</c:if>
 
 				<!-- 숫자 부분은 루프가 돌아야 하기에 forEach 써주기 -->
-				<c:forEach var="idx" begin="${pageDto.startPage}" end="${pageDto.endPage}">
-					<li	class="paginate_button ${pageDto.cri.pageNum == idx?'active':''}">
-					  <a href="${idx}">${idx}</a>
+				<c:forEach var="idx" begin="${pageDto.startPage}"
+					end="${pageDto.endPage}">
+					<li
+						class="paginate_button ${pageDto.cri.pageNum == idx?'active':''}">
+						<a href="${idx}">${idx}</a>
 					</li>
 				</c:forEach>
 
@@ -88,18 +93,18 @@
 		</div>
 		<form action="" id="actionForm">
 			<!-- pageNum, amount, type, keyword 값을 부를 때 - 
-	      1) pageDto => ${pageDto.cri.pageNum}  
-	      2)cri => ${criteria.pageNum} : 얘는 ModelAttribute 가 사용 안된 경우, 이 때 클래스명 앞에 붙이는데 소문자로 붙여서 쓰기
-	         ㄴ cri 지금 @ModelAttribute("cri")로 담아줬기 때문에 cri.pageNum 가능
-	   -->
+         1) pageDto => ${pageDto.cri.pageNum}  
+         2)cri => ${criteria.pageNum} : 얘는 ModelAttribute 가 사용 안된 경우, 이 때 클래스명 앞에 붙이는데 소문자로 붙여서 쓰기
+            ㄴ cri 지금 @ModelAttribute("cri")로 담아줬기 때문에 cri.pageNum 가능
+      -->
 			<input type="hidden" name="pageNum" value="${cri.pageNum}" /> <input
 				type="hidden" name="amount" value="${cri.amount}" /> <input
 				type="hidden" name="type" value="${cri.type}" /> <input
 				type="hidden" name="keyword" value="${cri.keyword}" />
 		</form>
-		
 </main>
-<script src="/resources/js/list.js"></script>
-<script src="/resources/js/back.js"></script>
-<%@include file="../../../views/includes/footer.jsp" %>
-			
+<form action="" id="NoticeReadForm"></form>
+<script src="/resources/js/notice_list.js"></script>
+<script src="/resources/js/list2.js"></script>
+<%@include file="../../../views/includes/footer.jsp"%>
+</div>

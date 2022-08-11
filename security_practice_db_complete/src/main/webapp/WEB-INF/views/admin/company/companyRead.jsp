@@ -1,25 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
-<%@include file="../../includes/header.jsp" %>
+<%@include file="../../../views/includes/header.jsp"%>
 
 <div id="layoutSidenav_content">
-<main>
-<div class="container-fluid px-4">
+	<main>
+		<div class="container-fluid px-4">
+			<div class="row menu-card-size">
+               <div class="card mb-4">
+                   <div class="card-header">
+                       <i class="fas fa-chart-area me-1"></i>
+                       원청 보기
+                   </div>
+                   <div class="card-body">
+                    <div style="letter-spacing:0; word-spacing:0; " >
 
-<div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">원청 페이지</h1>
-    </div>
-</div>            
-<div class="row">
-    <div class="col-lg-12">
-       <div class="panel panel-default">
-            <div class="panel-heading">
-            </div>
-            <div class="panel-body">
-             <form action="" method="get" role="form" >
+					
+				<form action="" method="get" role="form" >
                 <div class="form-group">
                    <label>파견 원청 번호</label>
                    <input class="form-control" name="company_id" value="${compDto.company_id}" readonly="readonly">                            
@@ -55,23 +55,22 @@
                 <button type="button" class="btn btn-info">목록보기</button>                   
                 <button type="button" class="btn btn-primary">수정하기</button>                   
                 <button type="button" class="btn btn-danger">삭제하기</button>                   
-                </form>
-             </div>
-             
-             
-             <!-- 수정버튼 클릭시 보낼 폼 -->
-         <form action="" id="operForm">
-            <input type="hidden" value="${compDto.company_id}" name="company_id" />
-         </form>
-      
-         
-             
-          </div>
-       </div>
-    </div>
-   </div>
-</main>
-<%@include file="../../includes/footer.jsp" %>
+                </form>				
+					
+					
+				 <!-- 수정버튼 클릭시 보낼 폼 -->
+		         <form action="" id="operForm">
+		            <input type="hidden" value="${compDto.company_id}" name="company_id" />
+		         </form>	
+
+</div>  
 </div>
+</div>
+</div>
+</div>
+</main>
+
 <script src="/resources/js/company_read.js"></script>
 
+<%@include file="../../../views/includes/footer.jsp"%>
+			

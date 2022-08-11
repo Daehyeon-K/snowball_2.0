@@ -1,30 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@include file="../../includes/header.jsp" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@include file="../../../views/includes/header.jsp"%>
 
 <div id="layoutSidenav_content">
-                <main>
-                    <div class="container-fluid px-4">
-                    	<h1 class="mt-4 breadcrumb mb-4 layout-center">
-							<input type="text" name="mem_id" value='사용자 조회' class="login-name" readonly/>   
-						</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Member List</li>
-                        </ol>
-
- <div class="max-width">
+	<main>
+		<div class="container-fluid px-4">
+			<div class="menu-name">
+				<span >사용자 조회</span>
+			</div>
+			<ol class="breadcrumb mb-4" style="padding-left: 10px;">
+				<li class="breadcrumb-item active">Member List</li>
+			</ol>
+			
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+			
+			
+			<div class="max-width">
           <!--search Form-->
           	<form action="" method="get" id="searchForm">
        	    	<input type="hidden" name="pageNum" value="${cri.pageNum}" /> 
 				<input type="hidden" name="amount" value="${cri.amount}" />
-          		<select name="type" id="">
+          		<select name="type" id="" class="select-height">
            		<option value="W" <c:out value="${cri.type == 'W' ? 'selected':'' }"/>>사용자명</option>
            		<option value="C" <c:out value="${cri.type == 'C' ? 'selected':'' }"/>>사용자ID</option>
        	    	</select>
        	    	<input type="text" name="keyword" id="" value="${cri.keyword}"/>
-       	    	<button class="btn btn-default" type="submit">Search</button>
+       	    	<button class="btn btn-default" type="submit" style="padding-top: 0px;padding-bottom: 0px;height:28px;">Search</button>
           	</form>
 
 
@@ -105,10 +108,12 @@
 		<input type="hidden" name="type" value="${cri.type}" />
 		<input type="hidden" name="keyword" value="${cri.keyword}" />
 	</form>
-
-
-</body>
+			
+			
+			
+	</div>
+</main>
 <script src="/resources/js/list.js"></script>
 <script src="/resources/js/back.js"></script>
-</html>
-<%@include file="../../includes/footer.jsp" %>
+<%@include file="../../../views/includes/footer.jsp" %>
+			

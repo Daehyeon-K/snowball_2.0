@@ -1,21 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@include file="../../includes/header.jsp" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@include file="../../../views/includes/header.jsp"%>
+
 <div id="layoutSidenav_content">
-<main>
- <div class="container-fluid px-4">
-   <h1>사용자 정보</h1>
-          
-            <div class="row">
-                <div class="col-lg-12">
-                	<div class="panel panel-default">
-                        <div class="panel-heading">
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                			<form action="" role="form" method="post" id="formSubmit">
+	<main>
+		<div class="container-fluid px-4">
+			<div class="row menu-card-size">
+               <div class="card mb-4">
+                   <div class="card-header">
+                       <i class="fas fa-chart-area me-1"></i>
+                       사용자 정보
+                   </div>
+                   <div class="card-body">
+                    <div style="letter-spacing:0; word-spacing:0; " >
+                    
+                    
+                    <form action="" role="form" method="post" id="formSubmit">
                 				<div class="form-group">
                 					<div class="form-group">
                 					<label>사원번호</label>
@@ -103,17 +108,10 @@
 	//현재 글 번호
 	let mem_id = ${dto.mem_id};
 </script>        
-<script src="/resources/js/mem_read.js"></script>          
-
-<%@include file="../../includes/footer.jsp" %>
-
-
-
-
-
-
-
-
-
-
-  
+                    
+                    
+</div>  
+</main>
+<script src="/resources/js/mem_read.js"></script>       
+<%@include file="../../../views/includes/footer.jsp"%>
+			

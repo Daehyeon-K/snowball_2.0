@@ -11832,8 +11832,11 @@ body {
     padding-bottom: 0px !important;
 }
 
-
-
+/* 각 메뉴들 메인페이지처럼 카드에 넣어주기 */
+.menu-card-size {
+	margin : 20px 10px !important;
+	width:99%;
+}
 
 
 
