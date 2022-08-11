@@ -99,16 +99,22 @@
         	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         	
 	            <!-- 좌 상단 회사 이름 -->
-	            <a class="navbar-brand ps-3" href="/">Co-Mapping</a>
+	            <a class="navbar-brand ps-3" href="/user/index">Co-Mapping</a>
 	            
 	            <!-- 메뉴 여닫는 버튼 -->
-	            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
+	            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!" style="margin=left:5px;">
 	            <i class="fas fa-bars"></i></button>
+	            
+	            
 	            
 	            <!-- 헤더 검색 영역 : form 제거 후 레이아웃 유지 가능한 지 확인 -->
 	            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0"></form>
 	            
 	            <!-- 우 상단 비밀번호 변경, 로그아웃 드롭다운 메뉴 -->
+	            <span class="name-layout">
+	            	<span class="login-name"><sec:authentication property="principal.user.mem_name"/> 님</span>
+	            	<%-- <input type="text" name="mem_id" value='<sec:authentication property="principal.user.mem_name"/>님' class="login-name" readonly/> --%>
+	            </span>
 	            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
 	                <li class="nav-item dropdown">
 	                	
@@ -279,10 +285,10 @@
                         </div>
                     </div>
                     <!-- 좌측 하단 내용: 수정 필요! -->
-                    <div class="sb-sidenav-footer">
+                    <%-- <div class="sb-sidenav-footer">
                         <div class="small">Logged in as: <div><sec:authentication property="principal.user.mem_name"/></div></div>
                         co-mapping
-                    </div>
+                    </div> --%>
                 </nav>
             </div>
 <script src="/resources/js/scripts.js"></script>

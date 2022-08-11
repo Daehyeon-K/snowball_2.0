@@ -1,19 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
-<%@include file="../../../views/includes/header.jsp" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@include file="../../../views/includes/header.jsp"%>
 
 <div id="layoutSidenav_content">
-                <main>
-                    <div class="container-fluid px-4">
-                    	<h1 class="mt-4 breadcrumb mb-4 layout-center">
-							<input type="text" name="mem_id" value='결재 정보' class="login-name" readonly/>   
-						</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Approval Information</li>
-                        </ol>
-
-<form action="approvalCommit?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data" id="approval_commit_form">
+	<main>
+		<div class="container-fluid px-4">
+			<div class="menu-name">
+				<span >결재 수신 정보</span>
+			</div>
+			<ol class="breadcrumb mb-4" style="padding-left: 10px;">
+				<li class="breadcrumb-item active">Approval List</li>
+			</ol>
+			
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+			
+			<form action="approvalCommit?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data" id="approval_commit_form">
 
   <div class="form-group">
     <label for="approval_id">결재ID</label>
@@ -113,9 +116,10 @@
 	</div>
   
   <div>
-  	 <button type="submit" class="btn btn-success approval_commit">승인</button>
-  	 <button type="submit" class="btn btn-danger approval_reject">반려</button>
- 	 <button type="reset" class="btn btn-primary">돌아가기</button>
+  	 <button type="submit" class="btn btn-default approval_commit">승인</button>
+  	 <button type="submit" class="btn btn-default approval_reject">반려</button>
+ 	 <button type="reset" class="btn btn-default back-commitlist">돌아가기</button>
+ 	 <br /><br />
  	 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
   </div>
   
@@ -125,10 +129,10 @@
 	let approval_id = "${dto.approval_id}";
 	
 	</script>
-
-
+</div>
+</main>
 <script src="/resources/js/commitRead.js?ver=3"></script>
 <script src="/resources/js/upload.js"></script>
-
-</html>
+<script src="/resources/js/back.js"></script>
 <%@include file="../../../views/includes/footer.jsp" %>
+			

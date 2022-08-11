@@ -517,7 +517,7 @@ public class UserController {
 		model.addAttribute("hrlist", hrlist);
 	}
 
-	@PostMapping("/supprot/dispatch/att")
+	@PostMapping("/support/dispatch/att")
 	public String dispatchListPost(@RequestParam("att_id") String att_id, Model model, RedirectAttributes rttr) {
 
 		log.info("근태리스트 요청");

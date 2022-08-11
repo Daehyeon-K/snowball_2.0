@@ -1,21 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <%@taglib uri="http://java.sun.com/jsp/jstl/core"
-prefix="c" %>
-
-<%@include file="../../../../views/includes/header.jsp" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@include file="../../../../views/includes/header.jsp"%>
 
 <div id="layoutSidenav_content">
-                <main>
-                    <div class="container-fluid px-4">
-                    	<h1 class="mt-4 breadcrumb mb-4 layout-center">
-							<input type="text" name="mem_id" value='인사 - 근태 조회' class="login-name" readonly/>   
-						</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">HR - Attendance List</li>
-                        </ol>
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-      <!-- /.panel-heading -->
+	<main>
+		<div class="container-fluid px-4">
+			<div class="menu-name">
+				<span >인사 - 근태 조회</span>
+			</div>
+			<ol class="breadcrumb mb-4" style="padding-left: 10px;">
+				<li class="breadcrumb-item active">HR - Attendance List</li>
+			</ol>
+			
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+			
+			
+			  <!-- /.panel-heading -->
       <div class="panel-body">
         <table class="table table-striped table-bordered table-hover">
           <thead>
@@ -41,9 +43,12 @@ prefix="c" %>
 		  </tbody>
         </table>
 		<button type="button" class="btn btn-primary back-user" >뒤로가기</button>
-    </div>
-          
-
-<script src="/resources/js/hrbutton.js?ver=4"></script>
-
+    </div>			
+			
+			
+			
+		</div>
+	</main>
+<script src="/resources/js/hrbutton.js?ver=3"></script>
 <%@include file="../../../../views/includes/footer.jsp" %>
+			

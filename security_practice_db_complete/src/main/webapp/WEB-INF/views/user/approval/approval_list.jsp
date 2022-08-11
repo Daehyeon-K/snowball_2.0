@@ -1,44 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
-<%@include file="../../../views/includes/header.jsp" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@include file="../../../views/includes/header.jsp"%>
 
 <div id="layoutSidenav_content">
-                <main>
-                    <div class="container-fluid px-4">
-                    	<h1 class="mt-4 breadcrumb mb-4 layout-center">
-							<input type="text" name="mem_id" value='결재 조회' class="login-name" readonly/>   
-						</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Approval List</li>
-                        </ol>
-                        
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-      <!-- /.panel-heading -->
-      <div class="panel-body">
+	<main>
+		<div class="container-fluid px-4">
+			<div class="menu-name">
+				<span >결재 조회</span>
+			</div>
+			<ol class="breadcrumb mb-4" style="padding-left: 10px;">
+				<li class="breadcrumb-item active">Approval List</li>
+			</ol>
+			
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+			
+			<div class="panel-body">
         <table class="table table-striped table-bordered table-hover">
           <thead>
            <div class="row">
           <!-- start search -->
-          <div class="col-md-12">
+          <div class="col-md-12" style="padding-left: 10px;">
          <!--  <button type="submit" class="btn btn-danger" style="float: right;">결재 신청하기</button> -->
-            <div class="col-md-8">
+            <div class="col-md-8" style="padding-left: 0px;">
             <!--search Form-->
             	<form action="" method="get" id="searchForm">
          	    	<input type="hidden" name="pageNum" value="${cri.pageNum}" /> 
 					<input type="hidden" name="amount" value="${cri.amount}" />
-            		<select name="type" id="">
+            		<select name="type" id="" class="select-height">
 	            		<option value="W" <c:out value="${cri.type == 'W' ? 'selected':'' }"/>>결재내용</option>
 	            		<option value="T" <c:out value="${cri.type == 'T' ? 'selected':'' }"/>>결재ID</option>
          	    	</select>
          	    	<input type="text" name="keyword" id="" value="${cri.keyword}"/>
-         	    	<button class="btn btn-default" type="submit">Search</button>
+         	    	<button class="btn btn-default" type="submit" style="padding-top: 0px;padding-bottom: 0px;height:28px;">Search</button>
             	</form>
           		
              <div class="row">
           <!-- start search -->
           <div class="col-md-12">
+    <div>
 	<table class="table">
 	  <thead>
 	    <tr>
@@ -78,7 +79,8 @@
 	    </c:forEach>
 	  </tbody>
 	</table>
-	<button type="button" class="btn btn-primary back-user">메인페이지</button>
+	</div>
+	<button type="button" class="btn btn-primary back-user" style="margin-left: 10px;">메인페이지</button>
 	
 	<!-- 페이지 나누기 하단 부분 -->
 	<div class="text-center">
@@ -110,7 +112,8 @@
 		<input type="hidden" name="type" value="${cri.type}" />
 		<input type="hidden" name="keyword" value="${cri.keyword}" />
 	</form>
-
+</main>
 <script src="/resources/js/list.js"></script>
 <script src="/resources/js/back.js"></script>
 <%@include file="../../../views/includes/footer.jsp" %>
+			

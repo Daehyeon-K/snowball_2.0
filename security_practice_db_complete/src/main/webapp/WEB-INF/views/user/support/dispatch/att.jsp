@@ -1,40 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <%@taglib uri="http://java.sun.com/jsp/jstl/core"
-prefix="c" %>
-<!DOCTYPE html>
-<html>
-
-<%@include file="../../../../views/includes/header.jsp" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@include file="../../../../views/includes/header.jsp"%>
 
 <div id="layoutSidenav_content">
-                <main>
-                    <div class="container-fluid px-4">
-                    	<h1 class="mt-4 breadcrumb mb-4 layout-center">
-							<input type="text" name="mem_id" value='파견 - 근태 정보' class="login-name" readonly/>   
-						</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Dispatch - Attendance Info</li>
-                        </ol>
-
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-      <!-- /.panel-heading -->
+	<main>
+		<div class="container-fluid px-4">
+			<div class="menu-name">
+				<span >파견 - 근태 정보</span>
+			</div>
+			<ol class="breadcrumb mb-4" style="padding-left: 10px;">
+				<li class="breadcrumb-item active">Dispatch - Attendance Info</li>
+			</ol>
+			
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+			
+			
+			<!-- /.panel-heading -->
       <div class="panel-body">
         <table class="table table-striped table-bordered table-hover">
           <thead>
            <div class="row">
-          <!-- start search -->
-          <div class="col-md-12">
-            <div class="col-md-8">
+          <!-- start search --> 
+          <div class="col-md-12" style="padding-left: 10px;">
+            <div class="col-md-8" style="padding-left: 0px;">
             <!--search Form-->
                <form action="" method="get" id="searchForm">
                <input type="hidden" name="pageNum" value="${cri.pageNum}" id = ""/>
             <input type="hidden" name="amount" value="${cri.amount}" />
-                  <select name="type" id="">
+                  <select name="type" id="" class="select-height">
                      <option value="T" <c:out value="${cri.type == 'T' ? 'selected':'' }"/>>근태ID</option>
                      <option value="C" <c:out value="${cri.type == 'C' ? 'selected':'' }"/>>사용자ID</option>
                    </select>
                    <input type="text" name="keyword" id="" value="${cri.keyword}"/>
-                   <button class="btn btn-default" type="submit">Search</button>
+                   <button class="btn btn-default" type="submit" style="padding-top: 0px;padding-bottom: 0px;height:28px;">Search</button>
                </form>
             </div>
           <div class="row">
@@ -51,7 +51,7 @@ prefix="c" %>
           </thead>
       <tbody>
       <c:forEach var="list" items="${hrlist}">
-      <form action="/user/support/hr/att" method="post" role="form" id="listForm" >
+      <form action="" method="post" role="form" id="listForm" >
           <tr>
             <td>${list.att_id}</td>
             <td>${list.mem_id}</td>
@@ -86,7 +86,7 @@ prefix="c" %>
      </ul>
    </div>
    
-   <form action="/user/support/dispatch/att" id="actionForm">
+   <form action=" id="actionForm">
       <!-- pageNum, amount, type, keyword 값을 부를 때 - 
          1) pageDto => ${pageDto.cri.pageNum}  
          2)cri => ${criteria.pageNum} : 얘는 ModelAttribute 가 사용 안된 경우, 이 때 클래스명 앞에 붙이는데 소문자로 붙여서 쓰기
@@ -96,10 +96,13 @@ prefix="c" %>
       <input type="hidden" name="amount" value="${cri.amount}" />
       <input type="hidden" name="type" value="${cri.type}" />
       <input type="hidden" name="keyword" value="${cri.keyword}" />
-   </form>
-
-</body>
+   </form>			
+			
+			
+			
+		</div>
+	</main>
 <script src="/resources/js/hrbutton.js?ver=3"></script>
 <script src="/resources/js/back.js"></script>
-</html>
 <%@include file="../../../../views/includes/footer.jsp" %>
+			

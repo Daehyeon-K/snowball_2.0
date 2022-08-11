@@ -51,7 +51,7 @@
 	$(function(){
 	//approval_id 클릭시 /approval/approval_read로 이동
 	$(".back-user1").click(function(){
-		location.href="/user/support/disaptch/att";
+		location.href="/user/support/dispatch/att";
 	})
 	
 	//페이지 이동 버튼 클릭

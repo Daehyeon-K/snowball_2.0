@@ -3,7 +3,22 @@
 				<footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Co-Mapping 2022</div>
+                            <div class="text-muted">
+                            	Copyright &copy; Co-Mapping 2022
+                            	<br />
+                            	<br />
+                            	OO컴퍼니
+                            	<br />
+                            	<br />
+                            	대표번호 : 02-1111-1111
+                            	<br />
+                            	<br />
+                            	사업자 번호 : 010-1111-1111
+                            	<br />
+                            	<br />
+                            	회사 위치 : 서울시 구로구 34길 25로
+                            </div>
+                            
                             <!-- 푸터 우측 개인정보보호정책, 이용약관 등 : 수정 필요! -->
                             <div>
                                 <a href="#">Privacy Policy</a>

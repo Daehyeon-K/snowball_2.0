@@ -1,29 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<link rel="stylesheet" href="/resources/css/list.css" />
-<%@include file="../../includes/header.jsp"%>
+<%@include file="../../../views/includes/header.jsp"%>
 
 <div id="layoutSidenav_content">
 	<main>
 		<div class="container-fluid px-4">
-			<h1 class="mt-4 breadcrumb mb-4 layout-center">게시글 조회</h1>
-			<ol class="breadcrumb mb-4">
-				<li class="breadcrumb-item active">list board</li>
+			<div class="menu-name">
+				<span >게시글 조회</span>
+			</div>
+			<ol class="breadcrumb mb-4" style="padding-left: 10px;">
+				<li class="breadcrumb-item active">Board List</li>
 			</ol>
-
-
-
+			
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+			
+			
 			<!-- 게시글 검색 부분 -->
-			<div class="col-md-12">
-				<div class="col-md-8">
+			<div class="col-md-12" style="padding-left: 10px;">
+				<div class="col-md-8" style="padding-left: 0px;">
 					<!--search Form-->
 					<form action="" method="get" id="searchForm">
-						<input type="hidden" name="pageNum" value="${cri.pageNum}" /> <input
-							type="hidden" name="amount" value="${cri.amount}" /> <select
-							name="type" id="">
+						<input type="hidden" name="pageNum" value="${cri.pageNum}" /> 
+						<input type="hidden" name="amount" value="${cri.amount}" /> 
+							<select name="type" id="" class="select-height">
 							<option value=""
 								<c:out value="${cri.type == '' ? 'selected':'' }"/>>---------</option>
 							<option value="T"
@@ -44,7 +45,7 @@
 						</select> <input type="text" name="keyword" id="" value="${cri.keyword}" />
 						<input type="hidden" name="${_csrf.parameterName}"
 							value="${_csrf.token}" />
-						<button class="btn btn-default" type="submit">Search</button>
+						<button class="btn btn-default" type="submit" style="padding-top: 0px;padding-bottom: 0px;height:28px;">Search</button>
 					</form>
 				</div>
 
@@ -102,18 +103,20 @@
 				</div>
 
 				<form action="" id="actionForm">
-					<!-- pageNum, amount, type, keyword 값을 부를 때 - 
-	      1) pageDto => ${pageDto.cri.pageNum}  
-	      2)cri => ${criteria.pageNum} : 얘는 ModelAttribute 가 사용 안된 경우, 이 때 클래스명 앞에 붙이는데 소문자로 붙여서 쓰기
-	         ㄴ cri 지금 @ModelAttribute("cri")로 담아줬기 때문에 cri.pageNum 가능
-	   -->
-					<input type="hidden" name="pageNum" value="${cri.pageNum}" /> <input
-						type="hidden" name="amount" value="${cri.amount}" /> <input
-						type="hidden" name="type" value="${cri.type}" /> <input
-						type="hidden" name="keyword" value="${cri.keyword}" />
+				<!-- pageNum, amount, type, keyword 값을 부를 때 - 
+			      1) pageDto => ${pageDto.cri.pageNum}  
+			      2)cri => ${criteria.pageNum} : 얘는 ModelAttribute 가 사용 안된 경우, 이 때 클래스명 앞에 붙이는데 소문자로 붙여서 쓰기
+			         ㄴ cri 지금 @ModelAttribute("cri")로 담아줬기 때문에 cri.pageNum 가능
+		   		-->
+					<input type="hidden" name="pageNum" value="${cri.pageNum}" /> 
+					<input type="hidden" name="amount" value="${cri.amount}" /> 
+					<input type="hidden" name="type" value="${cri.type}" /> 
+					<input type="hidden" name="keyword" value="${cri.keyword}" />
 				</form>
-
-
-				<%@include file="../../includes/footer.jsp"%>
-			</div>
-			<script src="/resources/js/page.js"></script>
+			
+			
+		</div>
+	</main>
+<script src="/resources/js/page.js"></script>
+<%@include file="../../../views/includes/footer.jsp" %>
+			

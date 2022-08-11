@@ -7,10 +7,10 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4 breadcrumb mb-4 layout-center bg-color">
+                        <%-- <h1 class="mt-4 breadcrumb mb-4 layout-center bg-color">
 							<input type="text" name="mem_id" value='<sec:authentication property="principal.user.mem_name"/>님 안녕하세요' class="login-name" readonly/>   
-						</h1>
-                        <ol class="breadcrumb mb-4">
+						</h1> --%>
+                        <ol class="breadcrumb mb-4 main-margin" style="padding-left: 0px;">
                             <li class="breadcrumb-item active margin-update">Main Page</li>
                         </ol>
                         
@@ -23,9 +23,9 @@
                                     </div>
                                     <div class="card-body" style="overflow: scroll;display: inline-block; white-space:nowrap;">
                                     
-                                     <div style="height:100;" >
+                                     <div>
                                     	<form action="" method="post" class="msgViewForm">
-									      <table class=".table table-striped table-bordered table-hover " style="font-size:1vw; width:100%; height:100%;">
+									      <table class=".table table-striped table-bordered table-hover table-height" style="font-size:1vw; width:100%; height:300%;">
 									          <thead>
 									          <tr>
 										         <th class="text-center col-md-2" scope="col">번호</th> 

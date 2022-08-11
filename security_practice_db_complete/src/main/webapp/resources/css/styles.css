@@ -1230,6 +1230,7 @@ progress {
   .col-md-12 {
     flex: 0 0 auto;
     width: 100%;
+    margin:5px;
   }
 
   .offset-md-0 {
@@ -2042,6 +2043,10 @@ progress {
 .table-hover > tbody > tr:hover, .dataTable-table > tbody > tr:hover {
   --bs-table-accent-bg: var(--bs-table-hover-bg);
   color: var(--bs-table-hover-color);
+}
+
+.table-height {
+	
 }
 
 .table-primary {
@@ -3551,6 +3556,10 @@ textarea.form-control-lg {
   display: none;
 }
 
+.nav-link {
+	text-align: center !important;
+}
+
 .collapsing {
   height: 0;
   overflow: hidden;
@@ -3988,7 +3997,14 @@ textarea.form-control-lg {
   color: #0d6efd;
   text-decoration: none;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  
 }
+
+.margin-update {
+	margin-top: 20px;
+    padding-left: 3px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .nav-link {
     transition: none;
@@ -4095,11 +4111,10 @@ textarea.form-control-lg {
   padding-top: 0.3125rem;
   padding-bottom: 0.3125rem;
   margin-right: 1rem;
-  font-size: 1.25rem;
+  font-size: 2.5rem !important;
   text-decoration: none;
   white-space: nowrap;
   display: flex;
-  
 }
 .navbar-nav {
   display: flex;
@@ -4610,9 +4625,9 @@ textarea.form-control-lg {
 }
 
 .card-header {
-  padding: 0.5rem 1rem;
+  padding: 1.3rem 1rem;
   margin-bottom: 0;
-  background-color: rgba(0, 0, 0, 0.03);
+  background-color: rgba(0, 128, 255, 0.06);
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 .card-header:first-child {
@@ -4823,8 +4838,14 @@ textarea.form-control-lg {
   display: flex;
   flex-wrap: wrap;
   padding: 0 0;
+  margin-left:5px;
   margin-bottom: 1rem;
   list-style: none;
+}
+
+.main-margin {
+	padding : 0px 0px !important;
+	margin:5px 0px !important;
 }
 
 .breadcrumb-item + .breadcrumb-item {
@@ -7712,6 +7733,11 @@ textarea.form-control-lg {
 
 .text-center {
   text-align: center !important;
+  height:50% !important;
+}
+
+.msgBtn {
+	margin:10px auto !important;
 }
 
 .text-decoration-none {
@@ -7876,7 +7902,8 @@ textarea.form-control-lg {
 
 .bg-light {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+  /* background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important; */
+  background-color: #dedede!important;
 }
 
 .bg-dark {
@@ -11529,7 +11556,7 @@ body {
 }
 
 .hover-action:hover{
-	background-color: #0080ff;
+	background-color: #44a2ff;
 	color:white !important;
 }
 
@@ -11768,9 +11795,47 @@ body {
 
 
 /* 채영이 추가한 로그인 시 이름 나타나는 부분 css */
-.login-name{
+.name-layout{
 	border: none;
-	background: none;
+	background-color:#0080ff;
+	color:balck;
+	float: right;
 }
+
+.login-name {
+	margin:auto 10px;
+	border: none;
+	background : none;
+	color:balck;
+	float: right;
+	display: inline-block;
+	text-align: right;
+	font-size: 15px;
+}
+
+.menu-name {
+	color : black;
+	margin : 15px 10px !important;
+	padding : 0px 0px !important;
+	font-size: 25px;
+	background-color: rgba(0, 128, 255, 0.08);
+}
+
+.select-height {
+	height : 26px;
+}
+
+.list-search-button-height {
+	height:26px;
+    margin-bottom: 0px;
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
+
+
+
+
+
+
 
 

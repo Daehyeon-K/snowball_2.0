@@ -1,19 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@include file="../../../views/includes/header.jsp"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib uri="http://www.springframework.org/security/tags"
-	prefix="sec"%>
+<%@include file="../../../views/includes/header.jsp"%>
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <div id="layoutSidenav_content">
 	<main>
 		<div class="container-fluid px-4">
-			<h1 class="mt-4 breadcrumb mb-4 layout-center">게시글 보기</h1>
-
-
+			<div class="menu-name">
+				<span >게시글 보기</span>
+			</div>
+			<ol class="breadcrumb mb-4" style="padding-left: 10px;">
+				<li class="breadcrumb-item active">Board Read</li>
+			</ol>
+			
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+			
+			
 			<div>
 				<form action="" method="post" role="form">
 					<div class="form-group">
@@ -60,7 +64,7 @@
 
 						<!-- 리스트 버튼은 누구나 다 보여져야하니까 권한 걸지 않기 -->
 						<button type="button" class="btn btn-info">리스트</button>
-
+						<br /><br />
 						<!-- 수정 및 삭제버튼은 자기 자신을 제외한 다른 사람 게시물을 수정/삭제 불가해야하므로 권한 조건 걸어주기 -->
 						<sec:authentication property="principal" var="info" />
 						<sec:authorize access="isAuthenticated()">
@@ -105,7 +109,6 @@
 						<div class="panel-footer"></div>
 					</div>
 
-					<%@include file="../../includes/footer.jsp"%>
 				</div>
 
 				<%-- 댓글 작성 모달 폼 --%>
@@ -162,20 +165,22 @@
 						value='<sec:authentication property="principal.username"/>'
 						name="mem_name" />
 				</form>
-				<script>
+<script>
    let board_id = '${dto.board_id}';
    
    <sec:authorize access="isAuthenticated()">
-/*         mem_name = '<sec:authentication property="principal.user.mem_name"/>';  */
+/*     mem_name = '<sec:authentication property="principal.user.mem_name"/>';  */
        mem_name = '<sec:authentication property="principal.username"/>';
    </sec:authorize>  
-
    
    let csrfHeaderName = "${_csrf.headerName}";
    let csrfTokenValue = "${_csrf.token}";
 </script>
 
+</main>
 <script src="/resources/js/read_row.js"></script>
 <script src="/resources/js/reply.js"></script>
 <script src="/resources/js/read2.js"></script>
 <script src="/resources/js/upload2.js"></script>
+<%@include file="../../../views/includes/footer.jsp" %>
+			

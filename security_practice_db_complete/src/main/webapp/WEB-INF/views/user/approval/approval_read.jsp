@@ -1,19 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
-<%@include file="../../../views/includes/header.jsp" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@include file="../../../views/includes/header.jsp"%>
 
 <div id="layoutSidenav_content">
-                <main>
-                    <div class="container-fluid px-4">
-                    	<h1 class="mt-4 breadcrumb mb-4 layout-center">
-							<input type="text" name="mem_id" value='결재 정보' class="login-name" readonly/>   
-						</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Approval Information</li>
-                        </ol>
-
-<form action="" method="post" enctype="multipart/form-data">
+	<main>
+		<div class="container-fluid px-4">
+			<div class="menu-name">
+				<span >결재 정보</span>
+			</div>
+			<ol class="breadcrumb mb-4" style="padding-left: 10px;">
+				<li class="breadcrumb-item active">Approval Information</li>
+			</ol>
+			
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+			
+			
+			<form action="" method="post" enctype="multipart/form-data">
 
   <div class="form-group">
     <label for="approval_id">결재ID</label>
@@ -111,6 +115,7 @@
   
   <div>
  	 <button type="reset" class="btn btn-primary">돌아가기</button>
+ 	 <br /><br />
  	 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
   </div>
   
@@ -120,10 +125,11 @@
 	let approval_id = "${dto.approval_id}";
 	
 	</script>
+			
+			
 
-
+</main>
 <script src="/resources/js/read.js"></script>
 <script src="/resources/js/upload.js"></script>
-
-</html>
 <%@include file="../../../views/includes/footer.jsp" %>
+			

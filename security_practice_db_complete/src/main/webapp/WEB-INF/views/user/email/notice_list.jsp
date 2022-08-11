@@ -1,31 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@include file="../../includes/header.jsp"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@include file="../../../views/includes/header.jsp"%>
 
 <div id="layoutSidenav_content">
 	<main>
 		<div class="container-fluid px-4">
-
-			<div class="row">
-				<div>
-					<h1 class="page-header">공지 게시판</h1>
-				</div>
-
+			<div class="menu-name">
+				<span >공지 게시판</span>
 			</div>
+			<ol class="breadcrumb mb-4" style="padding-left: 10px;">
+				<li class="breadcrumb-item active">Email List</li>
+			</ol>
+			
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+			
 			<!--search Form-->
 			<form action="" method="get" id="searchForm"
 				style="text-align: right">
 				<input type="hidden" name="pageNum" value="${cri.pageNum}" /> <input
-					type="hidden" name="amount" value="${cri.amount}" /> <select
-					name="type" id="">
-					<option value="W"
-						<c:out value="${cri.type == 'W' ? 'selected':'' }"/>>공지내용</option>
-					<option value="T"
-						<c:out value="${cri.type == 'T' ? 'selected':'' }"/>>공지제목</option>
-				</select> <input type="text" name="keyword" id="" value="${cri.keyword}" />
-				<button class="btn btn-default" type="submit">Search</button>
+					type="hidden" name="amount" value="${cri.amount}" /> 
+					<select name="type" id="" class="select-height">
+					<option value="W"<c:out value="${cri.type == 'W' ? 'selected':'' }"/>>공지내용</option>
+					<option value="T"<c:out value="${cri.type == 'T' ? 'selected':'' }"/>>공지제목</option>
+				</select> 
+				<input type="text" name="keyword" id="" value="${cri.keyword}" />
+				<button class="btn btn-default" type="submit" style="padding-top: 0px;padding-bottom: 0px;height:28px;">Search</button>
 			</form>
 			</br>
 			<!-- /.col-lg-12 -->
@@ -33,10 +34,8 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">
-							<!-- <button id="regBtn" type="button" class="btn-pr-4 mb-2">
-						          공지메일 작성
-						        </button> -->
+						<div class="panel-heading" style="background-color: rgba(0, 128, 255, 0.08);">
+							공지 이메일
 						</div>
 						<div class="panel-body">
 
@@ -98,11 +97,9 @@
 				type="hidden" name="type" value="${cri.type}" /> <input
 				type="hidden" name="keyword" value="${cri.keyword}" />
 		</form>
-
-	</main>
-	<form action="" id="NoticeReadForm"></form>
-	<script src="/resources/js/notice_list.js"></script>
-	<script src="/resources/js/list2.js"></script>
-	<%@include file="../../includes/footer.jsp"%>
-	<%-- 페이지 링크를 처리할 폼 --%>
-</div>
+		
+</main>
+<script src="/resources/js/list.js"></script>
+<script src="/resources/js/back.js"></script>
+<%@include file="../../../views/includes/footer.jsp" %>
+			

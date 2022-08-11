@@ -8,10 +8,12 @@
 <div id="layoutSidenav_content">
 	<main>
 		<div class="container-fluid px-4">
-			<h1 class="mt-4 breadcrumb mb-4 layout-center">
-				<input type="text" name="mem_id" value='결재 기안' class="login-name"
-					readonly />
-			</h1>
+			<!-- <h1 class="mt-4 breadcrumb mb-4 layout-center"> -->
+			<div class="menu-name">
+				<span >결재 기안</span>
+			</div>
+				<!-- <input type="text" name="mem_id" value='결재 기안' class="login-name" readonly /> -->
+			<!-- </h1> -->
 			<ol class="breadcrumb mb-4">
 				<li class="breadcrumb-item active">Approval Insert</li>
 			</ol>
@@ -30,7 +32,7 @@
 					<div class="form-group md-4">
 						<select name="approval_type_id" id="approval_type_id"
 							class="form-control">
-							<option value="BP">비품신청</option>
+							<option value="BP">비품신청 ▼</option>
 							<option value="HG">휴가신청</option>
 						</select>
 					</div>
@@ -47,7 +49,7 @@
 						<!-- 옵션을 select 이용해서 불러오기는 안될지 -->
 						<c:forEach var="interMan" items="${interMan}">
 							<option value="${interMan.mem_id}">${interMan.mem_name}
-								${interMan.grade_name}</option>
+								${interMan.grade_name} ▼</option>
 						</c:forEach>
 						<!-- 
       <option value="20220001">최지수 과장</option>
@@ -64,7 +66,7 @@
 						class="form-control">
 						<c:forEach var="fianlMan" items="${finalMan}">
 							<option value="${fianlMan.mem_id}">${fianlMan.mem_name}
-								${fianlMan.grade_name}</option>
+								${fianlMan.grade_name} ▼</option>
 						</c:forEach>
 						<!-- 
       <option value="20220007">정우성 사장</option>
@@ -87,15 +89,16 @@
 						<!-- 첨부파일 정보 -->
 					</ul>
 				</div>
-				<button id="uploadBtn" class="btn btn-primary">신청하기</button>
+				<br />
+				<button id="uploadBtn" class="btn btn-primary" style="margin-right:5px;">신청하기</button>
 				<button type="button" class="btn btn-primary back-user">돌아가기</button>
 			</form>
-			</body>
+			</main>
 			<script>
 				let csrfHeaderName = "${_csrf.headerName}";
 				let csrfTokenValue = "${_csrf.token}";
 			</script>
 			<script src="/resources/js/upload.js"></script>
 			<script src="/resources/js/back.js"></script>
-			</html>
-			<%@include file="../../../views/includes/footer.jsp"%>
+<%@include file="../../../views/includes/footer.jsp"%>
+			
