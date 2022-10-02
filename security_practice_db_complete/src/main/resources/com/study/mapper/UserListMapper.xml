@@ -7,11 +7,11 @@
 		<![CDATA[   
 		select mem_id, grade_id, company_id, dept_id, mem_name, mem_phone, mem_mail, mem_gender, mem_birth, mem_addr, mem_sal, mem_pwd, mem_con_start,mem_con_end, mem_dcon_start, mem_dcon_end,enabled
 		from (
-				select /*+INDEX_DESC(mem pk_mem)*/ rownum rn, mem_id, grade_id, company_id, dept_id, mem_name, mem_phone, mem_mail, mem_gender, mem_birth, mem_addr, mem_sal, mem_pwd, mem_con_start,mem_con_end, mem_dcon_start, mem_dcon_end,enabled
+				select /*+INDEX_DESC(mem pk_mem)*/ @rownum:=@rownum+1 rn, mem_id, grade_id, company_id, dept_id, mem_name, mem_phone, mem_mail, mem_gender, mem_birth, mem_addr, mem_sal, mem_pwd, mem_con_start,mem_con_end, mem_dcon_start, mem_dcon_end,enabled
 				from mem
-				where mem_id >= '1' and rownum <= (#{pageNum} * #{amount})
-			)
-		where rn > (#{pageNum} - 1) * #{amount}
+				where mem_id >= '1' and @rn:=@rn+1 <= (#{pageNum} * #{amount})
+			)as user_list_1, (select @rownum:=0) user_list_1_rn
+		where r@rn:=@rn+1n > (#{pageNum} - 1) * #{amount}
 		]]>
 	</select>
 	

@@ -2,33 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.study.mapper.MsgMapper">
 
-
-
-
-	<!-- 컨트롤러에서 mem_id 시큐리터 정보 가져와서 넣어주니까 성공 => 페이지 나누기 전 거 -->
-	<!-- <select id="mSelect" resultType="com.study.dto.MsgDTO">
-		select msg_id, sender_id, receiver_id, msg_content
-		from msg
-		where receiver_id = #{mem_id}
-	</select>  -->
-	
-	
 	<!-- 페이지 나누기 개념 없을 때 -->
    <select id="mSelect" resultType="com.study.dto.MsgDTO">
       <![CDATA[ 
      	select  msg_id, sender_id, receiver_id, msg_content
 		from (
-				select /*+INDEX_DESC(msg pk_msg)*/ rownum rn,  msg_id, sender_id, receiver_id, msg_content 
+				select /*+INDEX_DESC(msg pk_msg)*/ @rownum:=@rownum+1 rn,  msg_id, sender_id, receiver_id, msg_content 
     			from (
     					select msg_id, sender_id, receiver_id, msg_content  
     					from msg 
     					
-    					order by TO_NUMBER(REGEXP_SUBSTR(msg_id, '[0-9]+',1,1)) desc
-    		 		 )
+    					order by cast(REGEXP_SUBSTR(msg_id, '[0-9]+') as integer) desc
+    		 		 ) msg_tbl1, (select @rownum:=0) msg_rownum
     			where
       ]]> 
       <![CDATA[
-		msg_id >= 'MSG1' and rownum <= (#{pageNum} * #{amount}) and receiver_id = #{mem_id} )
+		msg_id >= 'MSG1' and  @rn:=@rn+1 <= (#{pageNum} * #{amount}) and receiver_id = #{mem_id} 
+		) msg_tbl2, (select @rn:=0) msg_rn
 		where rn > (#{pageNum} - 1) * #{amount}
 		
 	  ]]>
@@ -58,9 +48,8 @@
 	<!-- 인서트 성공  -->
 	<insert id="msgInsert">
 		insert into msg(msg_id, sender_id, receiver_id, msg_content, msg_send_date) 
-		values(concat('MSG',msg_seq.nextval), #{mem_id}, #{receiver_id}, #{msg_content}, sysdate)
+		values(concat('MSG',nextval(msg_seq)), #{mem_id}, #{receiver_id}, #{msg_content}, now())
 	</insert>
-	
 	
 	
 	<!-- 삭제도 잘됨 -->

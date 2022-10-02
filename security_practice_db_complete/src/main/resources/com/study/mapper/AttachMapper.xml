@@ -6,8 +6,7 @@
 		<!-- AttachDTO 맞춰야함 -->
 		insert into approval_file(approval_file_id, approval_id,
 		approval_file_dir, approval_file_name, approval_file_type)
-		values(#{approval_file_id},concat('APPR',
-		approval_seq.currval),#{approval_file_dir},#{approval_file_name},#{approval_file_type})
+		values(#{approval_file_id},concat('APPR', nextval(approval_seq)),#{approval_file_dir},#{approval_file_name},#{approval_file_type})
 	</insert>
 
 	<!-- 게시판 첨부파일 -->
@@ -16,8 +15,7 @@
 		insert into board_file(board_file_id, board_id,
 		board_file_dir,
 		board_file_name, board_file_type)
-		values(#{board_file_id},concat('BOARD',
-		board_seq.currval),#{board_file_dir},#{board_file_name},#{board_file_type})
+		values(#{board_file_id},concat('BOARD', nextval(board_seq)),#{board_file_dir},#{board_file_name},#{board_file_type})
 	</insert>
 
 	<!-- 게시판 첨부파일 -->
@@ -26,8 +24,7 @@
 		insert into mail_file(mail_file_id, mail_id,
 		mail_file_dir,
 		mail_file_name, mail_file_type)
-		values(#{mail_file_id},concat('Mail',
-		mail_file_seq.currval),#{mail_file_dir},#{mail_file_name},#{mail_file_type})
+		values(#{mail_file_id},concat('Mail', nextval(mail_file_seq)),#{mail_file_dir},#{mail_file_name},#{mail_file_type})
 	</insert>
 
 
@@ -54,6 +51,6 @@
 		resultType="com.study.dto.ApprovalFileDTO">
 		select * from approval_file
 		where approval_file_dir =
-		to_char(sysdate-1,'yyyy\mm\dd') <!-- 문자형식으로 바꿔줌 : to_char -->
+		DATE_FORMAT(now(), '%Y%m%d%') <!-- 문자형식으로 바꿔줌 : to_char -->
 	</select>
 </mapper>

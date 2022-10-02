@@ -11,14 +11,16 @@
 	<select id="hrList" resultType="com.study.dto.AttDTO">
 	<![CDATA[
 		select *
-		from(select /*+INDEX_DESC(att pk_att)*/ rownum rn, att.*
-		from att
-		where
+		from(
+			select /*+INDEX_DESC(att pk_att)*/ @rownum:=@rownum+1 rn, att.*
+			from att
+			where
 		]]>	
 			<include refid="criteria"></include>
 	<![CDATA[	
-		att_vac > 0 and rownum <= (#{pageNum} * #{amount}))
-		where rn > (#{pageNum} - 1) * #{amount} and att_in_out like 'in'
+		att_vac > 0 and @rn:=@rn+1 <= (#{pageNum} * #{amount})
+		) as hr1, (select @rn:=0) hr_rn
+		where @rn:=@rn+1 > (#{pageNum} - 1) * #{amount} and att_in_out like 'in'
 	]]>
 	</select>
 	<sql id="criteria">

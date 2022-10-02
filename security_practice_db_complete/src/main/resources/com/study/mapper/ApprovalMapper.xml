@@ -5,18 +5,21 @@
 	<select id="select" resultType="com.study.dto.ApprovalDTO">
       <![CDATA[ 
         select approval_id,mem_id,approval_type_id,approval_commit_id,approval_inter_id,approval_final_id,approval_reject,approval_content
-      from (select /*+INDEX_DESC(approval pk_approval)*/ rownum rn, approval_id,mem_id,approval_type_id,approval_commit_id,approval_inter_id,approval_final_id,approval_reject,approval_content 
-            from (select approval_id,mem_id,approval_type_id,approval_commit_id,approval_inter_id,approval_final_id,approval_reject,approval_content 
-                from approval 
-                order by TO_NUMBER(REGEXP_SUBSTR(approval_id, '[0-9]+',1,1)) desc
-                  )
+      from (
+      		select /*+INDEX_DESC(approval pk_approval)*/ @rownum:=@rownum+1 rn, approval_id,mem_id,approval_type_id,approval_commit_id,approval_inter_id,approval_final_id,approval_reject,approval_content 
+            from (
+	            	select approval_id,mem_id,approval_type_id,approval_commit_id,approval_inter_id,approval_final_id,approval_reject,approval_content 
+	                from approval 
+	                order by cast(REGEXP_SUBSTR(approval_id, '[0-9]+') as integer) desc
+                  ) as appr1, (select @rownum:=0) appr_rownum
              where
       ]]> 
-            <include refid="criteria"></include>
+      <include refid="criteria"></include>
             
       <![CDATA[
-      rownum <= (#{cri.pageNum} * #{cri.amount}) and  mem_id = #{mem_id})
-      where rn > ((#{cri.pageNum} - 1) * #{cri.amount})
+      @rn:=@rn+1 <= (#{cri.pageNum} * #{cri.amount}) and  mem_id = #{mem_id}
+      ) as appr2, (select @rn:=0) appr2_rn
+      where @rn:=@rn+1 > ((#{cri.pageNum} - 1) * #{cri.amount})
       
      ]]>
    </select>
@@ -46,31 +49,16 @@
      approval_id >= 'APPR1' and mem_id = #{mem_id}
    </select>
    
-   
-  
-
-	<!-- 이거 전 거 
-	<insert id="insert">
-		insert into approval(approval_id,mem_id,approval_type_id, approval_inter_id, approval_final_id, approval_reject, approval_content)  
-		values(concat('APPR', approval_seq.nextval),#{mem_id} ,#{approval_type_id}, #{approval_inter_id},#{approval_final_id},#{approval_reject},#{approval_content})
-	</insert> -->
-	
-	<!-- 1개 read 폼 호출 -->
-	<!-- <select id="read" resultType="com.study.dto.ApprovalDTO">
-		select * from approval where approval_id = #{approval_id}
-	</select> -->
-	
-	
 
 	<!-- 결재 생성 시 결재 승인 먼저 만들어 주기 -->
    <insert id="commit_insert">
       insert into approval_commit(approval_commit_id, approval_commit_inter_check, approval_commit_final_check)  
-      values(concat('APPR_COMM',approval_commit_seq.nextval), '중간미승인', '최종미승인')
+      values(concat('APPR_COMM',nextval(approval_commit_seq)), '중간미승인', '최종미승인')
    </insert>   
 
    <insert id="insert">
       insert into approval(approval_id,mem_id,approval_commit_id,approval_type_id, approval_inter_id, approval_final_id, approval_reject, approval_content)  
-      values(concat('APPR', approval_seq.nextval),#{mem_id},concat('APPR_COMM',approval_commit_seq.currval),#{approval_type_id}, #{approval_inter_id},#{approval_final_id},#{approval_reject},#{approval_content})
+      values(concat('APPR', nextval(approval_seq)),#{mem_id},concat('APPR_COMM', nextval(approval_commit_seq)-1),#{approval_type_id}, #{approval_inter_id},#{approval_final_id},#{approval_reject},#{approval_content})
    </insert>
 	
 	
@@ -83,19 +71,22 @@
    <select id="commitSelect" resultType="com.study.dto.ApprovalDTO">
       <![CDATA[ 
         select approval_id,mem_id,approval_type_id,approval_commit_id,approval_inter_id,approval_final_id,approval_reject,approval_content
-      from (select /*+INDEX_DESC(approval pk_approval)*/ rownum rn, approval_id,mem_id,approval_type_id,approval_commit_id,approval_inter_id,approval_final_id,approval_reject,approval_content 
-            from (select approval_id,mem_id,approval_type_id,approval_commit_id,approval_inter_id,approval_final_id,approval_reject,approval_content 
-                from approval 
-                order by TO_NUMBER(REGEXP_SUBSTR(approval_id, '[0-9]+',1,1)) desc
-                  )
-             where
+      	from (
+      			select /*+INDEX_DESC(approval pk_approval)*/ @rownum:=@rownum+1 rn, approval_id,mem_id,approval_type_id,approval_commit_id,approval_inter_id,approval_final_id,approval_reject,approval_content 
+           		from (
+	           			select approval_id,mem_id,approval_type_id,approval_commit_id,approval_inter_id,approval_final_id,approval_reject,approval_content 
+		                from approval 
+		                order by cast(REGEXP_SUBSTR(approval_id, '[0-9]+') as integer) desc
+                	 )as appr_comm_1, (select @rownum:=0) appr_comm_rownum
+                where
       ]]> 
-            <include refid="criteria2"></include>
+      <include refid="criteria2"></include>
             
       <![CDATA[
-      rownum <= (#{cri.pageNum} * #{cri.amount}) and (approval_inter_id = #{mem_id} or approval_final_id = #{mem_id}))
-      where rn > ((#{cri.pageNum} - 1) * #{cri.amount})
-      
+	      @rn:=@rn+1 <= (#{cri.pageNum} * #{cri.amount}) and (approval_inter_id = #{mem_id} or approval_final_id = #{mem_id})
+	      ) as appr_comm2, (select @rn:=0) appr_comm_rn
+	      where @rn:=@rn+1 > ((#{cri.pageNum} - 1) * #{cri.amount})
+	      
      ]]>
    </select>
    <!-- 결재수신 동적 sql -->

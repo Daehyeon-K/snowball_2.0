@@ -11,19 +11,21 @@
 	<select id="select" resultType="com.study.dto.MailDTO">
 		<![CDATA[ 
         select mail_id,mail_name,mail_title,mail_content,mail_send_date
-      from (select /*+INDEX_DESC(mail pk_mail)*/ rownum
-       rn, mail_id,mail_name,mail_title,mail_content,mail_send_date
-            from (select mail_id,mail_name,mail_title,mail_content,mail_send_date
-                from mail 
-                order by TO_NUMBER(REGEXP_SUBSTR(mail_id, '[0-9]+',1,1)) desc
-                  )
-             where
-      ]]>
+      	from (
+	      		select /*+INDEX_DESC(mail pk_mail)*/ @rownum:=@rownum+1 rn, mail_id,mail_name,mail_title,mail_content,mail_send_date
+	            from (
+	            		select mail_id,mail_name,mail_title,mail_content,mail_send_date
+		                from mail 
+		                order by cast(REGEXP_SUBSTR(mail_id, '[0-9]+') as integer) desc
+	                  ) as mail1, (select @rownum:=0) mail_rownum
+	             where
+      	]]>
 		<include refid="criteria"></include>
             
-      <![CDATA[
-      rownum <= (#{cri.pageNum} * #{cri.amount}))
-      where rn > ((#{cri.pageNum} - 1) * #{cri.amount})
+	      <![CDATA[
+	      @rn:=@rn+1 <= (#{cri.pageNum} * #{cri.amount})
+	      ) as mail2, (select @rn:=0) mail_rn
+	      where @rn:=@rn+1 > ((#{cri.pageNum} - 1) * #{cri.amount})
       
      ]]>
 	</select>
@@ -59,7 +61,7 @@
 	<insert id="emailToDB">
 		insert into mail ( mail_id, mail_name, mail_title,
 		mail_content)
-		values (concat('MAIL', mail_seq.nextval), #{mail_name},
+		values (concat('MAIL', nextval(mail_seq)), #{mail_name},
 		#{mail_title},
 		#{mail_content})
 	</insert>

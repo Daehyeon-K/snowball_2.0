@@ -7,17 +7,18 @@
       <![CDATA[ 
      	select mem_id, grade_id, company_id, dept_id, mem_name, mem_phone, mem_mail, mem_gender, mem_birth, mem_addr, mem_sal, mem_pwd, mem_con_start,mem_con_end, mem_dcon_start, mem_dcon_end
 		from (
-				select /*+INDEX_DESC(approval pk_mem)*/ rownum rn, mem_id, grade_id, company_id, dept_id, mem_name, mem_phone, mem_mail, mem_gender, mem_birth, mem_addr, mem_sal, mem_pwd, mem_con_start,mem_con_end, mem_dcon_start, mem_dcon_end 
+				select /*+INDEX_DESC(approval pk_mem)*/ @rownum:=@rownum+1 rn, mem_id, grade_id, company_id, dept_id, mem_name, mem_phone, mem_mail, mem_gender, mem_birth, mem_addr, mem_sal, mem_pwd, mem_con_start,mem_con_end, mem_dcon_start, mem_dcon_end 
     			from (
     					select mem_id, grade_id, company_id, dept_id, mem_name, mem_phone, mem_mail, mem_gender, mem_birth, mem_addr, mem_sal, mem_pwd, mem_con_start,mem_con_end, mem_dcon_start, mem_dcon_end 
     					from mem 
-    					order by TO_NUMBER(REGEXP_SUBSTR(mem_id, '[0-9]+',1,1)) desc
-    		 		 )
+    					order by cast(REGEXP_SUBSTR(mem_id, '[0-9]+') as integer)  desc
+    		 		 ) as mem_1, (select @rownum:=0) mem_rownum
     			where
       ]]> 
       <include refid="criteria"></include>
       <![CDATA[
-		mem_id >= '20220001' and rownum <= (#{pageNum} * #{amount}))
+		mem_id >= '20220001' and @rn:=@rn+1 <= (#{pageNum} * #{amount})
+		) as mem2, (select @rn:=0) mem_rn
 		where rn > (#{pageNum} - 1) * #{amount}
 		
 	  ]]>
@@ -50,16 +51,6 @@
 	
 	
 	
-	
-	
-	
-	
-	<!-- 관리자가 사용자 리스트 확인하기 -->
-<!-- 	<select id="userList" resultType="com.study.dto.MemDTO">
-		select * from mem order by mem_id asc
-	</select> -->
-	
-	
 	<!-- 관리자가 사용자 회원가입시켜주기 -->
 	<insert id="userInsert">
 		insert into mem(mem_id, grade_id, company_id, dept_id, mem_name, mem_phone, mem_mail, mem_gender, mem_birth, mem_addr, mem_sal, mem_pwd, mem_con_start,mem_con_end, mem_dcon_start, mem_dcon_end,enabled)   
@@ -69,9 +60,9 @@
 	
 	<!-- 사용자 추가될 때마다 각각 메모 알아서 insert 해주기 -->
  	<insert id="memoInsert">
-      insert into memo(memo_id,mem_id,memo_content) values(concat('MEMO',memo_seq.nextval),#{mem_id},' ')
+      insert into memo(memo_id,mem_id,memo_content) values(concat('MEMO',nextval(memo_seq)),#{mem_id},' ')
     </insert>
-	
+
 	
 	<!-- 권한 부여 -->
 	<insert id="authInsert">

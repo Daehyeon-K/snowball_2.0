@@ -5,7 +5,7 @@
 	<!-- 댓글 등록 -->  
 	<insert id="replyInsert">
 		insert into reply(reply_id,mem_id,board_id,reply_content,reply_regdate)
-		values(reply_seq.nextval,#{mem_id},#{board_id},#{reply_content},sysdate)
+		values(nextval(reply_seq),#{mem_id},#{board_id},#{reply_content},now())
 	</insert>
 	
 	<!-- 댓글 하나 가져오기 : read -->
@@ -19,12 +19,13 @@
 		<![CDATA[  	
 	
 		select reply_id,mem_id,board_id,reply_content,reply_regdate,reply_updatedate
-		from (select /*+INDEX(reply pk_reply)*/ rownum rn,reply_id,mem_id,board_id,reply_content,reply_regdate,reply_updatedate
-			  from reply
-			  where board_id=#{board_id} and 
-			  reply_id > 0 and rownum <= (#{cri.pageNum} * #{cri.amount}))
-		where rn > (#{cri.pageNum} - 1) * #{cri.amount}
-		
+		from (
+				select /*+INDEX(reply pk_reply)*/ @rownum:=@rownum+1 rn,reply_id,mem_id,board_id,reply_content,reply_regdate,reply_updatedate
+				from reply
+				where board_id=#{board_id} 
+				and reply_id > 0 and @rn:=@rn+1 <= (#{cri.pageNum} * #{cri.amount})
+			 ) as reply1, (select @rn:=0) reply1_rn
+		where @rn:=@rn+1 > (#{cri.pageNum} - 1) * #{cri.amount}
 		 ]]>
 	
 	</select>
@@ -39,7 +40,7 @@
 	<!-- 댓글 수정 : update(댓글내용, 댓글수정날짜) -->
 	<update id="replyupdate">
 		update reply
-		set reply_content=#{reply_content}, reply_updatedate=sysdate
+		set reply_content=#{reply_content}, reply_updatedate=now()
 		where reply_id=#{reply_id}
 	</update>
 	

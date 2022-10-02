@@ -1,10 +1,8 @@
 package com.study.service;
 
-import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,10 +11,12 @@ import com.study.dto.AuthorityDTO;
 import com.study.dto.ChangePwdDTO;
 import com.study.dto.CompanyDTO;
 import com.study.dto.CriteriaDTO;
-import com.study.dto.CustomUser;
 import com.study.dto.MemDTO;
 import com.study.mapper.AdminUserControlMapper;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class AdminUserControlServiceImpl implements AdminUserControlService {
 	
@@ -49,7 +49,8 @@ public class AdminUserControlServiceImpl implements AdminUserControlService {
 	
 	//mapper 에서 userInsert의 Mem 테이블과 authInsert의 Mem과 Authority 조인 테이블을 
 	//동시에 접근해야 하기 때문에 둘 중 하나라도 실패하면 실행 불가로 만들어주기
-	@Transactional 	@Override
+	@Override
+	@Transactional 	
 	public boolean userInsert(MemDTO user) {
 		// 비밀번호 암호화 여기서 처리해주기
 		user.setMem_pwd(encoder.encode(user.getMem_pwd()));
@@ -108,7 +109,7 @@ public class AdminUserControlServiceImpl implements AdminUserControlService {
 			change.setNew_mem_pwd(encoder.encode(change.getNew_mem_pwd()));
 			change.setCur_new_mem_pwd(encoder.encode(change.getCur_new_mem_pwd()));
 			mapper.pwdChange(change);
-			System.out.println("새 비밀번호 찍기 : "+change.getCur_new_mem_pwd());
+			log.info("새 비밀번호 찍기 : {}", change.getCur_new_mem_pwd());
 			
 			return true;
 			

@@ -12,9 +12,8 @@
 	 -->
 	 
 	 <!-- 비밀번호 암호화해주는 인코더 추가해주기 -->
-	 <bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
-	 
-	
+	 <!-- <bean id="customAccessDeniedHandler" class="com.study.handler.CustomAccessDeniedHandler"/> -->
+	<bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 	<security:http>
 		<!-- 로그인에서 비밀번호나 아이디 틀리면 /loginError 여기로 컨트롤러 이동 -->
 		<security:form-login login-page="/login" authentication-failure-url="/loginError" 
@@ -31,7 +30,7 @@
 		<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
 		
 		<!-- <security:access-denied-handler error-page="/access-denied"/> -->
-		<security:access-denied-handler ref="customAccessDeniedHandler"/>
+	 	<security:access-denied-handler ref="customAccessDeniedHandler"/>
 	</security:http>
 
 	

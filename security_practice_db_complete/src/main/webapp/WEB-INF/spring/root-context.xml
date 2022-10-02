@@ -38,12 +38,22 @@
 	
 	
 	<!-- 커넥션 풀 설정 -->
-	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+	<!-- <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
 		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe"/>
 		<property name="username" value="comapping"/>
 		<property name="password" value="12345"/>
+	</bean> -->
+	
+	<!-- 삼촌 - mysql로 변환 후 적용해보기 -->
+	<!-- 커넥션 풀 설정 -->
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<property name="jdbcUrl" value="jdbc:mysql://itoms.kr:3306/scy"/>
+		<property name="username" value="cyshim"/>
+		<property name="password" value="cyshim1018"/>
 	</bean>
+	
 	
 	<!-- HikariCP 설정 -->
 	<bean id="ds" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">

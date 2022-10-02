@@ -33,6 +33,7 @@
          <option value="3GZ">과장</option>
          <option value="4BZ">부장</option>
          <option value="5SZ">사장</option>
+         <option value="ADMIN">관리자</option>
       </select>
 <%--      <form:input path="grade_id" type="text" class="form-control" name="grade_id" required="required"/>
      <small><form:errors path="grade_id" style="color: red"/></small> --%>

@@ -20,7 +20,6 @@
 				method="post" enctype="multipart/form-data">
 				<div class="form-group">
 					<label for="mem_id">사용자ID</label>
-					<%--  <input type="text" class="form-control" name="mem_id" value="${login.mem_id}" readonly> --%>
 					<input type="text" name="mem_id" class="form-control"
 						value='<sec:authentication property="principal.username"/>'
 						readonly />
@@ -37,7 +36,6 @@
 				</div>
 				<div class="form-group">
 					<label for="approval_inter_id">중간승인권자</label>
-					<!-- <input type="text" class="form-control" name="approval_inter_id" value="" readonly> -->
 					<select name="approval_inter_id" id="approval_inter_id"
 						class="form-control">
 						<!-- 옵션을 select 이용해서 불러오기는 안될지 -->
@@ -49,7 +47,6 @@
 				</div>
 				<div class="form-group">
 					<label for="approval_final_id">최종승인권자</label>
-					<!-- <input type="text" class="form-control" name="approval_final_id" value="" readonly> -->
 					<select name="approval_final_id" id="approval_final_id"
 						class="form-control">
 						<c:forEach var="fianlMan" items="${finalMan}">
